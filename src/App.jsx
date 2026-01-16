@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
@@ -34,7 +36,7 @@ export default function App() {
       <main className="w-full bg-black text-white">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about-us" element={<About />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/research" element={<Research />} />
           <Route path="/contact-us" element={<ContactUs />} />

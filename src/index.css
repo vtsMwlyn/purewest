@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+a,
 button {
-	@apply hover:scale-105 transition cursor-pointer;
+	@apply cursor-pointer;
 }
