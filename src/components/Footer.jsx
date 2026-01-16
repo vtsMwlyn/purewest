@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 export default function Footer() {
 	return (
 		<>
-			<footer className="flex flex-col items-center bg-gray-950 text-white py-20">
+			<footer className="flex flex-col items-center bg-gray-950 text-white py-10 xl:py-20">
 				<div className="w-11/12 xl:w-5/6 flex flex-col">
-					<div className="grid grid-cols-4 gap-20">
+					<div className="grid grid-cols-1 xl:grid-cols-4 gap-10 xl:gap-20">
 						<div className="flex flex-col">
 							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Follow Us</h1>
 							<p>Discover the Power of Wellness with Purewest Australia on Social Media.</p>

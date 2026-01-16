@@ -1,4 +1,4 @@
-import { Star, ArrowRight, ChevronRight } from "lucide-react"
+import { Star, ArrowRight, ChevronRight, Menu } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { useState } from "react";
@@ -48,7 +48,7 @@ export default function Home() {
 
 								<Section className="absolute top-0 h-full">
 									<div className="w-full h-full flex flex-col justify-end items-start">
-										<h1 className="text-white font-bold text-8xl mb-10">{homeBanner.tagline}</h1>
+										<h1 className="text-white font-bold text-6xl xl:text-8xl mb-10">{homeBanner.tagline}</h1>
 									</div>
 								</Section>
 							</div>
@@ -58,39 +58,41 @@ export default function Home() {
 			</section>
 
 			{/* Beekeepers and Product */}
-			<section className="py-20 overflow-x-hidden scrollbar-hide">
-				<div className="flex gap-20 flex-nowrap min-w-max">
-					<div className="w-100 rounded-r-4xl aspect-3/4 overflow-hidden">
-						<Swiper
-							modules={[Autoplay]}
-							slidesPerView={1}
-							spaceBetween={0}
-							loop={true}
-							autoplay={{
-								delay: 3000,
-								disableOnInteraction: false,
-								pauseOnMouseEnter: true,
-							}}
-							className="w-full h-full"
-						>
-							{['/home-beekeeper-1.jpg', '/home-beekeeper-2.jpg', '/home-beekeeper-3.jpg', '/home-beekeeper-4.jpg', '/home-beekeeper-5.jpg'].map((img, index) => (
-								<SwiperSlide key={index}>
-									<div className="w-full h-full cursor-pointer">
-										<img src={img} className="object-center object-cover h-full w-full" />
-									</div>
-								</SwiperSlide>
-							))}
-						</Swiper>
+			<section className="py-10 xl:py-20 overflow-x-hidden scrollbar-hide">
+				<div className="flex gap-20 flex-col xl:flex-row xl:flex-nowrap xl:min-w-max">
+					<div className="flex flex-col lg:flex-row items-center gap-20">
+						<div className="w-full lg:w-1/2 xl:w-100 lg:rounded-r-4xl aspect-3/4 overflow-hidden">
+							<Swiper
+								modules={[Autoplay]}
+								slidesPerView={1}
+								spaceBetween={0}
+								loop={true}
+								autoplay={{
+									delay: 3000,
+									disableOnInteraction: false,
+									pauseOnMouseEnter: true,
+								}}
+								className="w-full h-full"
+							>
+								{['/home-beekeeper-1.jpg', '/home-beekeeper-2.jpg', '/home-beekeeper-3.jpg', '/home-beekeeper-4.jpg', '/home-beekeeper-5.jpg'].map((img, index) => (
+									<SwiperSlide key={index}>
+										<div className="w-full h-full cursor-pointer">
+											<img src={img} className="object-center object-cover h-full w-full" />
+										</div>
+									</SwiperSlide>
+								))}
+							</Swiper>
+						</div>
+
+						<div className="w-full lg:w-1/2 xl:w-100 flex flex-col items-start px-8 xl:px-0">
+							<h1 className="font-bold text-4xl text-yellow-500">Our Beekeepers</h1>
+							<p className="mt-4">In the remote forests of Western Australia, surrounded by ancient eucalyptus trees, our honey begins its journey.</p>
+							<p className="mt-4">Our Marri, Jarrah, and Karri honey is harvested by master beekeepers in pristine bushland, far from urban and agricultural influence. Each harvest is seasonal and limited, guided by natural bloom cycles to capture nectar at its peak — resulting in honey of exceptional purity, depth, and character, never rushed or industrially processed.</p>
+							<button type="button" className="rounded-full bg-white text-black py-2 px-4 flex gap-3 mt-8">Learn More <ArrowRight /></button>
+						</div>
 					</div>
 
-					<div className="w-100 flex flex-col items-start">
-						<h1 className="font-bold text-4xl text-yellow-500">Our Beekeepers</h1>
-						<p className="mt-4">In the remote forests of Western Australia, surrounded by ancient eucalyptus trees, our honey begins its journey.</p>
-						<p className="mt-4">Our Marri, Jarrah, and Karri honey is harvested by master beekeepers in pristine bushland, far from urban and agricultural influence. Each harvest is seasonal and limited, guided by natural bloom cycles to capture nectar at its peak — resulting in honey of exceptional purity, depth, and character, never rushed or industrially processed.</p>
-						<button type="button" className="rounded-full bg-white text-black py-2 px-4 flex gap-3 mt-8">Learn More <ArrowRight /></button>
-					</div>
-
-					<div className="w-300">
+					<div className="pl-6 xl:pl-0 w-300">
 						<Swiper
 							modules={[Navigation]}
 							slidesPerView={3}
@@ -133,13 +135,13 @@ export default function Home() {
 				<img src="/home-product-benefit.webp" className="absolute top-0 z-0 w-full h-full object-cover object-center brightness-60" />
 				<Section className="relative z-1">
 					<div className="flex justify-center w-full py-15">
-						<h1 className="w-2/3 text-white font-bold text-5xl">Discover the remarkable taste and benefits of Western Australian honey, crafted by the healthiest bees in one of the planet’s most untouched environments.</h1>
+						<h1 className="w-full xl:w-2/3 text-white font-bold text-5xl">Discover the remarkable taste and benefits of Western Australian honey, crafted by the healthiest bees in one of the planet’s most untouched environments.</h1>
 					</div>
 				</Section>
 			</section>
 
-			<Section className="py-20">
-				<div className="w-full grid grid-cols-4 gap-20">
+			<Section className="py-10 xl:py-20">
+				<div className="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-20">
 					{[
 						{ img: '/product-benefit-1.avif', title: 'Premium and Rare', desc: 'Jarrah honey’s rarity stems from the Jarrah tree, found exclusively in Western Australia, which blooms only once every two years under ideal conditions, making each harvest exceptionally rare and valuable.' },
 						{ img: '/product-benefit-2.avif', title: 'Low Glycemic Index', desc: 'Low glycemic index (GI) honey offers a slow, steady release of sugars, helping to maintain balanced blood sugar levels and prolonged energy. Its gentle sweetness makes it an ideal choice for supporting healthy metabolism and overall wellness.' },
@@ -157,7 +159,7 @@ export default function Home() {
 			</Section>
 
 			{/* Testimonial */}
-			<Section className="py-20">
+			<Section className="py-10 xl:py-20">
 				<h1 className="font-bold text-center text-4xl">Trusted by People for Their <span className="font-bold text-yellow-500">Body Health</span></h1>
 				<div className="rounded-full bg-white flex items-center gap-3 py-2 px-4 mt-4">
 					<div className="flex gap-2">
@@ -168,7 +170,7 @@ export default function Home() {
 					<p className="text-black font-semibold">1000+ Customers Satisfied</p>
 				</div>
 
-				<div className="w-full grid grid-cols-3 gap-20 mt-16">
+				<div className="w-full grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-20 mt-16">
 					{[
 						{ name: 'Charlie Munger', portrait: '/testimoni-person-1.jpeg', product: 'Jarrah - Active Honey', img: '/shop-jarrah.png', words: 'Amazing product. I use it daily for gut health and immune support.' },
 						{ name: 'Warren Buffet', portrait: '/testimoni-person-2.jpeg', product: 'Marri - Active Honey', img: '/shop-marri.png', words: 'Healthiest honey on Earth. I use to infuse my own medicinal honey and it was a lot of headache.' },
@@ -197,10 +199,10 @@ export default function Home() {
 			</Section>
 
 			{/* FAQ */}
-			<Section className="py-20">
+			<Section className="py-10 xl:py-20">
 				<h1 className="font-bold text-center text-4xl mb-6">What People Usually Ask About <span className="font-bold text-yellow-500">Purewest Products</span></h1>
 
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
 					{FAQs.map((faq, index) => (
 						<div key={index} className={`transition-all duration-300 ease-in-out w-full rounded-4xl bg-white grid mt-4 overflow-y-hidden ${accordion[index] === true ? 'min-h-15' : 'max-h-15'}`}>
 							<button type="button" onClick={() => toggleAccordion(index)} className="w-full flex justify-between items-center h-15 px-8">
@@ -214,12 +216,12 @@ export default function Home() {
 			</Section>
 
 			{/* Email Subscription */}
-			<Section className="py-20">
+			<Section className="py-10 xl:py-20">
 				<h1 className="font-bold text-center text-4xl mb-4 self-start"><span className="font-bold text-yellow-500">Subscribe</span> to Our Email</h1>
 				<p className="self-start">Be the first to know about new collections and exclusive offers.</p>
 				<div className="w-full flex gap-4 mt-6">
-					<input type="email" className="w-7/8 py-2 px-4 rounded-full border" placeholder="Enter your email" />
-					<button type="button" className="w-1/8 rounded-full bg-yellow-500 text-black py-2 px-4 font-semibold">Sign Up</button>
+					<input type="email" className="w-2/3 lg:w-7/8 py-2 px-4 rounded-full border" placeholder="Enter your email" />
+					<button type="button" className="w-1/3 lg:w-1/8 rounded-full bg-yellow-500 text-black py-2 px-4 font-semibold">Sign Up</button>
 				</div>
 			</Section>
 		</>
