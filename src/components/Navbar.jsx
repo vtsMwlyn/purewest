@@ -20,7 +20,7 @@ export default function Navbar({ cart }) {
 					<NavbarLink to="/shop">Shop</NavbarLink>
 					<NavbarLink to="/about-us">About</NavbarLink>
 					<div className="col-span-2 flex justify-center items-center"><img src="/logo.webp" className="w-20 xl:w-30" /></div>
-					<NavbarLink to="/research">Research</NavbarLink>
+					<NavbarLink to="/blog">Blog</NavbarLink>
 					<NavbarLink to="/contact-us">Contact</NavbarLink>
 					<NavbarLink to="/cart" className="relative">
 						<p>Cart</p>
@@ -38,7 +38,7 @@ export default function Navbar({ cart }) {
 							<div className="h-px bg-white w-full"></div>
 							<Link onClick={() => setShowDropdown(false)} to="/about-us">About Us</Link>
 							<div className="h-px bg-white w-full"></div>
-							<Link onClick={() => setShowDropdown(false)} to="/research">Research</Link>
+							<Link onClick={() => setShowDropdown(false)} to="/blog">Blog</Link>
 							<div className="h-px bg-white w-full"></div>
 							<Link onClick={() => setShowDropdown(false)} to="/contact-us">Contact Us</Link>
 							<div className="h-px bg-white w-full"></div>

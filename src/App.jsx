@@ -7,7 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
-import Research from "./pages/Research";
+import Blog from "./pages/Blog";
 import ContactUs from "./pages/ContactUs";
 import Cart from "./pages/Cart";
 
@@ -62,7 +62,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/shop" element={<Shop cart={cart} addToCart={addToCart} />} />
-          <Route path="/research" element={<Research />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQty={updateQty} />} />
         </Routes>

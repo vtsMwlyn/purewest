@@ -168,8 +168,8 @@ export default function Home() {
 
 			{/* Testimonial */}
 			<Section className="py-10 xl:py-20">
-				<img src="/flower-bg-1.png" className="absolute -top-30 -left-30 z-10 w-70 h-70" />
-				<img src="/flower-bg-2.png" className="absolute -top-30 -right-30 z-10 w-70 h-70" />
+				<img src="/flower-bg-1.png" className="hidden xl:block absolute -top-30 -left-30 z-10 w-70 h-70" />
+				<img src="/flower-bg-2.png" className="hidden xl:block absolute -top-30 -right-30 z-10 w-70 h-70" />
 
 				<h1 className="font-bold text-center text-4xl">Trusted by People for Their <span className="font-bold text-yellow-500">Body Health</span></h1>
 				<div className="rounded-full bg-white flex items-center gap-3 py-2 px-4 mt-4">
@@ -228,7 +228,7 @@ export default function Home() {
 
 			{/* Email Subscription */}
 			<Section className="py-10 xl:py-20">
-				<img src="/flower-bg-3.png" className="absolute -top-15 -right-30 z-10 w-60 h-60" />
+				<img src="/flower-bg-3.png" className="hidden xl:block absolute -top-15 -right-30 z-10 w-60 h-60" />
 
 				<h1 className="font-bold text-center text-4xl mb-4 self-start"><span className="font-bold text-yellow-500">Subscribe</span> to Our Email</h1>
 				<p className="self-start">Be the first to know about new collections and exclusive offers.</p>

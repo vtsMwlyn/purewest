@@ -1,5 +1,5 @@
 import Section from "../components/Section"
-import { PlusCircle, MinusCircle } from "lucide-react";
+import { PlusCircle, MinusCircle, Trash2 } from "lucide-react";
 
 export default function Cart({ cart, removeFromCart, updateQty }) {
 	const subtotal = cart.reduce((sum, item) => {
@@ -22,10 +22,13 @@ export default function Cart({ cart, removeFromCart, updateQty }) {
 											<img src={product.gallery[0]} className="rounded-xl w-25 h-25 object-cover object-center" />
 											<div className="flex flex-col">
 												<h1 className="font-semibold">{product.name}</h1>
-												<div className="w-40 relative flex items-center mt-2">
-													<button type="button" onClick={() => updateQty(product.id, item.qty - 1)} className="mt-1 absolute left-3"><MinusCircle /></button>
-													<input type="text" value={item.qty} onChange={(e) => updateQty(product.id, e.target.value)} className="w-full border border-slate-400 py-2 rounded-full mt-1 text-center" id="qty" />
-													<button type="button" onClick={() => updateQty(product.id, item.qty + 1)} className="mt-1 absolute right-3"><PlusCircle /></button>
+												<div className="flex items-center mt-2 gap-4">
+													<div className="w-35 relative flex items-center">
+														<button type="button" onClick={() => updateQty(product.id, item.qty - 1)} className="mt-1 absolute left-3"><MinusCircle /></button>
+														<input type="text" value={item.qty} onChange={(e) => updateQty(product.id, e.target.value)} className="w-full border border-slate-400 py-2 rounded-full mt-1 text-center" id="qty" />
+														<button type="button" onClick={() => updateQty(product.id, item.qty + 1)} className="mt-1 absolute right-3"><PlusCircle /></button>
+													</div>
+													<button type="button" onClick={() => removeFromCart(product.id)} className=""><Trash2 /></button>
 												</div>
 											</div>
 										</div>
