@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useState } from "react";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -8,6 +9,7 @@ import About from "./pages/About";
 import Shop from "./pages/Shop";
 import Research from "./pages/Research";
 import ContactUs from "./pages/ContactUs";
+import Cart from "./pages/Cart";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -27,19 +29,42 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (item) => {
+    setCart(prevCart => [...prevCart, item]);
+  }
+
+  const removeFromCart = (id) => {
+    setCart(prevCart => prevCart.filter(item => item.product.id !== id));
+  };
+
+  const updateQty = (id, newQty) => {
+    if (newQty <= 0) return;
+
+    setCart(prev =>
+      prev.map(item =>
+        item.product.id === id
+          ? { ...item, qty: newQty }
+          : item
+      )
+    );
+  }
+
   return (
     <Router>
       <ScrollToTop />
 
-      <Navbar />
+      <Navbar cart={cart} />
 
-      <main className="w-full bg-black text-white">
+      <main className="w-full overflow-x-hidden bg-black text-white">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<About />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop" element={<Shop cart={cart} addToCart={addToCart} />} />
           <Route path="/research" element={<Research />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQty={updateQty} />} />
         </Routes>
       </main>
 

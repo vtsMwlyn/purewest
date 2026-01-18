@@ -24,9 +24,9 @@ export default function Footer() {
 
 						<div className="flex flex-col">
 							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Explore Products</h1>
-							<a href="/" target="_blank">Jarrah - Active Honey</a>
-							<a href="/" target="_blank">Karri - Active Honey</a>
-							<a href="/" target="_blank">Marri - Active Honey</a>
+							<Link to="/shop">Jarrah - Active Honey</Link>
+							<Link to="/shop">Karri - Active Honey</Link>
+							<Link to="/shop">Marri - Active Honey</Link>
 						</div>
 
 						<div className="flex flex-col">

@@ -1,9 +1,11 @@
-import { Star, ArrowRight, ChevronRight, Menu } from "lucide-react"
+import { Star, ArrowRight, ChevronRight } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { useState } from "react";
+import LinkButton from "../components/LinkButton";
 
 import FAQs from "../data/faq";
+import products from "../data/products";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -29,7 +31,7 @@ export default function Home() {
 					spaceBetween={0}
 					loop={true}
 					autoplay={{
-						delay: 2000,
+						delay: 3000,
 						disableOnInteraction: false,
 						pauseOnMouseEnter: true,
 					}}
@@ -94,7 +96,6 @@ export default function Home() {
 
 					<div className="pl-6 xl:pl-0 w-300">
 						<Swiper
-							modules={[Navigation]}
 							slidesPerView={3}
 							spaceBetween={40}
 							loop={true}
@@ -105,22 +106,29 @@ export default function Home() {
 							}}
 							className="w-full h-full cursor-grab"
 						>
-							{[
-								{ name: 'Jarrah - Active Honey', img: '/shop-jarrah.png', price: 5.69 },
-								{ name: 'Karri - Active Honey', img: '/shop-karri.png', price: 10.19 },
-								{ name: 'Marri - Active Honey', img: '/shop-marri.png', price: 7.89 },
-								{ name: 'Jarrah - Active Honey', img: '/shop-jarrah.png', price: 5.69 },
-								{ name: 'Karri - Active Honey', img: '/shop-karri.png', price: 10.19 },
-								{ name: 'Marri - Active Honey', img: '/shop-marri.png', price: 7.89 },
-							].map((product, index) => (
+							{products.map((product, index) => (
 								<SwiperSlide key={index}>
 									<div className="flex flex-col rounded-4xl bg-slate-900 p-10">
-										<img src={product.img} className="w-full h-75 rounded-xl object-cover object-center mb-4" />
+										<img src={product.gallery[0]} className="w-full h-75 rounded-xl object-cover object-center mb-4" />
 										<h1 className="font-semibold text-2xl">{product.name}</h1>
 										<h2 className="font-semibold text-2xl text-yellow-500">${product.price}</h2>
 										<div className="w-full grid grid-cols-2 gap-2 mt-4">
-											<button type="button" className="rounded-full bg-white text-black py-2 px-4">View Product</button>
-											<button type="button" className="rounded-full bg-yellow-500 text-black py-2 px-4">Add to Cart</button>
+											<LinkButton href="/shop" theme="secondary">View Product</LinkButton>
+											<LinkButton href="/shop">Add to Cart</LinkButton>
+										</div>
+									</div>
+								</SwiperSlide>
+							))}
+
+							{products.map((product, index) => (
+								<SwiperSlide key={index}>
+									<div className="flex flex-col rounded-4xl bg-slate-900 p-10">
+										<img src={product.gallery[0]} className="w-full h-75 rounded-xl object-cover object-center mb-4" />
+										<h1 className="font-semibold text-2xl">{product.name}</h1>
+										<h2 className="font-semibold text-2xl text-yellow-500">${product.price}</h2>
+										<div className="w-full grid grid-cols-2 gap-2 mt-4">
+											<LinkButton href="/shop" theme="secondary">View Product</LinkButton>
+											<LinkButton href="/shop">Add to Cart</LinkButton>
 										</div>
 									</div>
 								</SwiperSlide>
@@ -160,6 +168,9 @@ export default function Home() {
 
 			{/* Testimonial */}
 			<Section className="py-10 xl:py-20">
+				<img src="/flower-bg-1.png" className="absolute -top-30 -left-30 z-10 w-70 h-70" />
+				<img src="/flower-bg-2.png" className="absolute -top-30 -right-30 z-10 w-70 h-70" />
+
 				<h1 className="font-bold text-center text-4xl">Trusted by People for Their <span className="font-bold text-yellow-500">Body Health</span></h1>
 				<div className="rounded-full bg-white flex items-center gap-3 py-2 px-4 mt-4">
 					<div className="flex gap-2">
@@ -217,6 +228,8 @@ export default function Home() {
 
 			{/* Email Subscription */}
 			<Section className="py-10 xl:py-20">
+				<img src="/flower-bg-3.png" className="absolute -top-15 -right-30 z-10 w-60 h-60" />
+
 				<h1 className="font-bold text-center text-4xl mb-4 self-start"><span className="font-bold text-yellow-500">Subscribe</span> to Our Email</h1>
 				<p className="self-start">Be the first to know about new collections and exclusive offers.</p>
 				<div className="w-full flex gap-4 mt-6">

@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+body {
+	font-family: "Montserrat", sans-serif;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+	@apply text-yellow-500!;
+}
+
 a,
 button {
 	@apply cursor-pointer;
