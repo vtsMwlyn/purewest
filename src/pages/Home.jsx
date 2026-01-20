@@ -2,7 +2,6 @@ import { Star, ArrowRight, ChevronRight } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useState } from "react";
-import LinkButton from "../components/LinkButton";
 
 import FAQs from "../data/faq";
 import products from "../data/products";
@@ -11,6 +10,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import Section from "../components/Section"
+import LinkButton from "../components/LinkButton";
+import Input from "../components/Input";
 
 export default function Home() {
 	const [accordion, setAccordion] = useState([false, false]);
@@ -233,7 +234,7 @@ export default function Home() {
 				<h1 className="font-bold text-center text-4xl mb-4 self-start"><span className="font-bold text-yellow-500">Subscribe</span> to Our Email</h1>
 				<p className="self-start">Be the first to know about new collections and exclusive offers.</p>
 				<div className="w-full flex gap-4 mt-6">
-					<input type="email" className="w-2/3 lg:w-7/8 py-2 px-4 rounded-full border" placeholder="Enter your email" />
+					<Input type="email" className="w-2/3 lg:w-7/8" placeholder="Enter your email" />
 					<button type="button" className="w-1/3 lg:w-1/8 rounded-full bg-yellow-500 text-black py-2 px-4 font-semibold">Sign Up</button>
 				</div>
 			</Section>

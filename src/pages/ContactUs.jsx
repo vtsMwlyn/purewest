@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail } from "lucide-react"
 
 import Section from "../components/Section"
 import Button from "../components/Button"
+import Input from "../components/Input"
 
 export default function ContactUs() {
 	return (
@@ -48,23 +49,23 @@ export default function ContactUs() {
 					<div className="w-full gap-4 grid grid-cols-2 mt-14">
 						<div className="flex flex-col">
 							<label htmlFor="first_name">First Name</label>
-							<input type="text" className="w-full border border-slate-400 py-2 px-4 rounded-full mt-1" id="first_name" />
+							<Input type="text" className="w-full mt-1" id="first_name" />
 						</div>
 
 						<div className="flex flex-col">
 							<label htmlFor="last_name">Last Name</label>
-							<input type="text" className="w-full border border-slate-400 py-2 px-4 rounded-full mt-1" id="last_name" />
+							<Input type="text" className="w-full mt-1" id="last_name" />
 						</div>
 					</div>
 
 					<div className="flex flex-col mt-4">
 						<label htmlFor="email">Email</label>
-						<input type="email" className="w-full border border-slate-400 py-2 px-4 rounded-full mt-1" id="email" />
+						<Input type="email" className="w-full mt-1" id="email" />
 					</div>
 
 					<div className="flex flex-col mt-4">
 						<label htmlFor="message">Message</label>
-						<textarea rows={4} className="w-full resize-none border border-slate-400 py-2 px-4 rounded-3xl mt-1" id="message"></textarea>
+						<textarea rows={4} className="w-full py-2 px-4 rounded-3xl border border-slate-400 outline-0 focus:ring-1 focus:ring-yellow-500 transition-all duration-300 focus:border-transparent mt-1 resize-none" id="message"></textarea>
 					</div>
 
 					<div className="w-full flex justify-end mt-8">

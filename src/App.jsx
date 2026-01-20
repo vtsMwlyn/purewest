@@ -57,7 +57,7 @@ export default function App() {
 
       <Navbar cart={cart} />
 
-      <main className="w-full overflow-x-hidden bg-black text-white">
+      <main className="bg-black text-white">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<About />} />

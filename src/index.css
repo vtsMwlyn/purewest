@@ -2,6 +2,7 @@
 
 body {
 	font-family: "Montserrat", sans-serif;
+	@apply w-full overflow-x-hidden;
 }
 
 .swiper-button-next,

@@ -1,10 +1,12 @@
-import Section from "../components/Section"
-import Popup from "../components/Popup"
 import { useState } from "react"
 import { Utensils, Flower, MinusCircle, PlusCircle } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+
+import Section from "../components/Section"
+import Popup from "../components/Popup"
 import Button from "../components/Button";
+import Input from "../components/Input";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -113,7 +115,7 @@ export default function Shop({ cart, addToCart }) {
 							<label htmlFor="qty" className="text-sm">Quantity</label>
 							<div className="w-full relative flex items-center">
 								<button type="button" onClick={() => setQty(q => Math.max(1, q - 1))} className="mt-1 absolute left-3"><MinusCircle /></button>
-								<input type="text" value={qty} onChange={(e) => setQty(e.target.value)} className="w-full border border-slate-400 py-2 rounded-full mt-1 text-center" id="qty" />
+								<Input type="text" value={qty} onChange={(e) => setQty(e.target.value)} className="w-full mt-1 text-center" id="qty" />
 								<button type="button" onClick={() => setQty(q => q + 1)} className="mt-1 absolute right-3"><PlusCircle /></button>
 							</div>
 						</div>
