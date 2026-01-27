@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
+import ArticleContent from "./pages/ArticleContent";
 import ContactUs from "./pages/ContactUs";
 import Cart from "./pages/Cart";
 
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/about-us" element={<About />} />
           <Route path="/shop" element={<Shop cart={cart} addToCart={addToCart} />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<ArticleContent />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} updateQty={updateQty} />} />
         </Routes>
