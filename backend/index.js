@@ -21,6 +21,12 @@ app.use("/api/products", productRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/articles", articleRoutes);
 
+app.get('/health', (req, res) => {
+  res.json({
+    message: 'Server is online'
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 db.sequelize.sync().then(() => {
