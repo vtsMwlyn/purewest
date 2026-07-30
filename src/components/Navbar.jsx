@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useCart } from "../CartContext";
+import { Link } from "react-router-dom";
 
 const C = {
   gold: "#A89060",
@@ -15,6 +17,7 @@ const C = {
 export default function Navbar({ onShopNow }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -90,6 +93,18 @@ export default function Navbar({ onShopNow }) {
         >
           Shop Now
         </button>
+        <Link to="/cart" className="relative flex items-center justify-center p-2 text-white no-underline transition-colors duration-300 hover:text-[#C4AA7A]">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          {totalItems > 0 && (
+            <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-[0.55rem] text-[#0e0a05] bg-[#A89060] rounded-full font-bold">
+              {totalItems}
+            </span>
+          )}
+        </Link>
         {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"

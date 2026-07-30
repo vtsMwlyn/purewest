@@ -6,6 +6,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import Home from "./pages/Home";
 import LabResults from "./pages/LabResults";
+import Cart from "./pages/Cart";
+import { CartProvider } from "./CartContext";
 
 import Navbar from "./components/Navbar";
 // import Footer from "./components/Footer";
@@ -26,8 +28,9 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
+    <CartProvider>
+      <Router>
+        <ScrollToTop />
 
       <Navbar onShopNow={() => {
         if (window.location.pathname === '/') {
@@ -41,10 +44,12 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lab-results" element={<LabResults />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </main>
 
       {/* <Footer /> */}
-    </Router>
+      </Router>
+    </CartProvider>
   );
 }

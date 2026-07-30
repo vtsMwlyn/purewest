@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useCart } from "../CartContext";
 
 /* ─── Design tokens (matching the original CSS variables) ─── */
 const C = {
@@ -507,18 +508,20 @@ function Products({ onOpenPanel }) {
 function ProductPanel({ productId, onClose }) {
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const [toast, setToast] = useState(false);
+  const { addToCart } = useCart();
   const product = PRODUCTS[productId];
 
   useEffect(() => { setActiveSizeIdx(0); }, [productId]);
 
   if (!product) return null;
 
-  function addToCart() {
+  const sz = product.sizes[activeSizeIdx];
+
+  function handleAddToCart() {
+    addToCart({ ...product, id: productId }, sz, 1);
     setToast(true);
     setTimeout(() => setToast(false), 2500);
   }
-
-  const sz = product.sizes[activeSizeIdx];
 
   return (
     <>
@@ -590,7 +593,7 @@ function ProductPanel({ productId, onClose }) {
 
             <button
               id="panelAddBtn"
-              onClick={addToCart}
+              onClick={handleAddToCart}
               className="w-full py-[18px] text-[0.65rem] tracking-[4px] uppercase font-bold mb-4 transition-all duration-400"
               style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}
               onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
