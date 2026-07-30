@@ -26,7 +26,8 @@ router.post("/login", async (req, res) => {
 
     res.json({ token, email: admin.email });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("[Auth Login Error]:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

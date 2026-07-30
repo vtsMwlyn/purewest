@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
     });
     res.json(articles);
   } catch (error) {
+    console.error("[Article GET Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -29,6 +30,7 @@ router.get("/:id", async (req, res) => {
     if (!article) return res.status(404).json({ message: "Article not found" });
     res.json(article);
   } catch (error) {
+    console.error("[Article GET Single Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -61,6 +63,7 @@ router.post("/", auth, upload.single("featured_image"), async (req, res) => {
 
     res.status(201).json(article);
   } catch (error) {
+    console.error("[Article POST Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -97,6 +100,7 @@ router.put("/:id", auth, upload.single("featured_image"), async (req, res) => {
 
     res.json(article);
   } catch (error) {
+    console.error("[Article PUT Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -110,6 +114,7 @@ router.delete("/:id", auth, async (req, res) => {
     await article.destroy();
     res.json({ message: "Article deleted" });
   } catch (error) {
+    console.error("[Article DELETE Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });

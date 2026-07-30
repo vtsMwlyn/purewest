@@ -41,8 +41,9 @@ router.post("/", async (req, res) => {
 
     res.json({ message: "Order placed and email sent successfully" });
   } catch (error) {
-    console.error("Nodemailer Error:", error);
-    res.status(500).json({ error: "Failed to send order email." });
+    console.error(error);
+    console.error("[Checkout Error]:", error);
+    res.status(500).json({ message: "Checkout failed", error: error.message });
   }
 });
 

@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
     const products = await Product.findAll();
     res.json(products);
   } catch (error) {
+    console.error("[Product GET Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -52,6 +53,7 @@ router.post("/", auth, upload.single("img"), async (req, res) => {
 
     res.status(201).json(product);
   } catch (error) {
+    console.error("[Product POST Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -91,6 +93,7 @@ router.put("/:id", auth, upload.single("img"), async (req, res) => {
 
     res.json(product);
   } catch (error) {
+    console.error("[Product PUT Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -104,6 +107,7 @@ router.delete("/:id", auth, async (req, res) => {
     await product.destroy();
     res.json({ message: "Product deleted" });
   } catch (error) {
+    console.error("[Product DELETE Error]:", error);
     res.status(500).json({ error: error.message });
   }
 });
