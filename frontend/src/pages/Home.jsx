@@ -713,7 +713,7 @@ export default function Home() {
 
   useEffect(() => {
     console.log("[Data Fetch] Fetching products from /api/products...");
-    fetch("/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         console.log("[Data Fetch] Successfully fetched products:", data.length, "items");

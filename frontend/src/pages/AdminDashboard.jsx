@@ -42,7 +42,7 @@ export default function AdminDashboard() {
   const fetchProducts = async () => {
     try {
       console.log("[Data Fetch] Fetching admin products from /api/products...");
-      const res = await fetch("/api/products");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
       console.log("[Data Fetch] Admin products response status:", res.status);
       const data = await res.json();
       setProducts(data);
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
       console.log(`[Data Fetch] Deleting product ${id}...`);
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -147,8 +147,8 @@ export default function AdminDashboard() {
 
     try {
       const url = editingProduct
-        ? `/api/products/${editingProduct}`
-        : "/api/products";
+        ? `${import.meta.env.VITE_API_URL}/api/products/${editingProduct}`
+        : `${import.meta.env.VITE_API_URL}/api/products`;
       const method = editingProduct ? "PUT" : "POST";
 
       console.log(`[Data Fetch] Submitting product data to ${url} via ${method}...`);

@@ -64,7 +64,7 @@ export default function AdminArticles() {
   const fetchArticles = async () => {
     try {
       console.log("[Data Fetch] Fetching articles from /api/articles...");
-      const res = await fetch("/api/articles");
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/articles`);
       console.log("[Data Fetch] Articles response status:", res.status);
       const data = await res.json();
       setArticles(data);
@@ -103,7 +103,7 @@ export default function AdminArticles() {
     if (!window.confirm("Are you sure you want to delete this article?")) return;
     try {
       console.log(`[Data Fetch] Deleting article ${id}...`);
-      const res = await fetch(`/api/articles/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/articles/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -128,8 +128,8 @@ export default function AdminArticles() {
 
     try {
       const url = editingArticle
-        ? `/api/articles/${editingArticle.id}`
-        : "/api/articles";
+        ? `${import.meta.env.VITE_API_URL}/api/articles/${editingArticle.id}`
+        : `${import.meta.env.VITE_API_URL}/api/articles`;
       const method = editingArticle ? "PUT" : "POST";
 
       console.log(`[Data Fetch] Submitting article data to ${url} via ${method}...`);

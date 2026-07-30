@@ -23,7 +23,7 @@ export default function Cart() {
     setCheckoutStatus(null);
     try {
       console.log("[Data Fetch] Initiating checkout at /api/checkout...");
-      const res = await fetch("/api/checkout", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
