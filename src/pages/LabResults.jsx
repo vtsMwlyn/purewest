@@ -443,6 +443,8 @@ function SugarPanel() {
 
 /* ─── Certificate detail cards ───────────────────────────────── */
 function CertificateGrid() {
+  const [activePdf, setActivePdf] = useState(null);
+
   const certs = [
     {
       org: "ChemCentre",
@@ -473,53 +475,103 @@ function CertificateGrid() {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto mb-16">
-      {certs.map((c, i) => (
-        <div key={i} className="relative p-10 flex flex-col h-full" style={{ border: `1px solid ${C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}>
-          <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
-          <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
+    <div className="max-w-[1000px] mx-auto mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {certs.map((c, i) => (
+          <div key={i} className="relative p-10 flex flex-col h-full transition-colors duration-300" style={{ border: `1px solid ${activePdf === c.pdfUrl ? C.gold : C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}>
+            <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
+            <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
 
-          <div className="text-[1.15rem] mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>
-            {c.org}
+            <div className="text-[1.15rem] mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>
+              {c.org}
+            </div>
+            <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7" style={{ color: C.gold }}>
+              {c.tag}
+            </div>
+
+            <div className="mb-7 flex-1">
+              {c.rows.map(([k, v], j) => (
+                <div key={j} className="flex justify-between py-[10px] text-[0.72rem]" style={{ borderBottom: "1px solid rgba(168,144,96,0.07)" }}>
+                  <span style={{ color: C.textMuted }}>{k}</span>
+                  <span style={{ color: C.text }}>{v}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-[0.62rem] italic leading-[1.7] mb-6" style={{ color: C.textMuted }}>
+              Signed — {c.signoff}
+            </p>
+
+            <div className="mt-auto pt-5" style={{ borderTop: `1px dashed ${C.rule}` }}>
+              <button 
+                onClick={() => setActivePdf(activePdf === c.pdfUrl ? null : c.pdfUrl)}
+                className="inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
+                style={{ color: activePdf === c.pdfUrl ? C.goldLight : C.goldPale, fontFamily: "'Libre Baskerville', serif", fontWeight: 700 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = activePdf === c.pdfUrl ? C.goldLight : C.goldPale)}
+              >
+                {activePdf === c.pdfUrl ? (
+                  <>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    Close PDF
+                  </>
+                ) : (
+                  <>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="12" y1="18" x2="12" y2="12"></line>
+                      <line x1="9" y1="15" x2="15" y2="15"></line>
+                    </svg>
+                    View Original PDF
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-          <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7" style={{ color: C.gold }}>
-            {c.tag}
+        ))}
+      </div>
+
+      {activePdf && (
+        <div className="mt-12 animate-in fade-in slide-in-from-top-4 duration-700" style={{ border: `1px solid ${C.gold}`, background: C.dark2 }}>
+          <div className="flex justify-between items-center px-6 py-4" style={{ borderBottom: `1px solid ${C.rule}`, background: C.dark3 }}>
+            <span className="text-[0.6rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>Document Viewer</span>
+            <div className="flex gap-4">
+              <a 
+                href={activePdf}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 no-underline"
+                style={{ color: C.textMuted }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
+              >
+                Open in new tab ↗
+              </a>
+              <button 
+                onClick={() => setActivePdf(null)}
+                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
+                style={{ color: C.goldPale }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = C.goldPale)}
+              >
+                Close ✕
+              </button>
+            </div>
           </div>
-
-          <div className="mb-7 flex-1">
-            {c.rows.map(([k, v], j) => (
-              <div key={j} className="flex justify-between py-[10px] text-[0.72rem]" style={{ borderBottom: "1px solid rgba(168,144,96,0.07)" }}>
-                <span style={{ color: C.textMuted }}>{k}</span>
-                <span style={{ color: C.text }}>{v}</span>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-[0.62rem] italic leading-[1.7] mb-6" style={{ color: C.textMuted }}>
-            Signed — {c.signoff}
-          </p>
-
-          <div className="mt-auto pt-5" style={{ borderTop: `1px dashed ${C.rule}` }}>
-            <a 
-              href={c.pdfUrl} 
-              target="_blank" 
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 no-underline"
-              style={{ color: C.goldPale, fontFamily: "'Libre Baskerville', serif", fontWeight: 700 }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = C.goldPale)}
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="12" y1="18" x2="12" y2="12"></line>
-                <line x1="9" y1="15" x2="15" y2="15"></line>
-              </svg>
-              View Original PDF
-            </a>
+          <div className="w-full h-[80vh] min-h-[600px] p-2">
+            <iframe 
+              src={`${activePdf}#view=FitH`} 
+              title="Lab Result PDF Document"
+              className="w-full h-full rounded-sm"
+              style={{ border: "none", background: "white" }}
+            />
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
