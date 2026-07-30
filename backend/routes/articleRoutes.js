@@ -5,15 +5,9 @@ const path = require("path");
 const { Article } = require("../models");
 const auth = require("../middleware/auth");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, "article-" + uniqueSuffix + path.extname(file.originalname));
-  },
-});
+const supabase = require("../config/supabase");
+
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // GET all articles (public)
@@ -45,7 +39,16 @@ router.post("/", auth, upload.single("featured_image"), async (req, res) => {
     const { title, date, subtitle, content } = req.body;
     let imgPath = "";
     if (req.file) {
-      imgPath = "/uploads/" + req.file.filename;
+      if (!supabase) throw new Error("Supabase client is not configured");
+      const fileExt = path.extname(req.file.originalname);
+      const fileName = `article-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
+      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
+        contentType: req.file.mimetype,
+      });
+      if (error) throw new Error("Image upload failed: " + error.message);
+      
+      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
+      imgPath = publicUrlData.publicUrl;
     }
 
     const article = await Article.create({
@@ -72,7 +75,16 @@ router.put("/:id", auth, upload.single("featured_image"), async (req, res) => {
 
     let imgPath = article.featured_image;
     if (req.file) {
-      imgPath = "/uploads/" + req.file.filename;
+      if (!supabase) throw new Error("Supabase client is not configured");
+      const fileExt = path.extname(req.file.originalname);
+      const fileName = `article-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
+      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
+        contentType: req.file.mimetype,
+      });
+      if (error) throw new Error("Image upload failed: " + error.message);
+      
+      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
+      imgPath = publicUrlData.publicUrl;
     }
 
     await article.update({

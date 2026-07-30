@@ -22,7 +22,8 @@ export default function Cart() {
     setIsCheckingOut(true);
     setCheckoutStatus(null);
     try {
-      const res = await fetch("http://localhost:5000/api/checkout", {
+      console.log("[Data Fetch] Initiating checkout at /api/checkout...");
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -32,6 +33,9 @@ export default function Cart() {
         })
       });
 
+      const data = await res.json();
+      console.log("[Data Fetch] Checkout response status:", res.status, "data:", data);
+      
       if (!res.ok) throw new Error("Checkout failed");
 
       setCheckoutStatus("success");

@@ -21,12 +21,14 @@ export default function AdminLogin() {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      console.log("[Data Fetch] Attempting admin login at /api/auth/login...");
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
+      console.log("[Data Fetch] Login response status:", res.status);
       if (res.ok) {
         localStorage.setItem("purewest_admin_token", data.token);
         window.location.href = "/admin/dashboard";

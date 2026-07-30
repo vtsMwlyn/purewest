@@ -63,7 +63,9 @@ export default function AdminArticles() {
 
   const fetchArticles = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/articles");
+      console.log("[Data Fetch] Fetching articles from /api/articles...");
+      const res = await fetch("/api/articles");
+      console.log("[Data Fetch] Articles response status:", res.status);
       const data = await res.json();
       setArticles(data);
     } catch (err) {
@@ -100,10 +102,12 @@ export default function AdminArticles() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this article?")) return;
     try {
-      await fetch(`http://localhost:5000/api/articles/${id}`, {
+      console.log(`[Data Fetch] Deleting article ${id}...`);
+      const res = await fetch(`/api/articles/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log(`[Data Fetch] Delete article response status:`, res.status);
       fetchArticles();
     } catch (err) {
       console.error(err);
@@ -124,17 +128,17 @@ export default function AdminArticles() {
 
     try {
       const url = editingArticle
-        ? `http://localhost:5000/api/articles/${editingArticle.id}`
-        : "http://localhost:5000/api/articles";
+        ? `/api/articles/${editingArticle.id}`
+        : "/api/articles";
       const method = editingArticle ? "PUT" : "POST";
 
+      console.log(`[Data Fetch] Submitting article data to ${url} via ${method}...`);
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: data,
       });
+      console.log(`[Data Fetch] Submit article response status:`, res.status);
 
       if (res.ok) {
         setIsModalOpen(false);
@@ -192,7 +196,7 @@ export default function AdminArticles() {
             ) : (
               articles.map((a) => (
                 <div key={a.id} className="flex gap-6 items-center p-4 transition-colors duration-300" style={{ background: C.dark3, border: `1px solid ${C.rule}` }}>
-                  <img src={a.featured_image && a.featured_image.startsWith('/') && !a.featured_image.includes('localhost') ? `http://localhost:5000${a.featured_image}` : (a.featured_image || '/placeholder.png')} alt={a.title} className="w-20 h-20 object-cover" />
+                  <img src={a.featured_image && a.featured_image.startsWith('/') && !a.featured_image.includes('localhost') ? a.featured_image : (a.featured_image || '/placeholder.png')} alt={a.title} className="w-20 h-20 object-cover" />
                   <div className="flex-1">
                     <div className="text-[1.4rem] font-light mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>{a.title}</div>
                     <div className="text-[0.6rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>

@@ -41,7 +41,9 @@ export default function AdminDashboard() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      console.log("[Data Fetch] Fetching admin products from /api/products...");
+      const res = await fetch("/api/products");
+      console.log("[Data Fetch] Admin products response status:", res.status);
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -114,10 +116,12 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      await fetch(`http://localhost:5000/api/products/${id}`, {
+      console.log(`[Data Fetch] Deleting product ${id}...`);
+      const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log(`[Data Fetch] Delete product response status:`, res.status);
       fetchProducts();
     } catch (err) {
       console.error(err);
@@ -143,17 +147,17 @@ export default function AdminDashboard() {
 
     try {
       const url = editingProduct
-        ? `http://localhost:5000/api/products/${editingProduct}`
-        : "http://localhost:5000/api/products";
+        ? `/api/products/${editingProduct}`
+        : "/api/products";
       const method = editingProduct ? "PUT" : "POST";
 
+      console.log(`[Data Fetch] Submitting product data to ${url} via ${method}...`);
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: data,
       });
+      console.log(`[Data Fetch] Submit product response status:`, res.status);
 
       if (res.ok) {
         setIsModalOpen(false);
@@ -195,7 +199,7 @@ export default function AdminDashboard() {
           <div className="flex flex-col gap-4">
             {products.map((p) => (
               <div key={p.id} className="flex gap-6 items-center p-4 transition-colors duration-300" style={{ background: C.dark3, border: `1px solid ${C.rule}` }}>
-                <img src={p.img.startsWith('/') && !p.img.includes('localhost') && p.img.startsWith('/uploads') ? `http://localhost:5000${p.img}` : p.img} alt={p.name} className="w-20 h-20 object-cover" />
+                <img src={p.img.startsWith('/') && !p.img.includes('localhost') && p.img.startsWith('/uploads') ? p.img : p.img} alt={p.name} className="w-20 h-20 object-cover" />
                 <div className="flex-1">
                   <div className="text-[1.4rem] font-light mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>{p.name}</div>
                   <div className="text-[0.6rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>{p.ta}</div>

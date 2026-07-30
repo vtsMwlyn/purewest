@@ -29,9 +29,13 @@ app.get('/health', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-db.sequelize.sync().then(() => {
-  console.log("Database connected.");
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+if (process.env.NODE_ENV !== "production") {
+  db.sequelize.sync().then(() => {
+    console.log("Database connected.");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   });
-});
+}
+
+module.exports = app;

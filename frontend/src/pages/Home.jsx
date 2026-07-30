@@ -712,10 +712,14 @@ export default function Home() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    console.log("[Data Fetch] Fetching products from /api/products...");
+    fetch("/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        console.log("[Data Fetch] Successfully fetched products:", data.length, "items");
+        setProducts(data);
+      })
+      .catch((err) => console.error("[Data Fetch] Error fetching products:", err));
   }, []);
 
   const openPanel = (id) => {
