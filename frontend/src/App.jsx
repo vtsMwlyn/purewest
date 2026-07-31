@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -10,6 +11,9 @@ import Cart from "./pages/Cart";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminArticles from "./pages/AdminArticles";
+import Education from "./pages/Education";
+import ArticleDetail from "./pages/ArticleDetail";
+import Product from "./pages/Product";
 import { CartProvider } from "./CartContext";
 
 import Navbar from "./components/Navbar";
@@ -35,13 +39,7 @@ export default function App() {
       <Router>
         <ScrollToTop />
 
-      <Navbar onShopNow={() => {
-        if (window.location.pathname === '/') {
-          document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.location.href = '/#products';
-        }
-      }} />
+      <Navbar onShopNow={() => window.location.href = '/products'} />
 
       <main className="bg-black text-white">
         <Routes>
@@ -51,10 +49,25 @@ export default function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/articles" element={<AdminArticles />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/education/:id" element={<ArticleDetail />} />
+          <Route path="/products" element={<Product />} />
         </Routes>
       </main>
 
       {/* <Footer /> */}
+      <Toaster 
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            background: '#120d07',
+            color: '#d4c4a8',
+            border: '1px solid rgba(168,144,96,0.12)',
+            fontFamily: "'Libre Baskerville', serif",
+            fontSize: '0.8rem'
+          }
+        }} 
+      />
       </Router>
     </CartProvider>
   );

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import AdminLayout from "../components/AdminLayout";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 
@@ -29,6 +30,7 @@ export default function AdminArticles() {
   const [formData, setFormData] = useState(initialFormState);
   const [contentHtml, setContentHtml] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const token = localStorage.getItem("purewest_admin_token");
 
@@ -108,14 +110,21 @@ export default function AdminArticles() {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(`[Data Fetch] Delete article response status:`, res.status);
+      if (res.ok) {
+        toast.success("Article deleted successfully");
+      } else {
+        toast.error("Failed to delete article");
+      }
       fetchArticles();
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while deleting");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const data = new FormData();
     data.append("title", formData.title);
     data.append("date", formData.date);
@@ -141,13 +150,17 @@ export default function AdminArticles() {
       console.log(`[Data Fetch] Submit article response status:`, res.status);
 
       if (res.ok) {
+        toast.success(editingArticle ? "Article updated successfully" : "Article added successfully");
         setIsModalOpen(false);
         fetchArticles();
       } else {
-        alert("Error saving article");
+        toast.error("Error saving article");
       }
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while saving");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -160,8 +173,18 @@ export default function AdminArticles() {
   // (You could also override .ql-toolbar in a CSS file)
   
   return (
-    <div style={{ background: C.dark, minHeight: "100svh", paddingTop: "100px", paddingBottom: "100px", fontFamily: "'Libre Baskerville', serif", color: C.text }}>
-      
+    <AdminLayout
+      title={<>Articles <em style={{ color: C.gold, fontStyle: "italic" }}>Management</em></>}
+      action={
+        <button
+          onClick={openAddModal}
+          className="px-5 py-2 text-[0.55rem] tracking-[2px] uppercase font-bold cursor-pointer"
+          style={{ background: C.gold, color: C.dark, border: "none" }}
+        >
+          + Add Article
+        </button>
+      }
+    >
       {/* Basic dark overrides for quill since .snow is light by default */}
       <style>{`
         .ql-toolbar.ql-snow { border-color: ${C.rule}; background: #1a1a1a; }
@@ -171,26 +194,8 @@ export default function AdminArticles() {
         .ql-snow .ql-picker { color: ${C.goldPale}; }
       `}</style>
 
-      <div className="max-w-[1200px] mx-auto px-10">
-        <div className="flex justify-between items-center mb-10 pb-6" style={{ borderBottom: `1px solid ${C.rule}` }}>
-          <h2 className="text-[2rem] font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>
-            Admin <em style={{ color: C.gold, fontStyle: "italic" }}>Articles</em>
-          </h2>
-          <div className="flex gap-4">
-            <Link to="/admin/dashboard" className="px-5 py-2 text-[0.6rem] tracking-[2px] uppercase cursor-pointer no-underline flex items-center" style={{ background: "transparent", color: C.goldPale, border: `1px solid ${C.rule}` }}>
-              Products
-            </Link>
-            <button onClick={openAddModal} className="px-6 py-2 text-[0.6rem] tracking-[2px] uppercase font-bold cursor-pointer" style={{ background: C.gold, color: C.dark, border: "none" }}>
-              + Add Article
-            </button>
-            <button onClick={handleLogout} className="px-5 py-2 text-[0.6rem] tracking-[2px] uppercase cursor-pointer" style={{ background: "transparent", color: C.goldPale, border: `1px solid ${C.rule}` }}>
-              Logout
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <div className="flex flex-col gap-4">
+      {/* Article list */}
+      <div className="flex flex-col gap-4">
             {articles.length === 0 ? (
               <p style={{ color: C.textMuted }}>No articles found.</p>
             ) : (
@@ -214,9 +219,7 @@ export default function AdminArticles() {
                 </div>
               ))
             )}
-          </div>
         </div>
-      </div>
 
       {/* Modal Popup */}
       {isModalOpen && (
@@ -263,14 +266,14 @@ export default function AdminArticles() {
                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer" style={{ background: "transparent", color: C.textMuted, border: `1px solid ${C.rule}` }}>
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer" style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}>
-                  {editingArticle ? "Update Article" : "Save Article"}
+                <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}>
+                  {isSubmitting ? "Saving..." : (editingArticle ? "Update Article" : "Save Article")}
                 </button>
               </div>
             </form>
           </div>
         </div>
       )}
-    </div>
+    </AdminLayout>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const C = {
   gold: "#A89060",
@@ -16,10 +17,12 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setIsSubmitting(true);
     try {
       console.log("[Data Fetch] Attempting admin login at /api/auth/login...");
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
@@ -30,13 +33,18 @@ export default function AdminLogin() {
       const data = await res.json();
       console.log("[Data Fetch] Login response status:", res.status);
       if (res.ok) {
+        toast.success("Login successful");
         localStorage.setItem("purewest_admin_token", data.token);
         window.location.href = "/admin/dashboard";
       } else {
         setError(data.message || "Login failed");
+        toast.error(data.message || "Login failed");
       }
     } catch (err) {
       setError("Server error. Please try again later.");
+      toast.error("Server error. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -71,10 +79,11 @@ export default function AdminLogin() {
           />
           <button
             type="submit"
-            className="w-full py-[16px] text-[0.6rem] tracking-[4px] uppercase font-bold transition-all duration-400 mt-4 cursor-pointer"
+            disabled={isSubmitting}
+            className="w-full py-[16px] text-[0.6rem] tracking-[4px] uppercase font-bold transition-all duration-400 mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}
           >
-            Sign In
+            {isSubmitting ? "Signing In..." : "Sign In"}
           </button>
         </form>
       </div>

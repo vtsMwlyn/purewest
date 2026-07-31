@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import AdminLayout from "../components/AdminLayout";
 
 const C = {
   gold: "#A89060",
@@ -30,6 +32,7 @@ export default function AdminDashboard() {
 
   const [formData, setFormData] = useState(initialFormState);
   const [imageFile, setImageFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const token = localStorage.getItem("purewest_admin_token");
 
   useEffect(() => {
@@ -122,14 +125,21 @@ export default function AdminDashboard() {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(`[Data Fetch] Delete product response status:`, res.status);
+      if (res.ok) {
+        toast.success("Product deleted successfully");
+      } else {
+        toast.error("Failed to delete product");
+      }
       fetchProducts();
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while deleting");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const data = new FormData();
     data.append("name", formData.name);
     data.append("eyebrow", formData.eyebrow);
@@ -160,13 +170,17 @@ export default function AdminDashboard() {
       console.log(`[Data Fetch] Submit product response status:`, res.status);
 
       if (res.ok) {
+        toast.success(editingProduct ? "Product updated successfully" : "Product added successfully");
         setIsModalOpen(false);
         fetchProducts();
       } else {
-        alert("Error saving product");
+        toast.error("Error saving product");
       }
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred while saving");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -176,27 +190,20 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div style={{ background: C.dark, minHeight: "100svh", paddingTop: "100px", paddingBottom: "100px", fontFamily: "'Libre Baskerville', serif", color: C.text }}>
-      <div className="max-w-[1200px] mx-auto px-10">
-        <div className="flex justify-between items-center mb-10 pb-6" style={{ borderBottom: `1px solid ${C.rule}` }}>
-          <h2 className="text-[2rem] font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>
-            Admin <em style={{ color: C.gold, fontStyle: "italic" }}>Dashboard</em>
-          </h2>
-          <div className="flex gap-4">
-            <Link to="/admin/articles" className="px-5 py-2 text-[0.6rem] tracking-[2px] uppercase cursor-pointer no-underline flex items-center" style={{ background: "transparent", color: C.goldPale, border: `1px solid ${C.rule}` }}>
-              Articles
-            </Link>
-            <button onClick={openAddModal} className="px-6 py-2 text-[0.6rem] tracking-[2px] uppercase font-bold cursor-pointer" style={{ background: C.gold, color: C.dark, border: "none" }}>
-              + Add Product
-            </button>
-            <button onClick={handleLogout} className="px-5 py-2 text-[0.6rem] tracking-[2px] uppercase cursor-pointer" style={{ background: "transparent", color: C.goldPale, border: `1px solid ${C.rule}` }}>
-              Logout
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <div className="flex flex-col gap-4">
+    <AdminLayout
+      title={<>Products <em style={{ color: C.gold, fontStyle: "italic" }}>Management</em></>}
+      action={
+        <button
+          onClick={openAddModal}
+          className="px-5 py-2 text-[0.55rem] tracking-[2px] uppercase font-bold cursor-pointer"
+          style={{ background: C.gold, color: C.dark, border: "none" }}
+        >
+          + Add Product
+        </button>
+      }
+    >
+      {/* Product list */}
+      <div className="flex flex-col gap-4">
             {products.map((p) => (
               <div key={p.id} className="flex gap-6 items-center p-4 transition-colors duration-300" style={{ background: C.dark3, border: `1px solid ${C.rule}` }}>
                 <img src={p.img.startsWith('/') && !p.img.includes('localhost') && p.img.startsWith('/uploads') ? p.img : p.img} alt={p.name} className="w-20 h-20 object-cover" />
@@ -214,9 +221,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             ))}
-          </div>
         </div>
-      </div>
 
       {/* Modal Popup */}
       {isModalOpen && (
@@ -296,14 +301,14 @@ export default function AdminDashboard() {
                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer" style={{ background: "transparent", color: C.textMuted, border: `1px solid ${C.rule}` }}>
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer" style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}>
-                  {editingProduct ? "Update Product" : "Save Product"}
+                <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}>
+                  {isSubmitting ? "Saving..." : (editingProduct ? "Update Product" : "Save Product")}
                 </button>
               </div>
             </form>
           </div>
         </div>
       )}
-    </div>
+    </AdminLayout>
   );
 }

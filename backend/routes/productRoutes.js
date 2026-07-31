@@ -11,6 +11,17 @@ const supabase = require("../config/supabase");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+const parseJSONField = (field, fallback = []) => {
+  if (typeof field === "string") {
+    try {
+      return JSON.parse(field);
+    } catch (e) {
+      return fallback;
+    }
+  }
+  return field || fallback;
+};
+
 // GET all products (public)
 router.get("/", async (req, res) => {
   try {
@@ -45,9 +56,9 @@ router.post("/", auth, upload.single("img"), async (req, res) => {
       eyebrow,
       ta,
       desc,
-      specs: specs || "[]",
-      sizes: sizes || "[]",
-      icons: icons || "[]",
+      specs: parseJSONField(specs),
+      sizes: parseJSONField(sizes),
+      icons: parseJSONField(icons),
       img: imgPath,
     });
 
@@ -85,9 +96,9 @@ router.put("/:id", auth, upload.single("img"), async (req, res) => {
       eyebrow,
       ta,
       desc,
-      specs: specs || product.specs,
-      sizes: sizes || product.sizes,
-      icons: icons || product.icons,
+      specs: specs ? parseJSONField(specs) : product.specs,
+      sizes: sizes ? parseJSONField(sizes) : product.sizes,
+      icons: icons ? parseJSONField(icons) : product.icons,
       img: imgPath,
     });
 

@@ -29,9 +29,10 @@ export default function Navbar({ onShopNow }) {
   const links = [
     { label: "Our Story", href: "/#about" },
     { label: "The Difference", href: "/#why" },
-    { label: "Collection", href: "/#products" },
+    { label: "Collection", href: "/products" },
     { label: "Reviews", href: "/#testimonials" },
     { label: "Lab Results", href: "/lab-results" },
+    { label: "Education", href: "/education" },
   ];
 
   return (
