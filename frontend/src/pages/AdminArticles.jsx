@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import AdminLayout from "../components/AdminLayout";
-import { useQuill } from "react-quilljs";
+import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
 const C = {
@@ -34,7 +34,30 @@ export default function AdminArticles() {
   
   const token = localStorage.getItem("purewest_admin_token");
 
-  const { quill, quillRef } = useQuill();
+  const quillRef = useRef(null);
+  const [quill, setQuill] = useState(null);
+
+  useEffect(() => {
+    if (quillRef.current && !quill) {
+      const q = new Quill(quillRef.current, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ align: [] }],
+            [{ list: 'ordered'}, { list: 'bullet' }],
+            [{ indent: '-1'}, { indent: '+1' }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            ['link', 'image', 'video'],
+            [{ color: [] }, { background: [] }],
+            ['clean'],
+          ],
+        },
+      });
+      setQuill(q);
+    }
+  }, [quill]);
 
   // Watch for Quill content changes
   useEffect(() => {
