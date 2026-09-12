@@ -38,46 +38,47 @@ export default function AdminArticles() {
   const [quill, setQuill] = useState(null);
 
   useEffect(() => {
-    if (quillRef.current && !quill) {
-      const q = new Quill(quillRef.current, {
-        theme: 'snow',
-        modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ align: [] }],
-            [{ list: 'ordered'}, { list: 'bullet' }],
-            [{ indent: '-1'}, { indent: '+1' }],
-            [{ size: ['small', false, 'large', 'huge'] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ['link', 'image', 'video'],
-            [{ color: [] }, { background: [] }],
-            ['clean'],
-          ],
-        },
-      });
-      setQuill(q);
+    if (!isModalOpen) {
+      setQuill(null);
+      return;
     }
-  }, [quill]);
 
-  // Watch for Quill content changes
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", () => {
-        setContentHtml(quill.root.innerHTML);
-      });
-    }
-  }, [quill]);
+    // Wait for the modal DOM to paint
+    const initTimer = setTimeout(() => {
+      if (quillRef.current && !quill) {
+        const q = new Quill(quillRef.current, {
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ align: [] }],
+              [{ list: 'ordered'}, { list: 'bullet' }],
+              [{ indent: '-1'}, { indent: '+1' }],
+              [{ size: ['small', false, 'large', 'huge'] }],
+              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+              ['link', 'image', 'video'],
+              [{ color: [] }, { background: [] }],
+              ['clean'],
+            ],
+          },
+        });
 
-  // If we open edit modal, inject HTML into Quill
-  useEffect(() => {
-    if (quill && isModalOpen) {
-      if (editingArticle) {
-        quill.clipboard.dangerouslyPasteHTML(editingArticle.content || "");
-      } else {
-        quill.clipboard.dangerouslyPasteHTML(""); // Reset for new
+        q.on("text-change", () => {
+          setContentHtml(q.root.innerHTML);
+        });
+
+        if (editingArticle) {
+          q.clipboard.dangerouslyPasteHTML(editingArticle.content || "");
+        } else {
+          q.clipboard.dangerouslyPasteHTML("");
+        }
+
+        setQuill(q);
       }
-    }
-  }, [quill, isModalOpen, editingArticle]);
+    }, 10);
+
+    return () => clearTimeout(initTimer);
+  }, [isModalOpen, editingArticle, quill]);
 
   useEffect(() => {
     if (!token) {
@@ -110,6 +111,7 @@ export default function AdminArticles() {
     setEditingArticle(null);
     setFormData(initialFormState);
     setImageFile(null);
+    setContentHtml("");
     setIsModalOpen(true);
   };
 
@@ -121,6 +123,7 @@ export default function AdminArticles() {
       subtitle: article.subtitle || "",
     });
     setImageFile(null);
+    setContentHtml(article.content || "");
     setIsModalOpen(true);
   };
 
@@ -212,6 +215,7 @@ export default function AdminArticles() {
       <style>{`
         .ql-toolbar.ql-snow { border-color: ${C.rule}; background: #1a1a1a; }
         .ql-container.ql-snow { border-color: ${C.rule}; background: ${C.dark}; font-family: 'Libre Baskerville', serif; color: #fff; min-height: 250px; font-size: 0.85rem; }
+        .ql-editor { min-height: 250px; }
         .ql-snow .ql-stroke { stroke: ${C.goldPale}; }
         .ql-snow .ql-fill { fill: ${C.goldPale}; }
         .ql-snow .ql-picker { color: ${C.goldPale}; }
@@ -269,17 +273,25 @@ export default function AdminArticles() {
               
               <div className="shrink-0">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Subtitle (Excerpt)</label>
-                <input type="text" name="subtitle" value={formData.subtitle} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                <textarea name="subtitle" rows={3} value={formData.subtitle} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none resize-y" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
               </div>
 
               <div className="shrink-0">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Featured Image</label>
-                <input type="file" onChange={handleFileChange} className="w-full p-2 text-[0.85rem]" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                <input type="file" accept="image/*" onChange={handleFileChange} className="w-full p-2 text-[0.85rem]" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                {(imageFile || (editingArticle && editingArticle.featured_image)) && (
+                  <div className="mt-4 p-2" style={{ background: C.dark3, border: `1px solid ${C.rule}`, display: "inline-block" }}>
+                    <img 
+                      src={imageFile ? URL.createObjectURL(imageFile) : (editingArticle.featured_image.startsWith('/') && !editingArticle.featured_image.includes('localhost') ? editingArticle.featured_image : editingArticle.featured_image)} 
+                      alt="Preview" 
+                      className="max-h-[150px] object-contain"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex-1 flex flex-col min-h-[300px]">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Content</label>
-                {/* React-QuillJS injects into this ref */}
                 <div className="flex-1">
                   <div ref={quillRef} />
                 </div>

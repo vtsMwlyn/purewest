@@ -252,7 +252,7 @@ export default function ArticleDetail() {
         .article-body h1 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
         .article-body h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
         .article-body h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
-        .article-body p { margin-bottom: 1.4rem; }
+        .article-body p { margin-bottom: 0.7rem; }
         .article-body strong { color: ${C.goldPale}; font-weight: 600; }
         .article-body em { color: ${C.goldLight}; font-style: italic; }
         .article-body a { color: ${C.gold}; text-decoration: underline; text-underline-offset: 3px; }

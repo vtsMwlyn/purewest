@@ -14,6 +14,7 @@ import AdminArticles from "./pages/AdminArticles";
 import Education from "./pages/Education";
 import ArticleDetail from "./pages/ArticleDetail";
 import Product from "./pages/Product";
+import FAQ from "./pages/FAQ";
 import { CartProvider } from "./CartContext";
 
 import Navbar from "./components/Navbar";
@@ -33,13 +34,21 @@ function ScrollToTop() {
   return null;
 }
 
+function ConditionalNavbar() {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+  return <Navbar onShopNow={() => window.location.href = '/products'} />;
+}
+
 export default function App() {
   return (
     <CartProvider>
       <Router>
         <ScrollToTop />
 
-      <Navbar onShopNow={() => window.location.href = '/products'} />
+      <ConditionalNavbar />
 
       <main className="bg-black text-white">
         <Routes>
@@ -52,6 +61,7 @@ export default function App() {
           <Route path="/education" element={<Education />} />
           <Route path="/education/:id" element={<ArticleDetail />} />
           <Route path="/products" element={<Product />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
       </main>
 

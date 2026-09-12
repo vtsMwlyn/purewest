@@ -111,6 +111,17 @@ router.delete("/:id", auth, async (req, res) => {
     const article = await Article.findByPk(req.params.id);
     if (!article) return res.status(404).json({ message: "Article not found" });
 
+    if (article.featured_image && article.featured_image.includes("supabase.co")) {
+      const parts = article.featured_image.split("/");
+      const fileName = parts[parts.length - 1];
+      if (fileName) {
+        const { error: deleteError } = await supabase.storage.from("uploads").remove([fileName]);
+        if (deleteError) {
+          console.error("[Supabase Delete Error]:", deleteError);
+        }
+      }
+    }
+
     await article.destroy();
     res.json({ message: "Article deleted" });
   } catch (error) {
