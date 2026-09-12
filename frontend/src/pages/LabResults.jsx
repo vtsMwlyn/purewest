@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ─── Design tokens (matching the PureWest Australia theme) ─── */
 const C = {
@@ -444,38 +444,53 @@ function SugarPanel() {
 /* ─── Certificate detail cards ───────────────────────────────── */
 function CertificateGrid() {
   const [activePdf, setActivePdf] = useState(null);
+  const [certs, setCerts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const certs = [
-    {
-      org: "ChemCentre",
-      tag: "Sugar Analysis · Certificate of Examination",
-      rows: [
-        ["Reference", "24S1051 R0"],
-        ["Sample ID", "M/0924-775JH — Jarrah"],
-        ["Sampled", "01 Sep 2024"],
-        ["Analysed", "06 Sep 2024"],
-        ["Method", "ORG155F (HPLC)"],
-      ],
-      signoff: "Ashley Tai, Chemist & Research Officer — SSD Organic Chemistry",
-      pdfUrl: "/docs/240925 - Chemcentre - CoA (Sugar analysis & TA).pdf"
-    },
-    {
-      org: "National Measurement Institute",
-      tag: "Total Activity · Report of Analysis",
-      rows: [
-        ["Report No.", "RN1441897"],
-        ["Sample ID", "M/0924-775JH-Jarrah-Honey"],
-        ["Date received", "05 Sep 2024"],
-        ["Date tested", "13 Sep 2024"],
-        ["Method", "VM1.29"],
-      ],
-      signoff: "Dean Clarke, Section Manager — Microbiology, VIC",
-      pdfUrl: "/docs/240925 - NMI - TA Rating.pdf"
-    },
-  ];
+  useEffect(() => {
+    const fetchLabTests = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/lab-tests`);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        
+        const mappedCerts = data.map(test => ({
+          org: test.title || "Independent Laboratory",
+          tag: test.subtitle || "Certificate of Analysis",
+          rows: [
+            ["Reference", test.reference || "N/A"],
+            ["Sample ID", test.sample_id || "N/A"],
+            ["Sampled", test.sampled_at ? new Date(test.sampled_at).toLocaleDateString("en-AU", { day: 'numeric', month: 'short', year: 'numeric' }) : "N/A"],
+            ["Analysed", test.analyzed_at ? new Date(test.analyzed_at).toLocaleDateString("en-AU", { day: 'numeric', month: 'short', year: 'numeric' }) : "N/A"],
+            ["Method", test.method || "N/A"],
+          ].filter(row => row[1] !== "N/A" && row[1] !== ""),
+          signoff: test.signed_by || "Authorized Signatory",
+          pdfUrl: test.pdf_path
+        }));
+        
+        setCerts(mappedCerts);
+      } catch (err) {
+        console.error("Failed to fetch lab tests:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchLabTests();
+  }, []);
 
   return (
     <div className="max-w-[1000px] mx-auto mb-16">
+      {loading ? (
+        <div className="flex flex-col items-center justify-center py-20 gap-4">
+          <div className="w-[6px] h-[6px] rotate-45 animate-pulse" style={{ background: C.gold }} />
+          <p className="text-[0.6rem] tracking-[4px] uppercase" style={{ color: C.textMuted, fontFamily: BODY }}>Loading certificates…</p>
+        </div>
+      ) : certs.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="text-[0.8rem]" style={{ color: C.textMuted, fontFamily: BODY }}>No lab certificates have been uploaded yet.</p>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {certs.map((c, i) => (
           <div key={i} className="relative p-10 flex flex-col h-full transition-colors duration-300" style={{ border: `1px solid ${activePdf === c.pdfUrl ? C.gold : C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}>
@@ -534,6 +549,7 @@ function CertificateGrid() {
           </div>
         ))}
       </div>
+      )}
 
       {activePdf && (
         <div className="mt-12 animate-in fade-in slide-in-from-top-4 duration-700" style={{ border: `1px solid ${C.gold}`, background: C.dark2 }}>

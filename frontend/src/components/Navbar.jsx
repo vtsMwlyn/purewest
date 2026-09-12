@@ -33,6 +33,7 @@ export default function Navbar({ onShopNow }) {
     { label: "Reviews", href: "/#testimonials" },
     { label: "Lab Results", href: "/lab-results" },
     { label: "Education", href: "/education" },
+    { label: "FAQ", href: "/faq" },
   ];
 
   return (

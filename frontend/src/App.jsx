@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminArticles from "./pages/AdminArticles";
+import AdminLabTests from "./pages/AdminLabTests";
 import Education from "./pages/Education";
 import ArticleDetail from "./pages/ArticleDetail";
 import Product from "./pages/Product";
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/articles" element={<AdminArticles />} />
+          <Route path="/admin/lab-tests" element={<AdminLabTests />} />
           <Route path="/education" element={<Education />} />
           <Route path="/education/:id" element={<ArticleDetail />} />
           <Route path="/products" element={<Product />} />
