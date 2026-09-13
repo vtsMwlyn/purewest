@@ -46,22 +46,11 @@ export default function Navbar({ onShopNow }) {
           ? "rgba(8,6,4,0.97)"
           : "linear-gradient(to bottom,rgba(8,6,4,0.7),transparent)",
         backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: `1px solid ${scrolled ? C.rule : "transparent"}`,
+        color: scrolled ? '#7a6a55' : 'white',
       }}
     >
       <a href="/" className="no-underline">
-        <div
-          className="text-xl tracking-[6px] uppercase font-semibold leading-none"
-          style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}
-        >
-          Purewest
-        </div>
-        <div
-          className="text-[0.45rem] tracking-[4px] uppercase"
-          style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}
-        >
-          Australia
-        </div>
+        <img src="/images/logo.webp" className="h-12" alt="Purewest" />
       </a>
 
       {/* Desktop links */}
@@ -70,10 +59,8 @@ export default function Navbar({ onShopNow }) {
           <li key={l.href}>
             <a
               href={l.href}
-              className="no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300"
-              style={{ color: C.textMuted, fontFamily: "'Libre Baskerville', serif" }}
-              onMouseEnter={(e) => (e.target.style.color = C.gold)}
-              onMouseLeave={(e) => (e.target.style.color = C.textMuted)}
+              className="no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300 hover:text-[#A89060]"
+              style={{ fontFamily: "'Libre Baskerville', serif" }}
             >
               {l.label}
             </a>

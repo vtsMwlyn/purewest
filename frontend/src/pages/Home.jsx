@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 /* ─── Design tokens (matching the original CSS variables) ─── */
 const C = {
@@ -26,7 +27,7 @@ function SectionRule() {
 
 function Stars() {
   return (
-    <div className="flex gap-1 mb-7">
+    <div className="flex gap-1">
       {[...Array(5)].map((_, i) => (
         <div
           key={i}
@@ -46,14 +47,14 @@ function Stars() {
 
 /* ─── Hero ─────────────────────────────────────────────────── */
 const HERO_SLIDES = [
-  { id: "heroSlide0", img: "/images/heroslide0.jpg", label: "Jarrah" },
-  { id: "heroSlide1", img: null, label: "Marri" },
-  { id: "heroSlide2", img: null, label: "Karri" },
-  { id: "heroSlide3", img: null, label: "Forest" },
-  { id: "heroSlide4", img: null, label: "Harvest" },
+  { id: "heroSlide4", img: "/images/pancake.webp", label: "Harvest" },
+  { id: "heroSlide0", img: "/images/panelimg.webp", label: "Products" },
+  { id: "heroSlide1", img: "/images/beehive-closer.webp", label: "Beehive" },
+  { id: "heroSlide2", img: "/images/mom-and-kid.webp", label: "Mom and Kids" },
+  { id: "heroSlide3", img: "/images/bee-flower.webp", label: "Bee Flower" },
 ];
 
-function Hero({ onShopNow }) {
+function Hero() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
 
@@ -141,7 +142,7 @@ function Hero({ onShopNow }) {
         </div>
 
         <img
-          src="/images/herologoimg.png"
+          src="/images/logo.webp"
           alt="PureWest Australia"
           className="w-40 h-auto mb-3"
           style={{ filter: "drop-shadow(0 0 20px rgba(168,144,96,0.2))" }}
@@ -155,15 +156,15 @@ function Hero({ onShopNow }) {
         </p>
 
         <div className="flex gap-3 justify-center flex-wrap">
-          <button
-            onClick={onShopNow}
+          <Link
+            link="/products"
             className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400"
             style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark }}
             onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
             onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
           >
             Explore the Collection
-          </button>
+          </Link>
           <button
             className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400"
             style={{ fontFamily: "'Libre Baskerville', serif", background: "transparent", color: C.goldPale, border: "1px solid rgba(168,144,96,0.35)" }}
@@ -189,7 +190,7 @@ function About() {
   ];
 
   return (
-    <section id="about" className="px-[72px] py-[130px]" style={{ background: C.dark2 }}>
+    <section id="about" className="px-[72px] py-[90px]" style={{ background: C.dark2 }}>
       <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6" style={{ color: C.gold }}>
         Est. in the Ancient Forests
       </p>
@@ -204,41 +205,38 @@ function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[100px] items-center max-w-[1140px] mx-auto">
         {/* Emblem */}
         <div
-          className="flex flex-col items-center justify-center px-10 py-[60px] relative"
-          style={{ border: `1px solid ${C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}
+          className="flex flex-col items-center justify-center relative h-120"
+          style={{ border: `1px solid ${C.rule}` }}
         >
           <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
           <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
 
-          <div className="text-[0.55rem] tracking-[5px] uppercase mb-[30px]" style={{ color: C.textMuted }}>
-            Wild-Harvested Since Forever
-          </div>
-          <div className="text-[6rem] font-light leading-none" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
-            WA
-          </div>
-          <div className="text-[0.55rem] tracking-[4px] uppercase mt-[10px]" style={{ color: C.textMuted }}>
-            Western Australia
-          </div>
-          <div className="w-10 h-px my-[30px]" style={{ background: C.rule }} />
-          <div className="text-base italic tracking-[1px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
-            South-West Forest Region
-          </div>
+          <img src="/images/jarrah-forest.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
 
-          <div className="flex w-full mt-[50px]" style={{ border: `1px solid ${C.rule}` }}>
-            {stats.map((s, i) => (
-              <div
-                key={i}
-                className="flex-1 py-7 px-5 text-center"
-                style={{ borderRight: i < stats.length - 1 ? `1px solid ${C.rule}` : "none" }}
-              >
-                <div className="text-[2rem] font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
-                  {s.num}
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] from-20% to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end">
+            <div className="text-[0.55rem] tracking-[5px] uppercase mb-[10px] text-white">
+              Wild-Harvested Since Forever
+            </div>
+            <div className="text-base italic tracking-[1px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
+              South-West Forest Region
+            </div>
+
+            <div className="flex w-full mt-[20px]" style={{ border: `1px solid ${C.rule}` }}>
+              {stats.map((s, i) => (
+                <div
+                  key={i}
+                  className="flex-1 py-7 px-5 text-center"
+                  style={{ borderRight: i < stats.length - 1 ? `1px solid ${C.rule}` : "none" }}
+                >
+                  <div className="text-[2rem] font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
+                    {s.num}
+                  </div>
+                  <div className="text-[0.52rem] tracking-[2.5px] uppercase mt-[6px]" style={{ color: C.textMuted }}>
+                    {s.label}
+                  </div>
                 </div>
-                <div className="text-[0.52rem] tracking-[2.5px] uppercase mt-[6px]" style={{ color: C.textMuted }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -260,18 +258,48 @@ function About() {
 }
 
 /* ─── Why ──────────────────────────────────────────────────── */
+function WhyCards({info}){
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="transition-colors duration-400 cursor-default relative overflow-hidden"
+      style={{ background: C.dark }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <img src={info.img} className={`absolute inset-0 w-full h-full object-cover object-center ${hovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'} transition duration-1000`} alt="Pancake" />
+
+      <div className="relative z-5 bg-[#1a120a]/70 w-full h-full p-[52px_40px] ">
+        <div className="text-[3.5rem] font-light leading-none mb-5" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          {info.num}
+        </div>
+        <h3 className="text-[1.3rem] font-normal mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
+          {info.title}
+        </h3>
+        <p className="text-[0.78rem] leading-[1.95] text-white">
+          {info.body}
+        </p>
+        <span className="inline-block mt-5 text-[0.5rem] tracking-[3px] uppercase pb-[2px]" style={{ color: C.gold, borderBottom: `1px solid ${C.gold}` }}>
+          {info.tag}
+        </span>
+      </div>
+    </div>
+  )
+}
+
 function Why() {
   const cards = [
-    { num: "01", title: "Extraordinary Antimicrobial Activity", tag: "TA 35+", body: "Our Jarrah honey is independently tested and certified at Total Activity (TA) 35+ — a measure of antimicrobial potency that places it among the world's most powerful natural honeys, with none of the marketing myths." },
-    { num: "02", title: "Naturally Hydrogen Peroxide-Based", tag: "H₂O₂ Active", body: "Unlike MGO-based honeys, Jarrah's activity is hydrogen peroxide-based — stable, proven, and effective. No synthetics. No additives. Just the pure chemistry of an ancient forest ecosystem." },
-    { num: "03", title: "Naturally Low GI", tag: "Low Glycaemic Index", body: "With a low glycaemic index, Jarrah honey releases energy slowly and gently — the intelligent choice for those managing blood sugar or simply choosing a more balanced, health-conscious natural sweetener without compromise." },
-    { num: "04", title: "An Exquisite Flavour", tag: "Caramel Finish", body: "Smooth, rich, and deeply complex — Jarrah honey carries a signature lingering caramel aftertaste that distinguishes it from every other honey in the world. A genuine sensory experience, as much as a wellness one." },
-    { num: "05", title: "Rare by Nature", tag: "Limited Harvest", body: "The Jarrah tree blooms irregularly — sometimes only once every two years. No cultivation. No shortcuts. Each harvest is a finite, unrepeatable event, making every jar a genuinely rare and precious thing." },
-    { num: "06", title: "Pristine Origin", tag: "Sustainably Sourced", body: "Sourced exclusively from the ancient forests of south-west WA — arguably the world's most pristine ecosystem — and harvested with the utmost respect for the land that makes it possible." },
+    { num: "01", title: "Extraordinary Antimicrobial Activity", tag: "TA 35+", body: "Our Jarrah honey is independently tested and certified at Total Activity (TA) 35+ — a measure of antimicrobial potency that places it among the world's most powerful natural honeys, with none of the marketing myths.", img: "/images/waffle.webp" },
+    { num: "02", title: "Naturally Hydrogen Peroxide-Based", tag: "H₂O₂ Active", body: "Unlike MGO-based honeys, Jarrah's activity is hydrogen peroxide-based — stable, proven, and effective. No synthetics. No additives. Just the pure chemistry of an ancient forest ecosystem.", img: "/images/holding-marri.webp" },
+    { num: "03", title: "Naturally Low GI", tag: "Low Glycaemic Index", body: "With a low glycaemic index, Jarrah honey releases energy slowly and gently — the intelligent choice for those managing blood sugar or simply choosing a more balanced, health-conscious natural sweetener without compromise.", img: "/images/mom-and-kid.webp" },
+    { num: "04", title: "An Exquisite Flavour", tag: "Caramel Finish", body: "Smooth, rich, and deeply complex — Jarrah honey carries a signature lingering caramel aftertaste that distinguishes it from every other honey in the world. A genuine sensory experience, as much as a wellness one.", img: "/images/chilling-at-beach.webp" },
+    { num: "05", title: "Rare by Nature", tag: "Limited Harvest", body: "The Jarrah tree blooms irregularly — sometimes only once every two years. No cultivation. No shortcuts. Each harvest is a finite, unrepeatable event, making every jar a genuinely rare and precious thing.", img: "/images/bee-flower.webp" },
+    { num: "06", title: "Pristine Origin", tag: "Sustainably Sourced", body: "Sourced exclusively from the ancient forests of south-west WA — arguably the world's most pristine ecosystem — and harvested with the utmost respect for the land that makes it possible.", img: "/images/jarrah-forest.webp" },
   ];
 
   return (
-    <section id="why" className="px-[72px] py-[130px]" style={{ background: C.dark }}>
+    <section id="why" className="px-[72px] py-[90px]" style={{ background: C.dark }}>
       <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6" style={{ color: C.gold }}>
         Why Jarrah
       </p>
@@ -285,26 +313,7 @@ function Why() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto" style={{ gap: "1px", background: C.rule }}>
         {cards.map((c) => (
-          <div
-            key={c.num}
-            className="p-[52px_40px] transition-colors duration-400 cursor-default"
-            style={{ background: C.dark }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = C.dark3)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = C.dark)}
-          >
-            <div className="text-[3.5rem] font-light leading-none mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", color: "rgba(168,144,96,0.1)" }}>
-              {c.num}
-            </div>
-            <h3 className="text-[1.3rem] font-normal mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
-              {c.title}
-            </h3>
-            <p className="text-[0.78rem] leading-[1.95]" style={{ color: C.textMuted }}>
-              {c.body}
-            </p>
-            <span className="inline-block mt-5 text-[0.5rem] tracking-[3px] uppercase pb-[2px]" style={{ color: C.gold, borderBottom: `1px solid ${C.gold}` }}>
-              {c.tag}
-            </span>
-          </div>
+          <WhyCards kry={c.num} info={c} />
         ))}
       </div>
     </section>
@@ -317,7 +326,7 @@ function RangePhoto() {
     <section id="range-photo" className="p-0 overflow-hidden" style={{ background: C.dark }}>
       <div className="relative min-h-[420px] overflow-hidden" style={{ background: C.dark3 }}>
         <img
-          src="/images/rangeimg.jpg"
+          src="/images/rangeimg.webp"
           alt="PureWest Australia Honey Range"
           className="w-full object-cover max-h-[700px]"
           style={{ objectPosition: "center 40%", filter: "brightness(0.88) contrast(1.05) saturate(0.95)" }}
@@ -326,7 +335,7 @@ function RangePhoto() {
           className="absolute inset-0 pointer-events-none"
           style={{ background: "linear-gradient(to bottom, rgba(8,6,4,0.35) 0%, transparent 30%, transparent 60%, rgba(8,6,4,0.7) 100%)" }}
         />
-        <div className="absolute bottom-[60px] left-1/2 -translate-x-1/2 text-center z-[2]">
+        <div className="absolute left-1/2 -translate-x-1/2 text-center z-[2] bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] w-full h-full bottom-0 flex flex-col justify-end pb-10">
           <p className="text-[0.52rem] tracking-[5px] uppercase mb-2" style={{ color: C.gold }}>
             The Collection
           </p>
@@ -345,7 +354,7 @@ function RangePhoto() {
 /* ─── Quote ────────────────────────────────────────────────── */
 function Quote() {
   return (
-    <section id="quote" className="py-[100px] px-[72px] text-center" style={{ background: C.dark2 }}>
+    <section id="quote" className="pb-[90px] pt-[40px] px-[72px] text-center" style={{ background: C.dark }}>
       <p
         className="mx-auto font-light italic leading-[1.7] mb-6"
         style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)", color: C.text, maxWidth: "780px" }}
@@ -356,6 +365,26 @@ function Quote() {
       <p className="text-[0.6rem] tracking-[3px] uppercase" style={{ color: C.gold }}>
         PureWest Australia · South-West Western Australia
       </p>
+
+      <Link
+        to="/products"
+        className="inline-block px-9 py-[13px] mt-10 text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400"
+        style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
+        onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
+      >
+        Explore the Collection
+      </Link>
+      <Link
+        to="/lab-result"
+        className="inline-block px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400 ml-5"
+        style={{ fontFamily: "'Libre Baskerville', serif", background: "transparent", color: C.goldPale, border: "1px solid rgba(168,144,96,0.35)" }}
+        onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.gold; }}
+        onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(168,144,96,0.35)"; e.currentTarget.style.color = C.goldPale; }}
+        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+      >
+        Check Lab Result
+      </Link>
     </section>
   );
 }
@@ -371,7 +400,7 @@ function Testimonials() {
   ];
 
   return (
-    <section id="testimonials" className="px-[72px] py-[130px]" style={{ background: C.dark }}>
+    <section id="testimonials" className="px-[72px] py-[90px]" style={{ background: C.dark2 }}>
       <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6" style={{ color: C.gold }}>
         What Our Customers Say
       </p>
@@ -383,16 +412,23 @@ function Testimonials() {
       </h2>
       <SectionRule />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto" style={{ gap: "1px", background: C.rule }}>
+      <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto gap-6">
         {cards.map((c, i) => (
-          <div key={i} className="p-[48px_40px]" style={{ background: C.dark }}>
-            <Stars />
-            <p className="text-[1.05rem] italic leading-[1.9] mb-8 font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.text }}>
+          <div key={i} className="p-[38px_30px]" style={{ background: C.dark }}>
+            <div className="mb-5">
+              <Stars />
+            </div>
+            <p className="text-[0.9rem] italic leading-[1.9] mb-8 font-light text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
               &ldquo;{c.text}&rdquo;
             </p>
             <div className="w-6 h-px mb-4 opacity-50" style={{ background: C.gold }} />
-            <div className="text-[0.6rem] tracking-[3px] uppercase" style={{ color: C.gold }}>{c.author}</div>
-            <div className="text-[0.58rem] mt-[5px] italic" style={{ color: C.textMuted }}>{c.loc}</div>
+            <div className="flex items-center gap-3">
+              <img src="/images/mom-and-kid.webp" className="w-10 h-10 object-cover object-center" alt="Photo" />
+              <div className="flex flex-col">
+                <div className="text-[0.6rem] tracking-[3px] uppercase" style={{ color: C.gold }}>{c.author}</div>
+                <div className="text-[0.58rem] mt-[5px] italic" style={{ color: C.textMuted }}>{c.loc}</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -403,25 +439,28 @@ function Testimonials() {
 /* ─── Shipping ─────────────────────────────────────────────── */
 function Shipping() {
   const items = [
-    { icon: "🚚", title: "Free Shipping",    body: "Complimentary shipping on all orders over $50. Express options available." },
-    { icon: "🌿", title: "Raw & Pure",        body: "Cold-extracted and never heat treated. Exactly as nature intended." },
-    { icon: "🏆", title: "Certified Quality", body: "Every batch independently tested and certified for Total Activity rating." },
-    { icon: "↩️", title: "Easy Returns",      body: "Not completely satisfied? We offer a 30-day money-back guarantee." },
+    { src: "/images/product-benefit-1.webp", title: "Free Shipping",    body: "Complimentary shipping on all orders over $50. Express options available." },
+    { src: "/images/product-benefit-2.webp", title: "Raw & Pure",        body: "Cold-extracted and never heat treated. Exactly as nature intended." },
+    { src: "/images/product-benefit-3.webp", title: "Certified Quality", body: "Every batch independently tested and certified for Total Activity rating." },
+    { src: "/images/product-benefit-4.webp", title: "Easy Returns",      body: "Not completely satisfied? We offer a 30-day money-back guarantee." },
   ];
 
   return (
-    <section id="shipping" className="py-[90px] px-[72px]" style={{ background: C.dark2 }}>
-      <div className="max-w-[1000px] mx-auto grid grid-cols-2 md:grid-cols-4" style={{ gap: "1px", background: C.rule, border: `1px solid ${C.rule}` }}>
-        {items.map((item, i) => (
-          <div key={i} className="py-11 px-[30px] text-center" style={{ background: C.dark2 }}>
-            <span className="text-[1.6rem] mb-[18px] block">{item.icon}</span>
-            <h4 className="text-base font-normal mb-[10px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
-              {item.title}
-            </h4>
-            <p className="text-[0.68rem] leading-[1.7]" style={{ color: C.textMuted }}>{item.body}</p>
-          </div>
-        ))}
+    <section id="shipping" className="w-full relative flex justify-end">
+      <div className="w-full relative z-5 bg-linear-to-l from-[#120d07] to-transparent flex justify-end">
+        <div className="w-1/2 py-[90px] px-[72px] grid grid-cols-2">
+          {items.map((item, i) => (
+            <div key={i} className="py-11 px-[30px] text-center border border-[rgba(168,144,96,0.12)] bg-[#0e0a05]">
+              <img src={item.src} className="size-20 mb-[18px] block mx-auto"/>
+              <h4 className="text-base font-normal mb-[10px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
+                {item.title}
+              </h4>
+              <p className="text-[0.68rem] leading-[1.7]" style={{ color: C.textMuted }}>{item.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
+      <img src="/images/traktor.webp" className="absolute z-0 inset-0 w-full h-full object-cover object-center"/>
     </section>
   );
 }
@@ -502,19 +541,15 @@ function Footer() {
 
 /* ─── Home (root) ──────────────────────────────────────────── */
 export default function Home() {
-  const navigateToProducts = () => {
-    window.location.href = "/products";
-  };
-
   return (
     <div style={{ background: C.dark, color: C.text, fontFamily: "'Libre Baskerville', serif" }}>
-      <Hero onShopNow={navigateToProducts} />
+      <Hero />
       <About />
+      <Shipping />
       <Why />
       <RangePhoto />
       <Quote />
       <Testimonials />
-      <Shipping />
       <Footer />
     </div>
   );

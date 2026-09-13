@@ -4,7 +4,7 @@ const path = require('path');
 
 // Config
 const publicFolder = path.join(__dirname, 'public');
-const supportedExtensions = ['.jpeg', '.jpg', '.png', '.tiff', '.svg', '.jfif'];
+const supportedExtensions = ['.jpeg', '.jpg', '.png', '.tiff', '.svg', '.jfif', '.avif'];
 
 async function convertImage(filePath) {
   const base = path.basename(filePath).toLowerCase();
