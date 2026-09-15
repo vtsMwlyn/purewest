@@ -199,51 +199,52 @@ export default function Education() {
     >
       {/* Hero */}
       <div
-        className="relative flex flex-col items-center justify-center text-center px-6"
+        className="relative flex flex-col items-center justify-center text-center h-screen w-full"
         style={{
-          paddingTop: "160px",
-          paddingBottom: "80px",
-          borderBottom: `1px solid ${C.rule}`,
           background: `linear-gradient(to bottom, ${C.dark2}, ${C.dark})`,
         }}
       >
-        {/* Decorative diamond */}
-        <div
-          className="w-[6px] h-[6px] rotate-45 mx-auto mb-6"
-          style={{ background: C.gold }}
-        />
-        <p
-          className="text-[0.55rem] tracking-[6px] uppercase mb-5"
-          style={{ color: C.gold, fontFamily: BODY }}
-        >
-          Knowledge · Wellness · Nature
-        </p>
-        <h1
-          className="font-light leading-[1.05] mb-6"
-          style={{
-            fontFamily: SERIF,
-            fontSize: "clamp(2.8rem, 6vw, 5rem)",
-            color: "#fff",
-            letterSpacing: "-0.5px",
-          }}
-        >
-          The{" "}
-          <em style={{ color: C.gold, fontStyle: "italic" }}>Education</em>{" "}
-          Journal
-        </h1>
-        <p
-          className="max-w-xl text-[0.9rem] leading-relaxed"
-          style={{ color: C.textMuted }}
-        >
-          Explore the science, tradition, and stories behind Australia's most
-          extraordinary honeys — written by the people who live it.
-        </p>
+        <img src="/images/jarrah-hero-product.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
+        
+        <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
+          {/* Decorative diamond */}
+          <div
+            className="w-[6px] h-[6px] rotate-45 mx-auto mb-6"
+            style={{ background: C.gold }}
+          />
+          <p
+            className="text-[0.55rem] tracking-[6px] uppercase mb-5"
+            style={{ fontFamily: BODY }}
+          >
+            Knowledge · Wellness · Nature
+          </p>
+          <h1
+            className="font-light leading-[1.05] mb-6"
+            style={{
+              fontFamily: SERIF,
+              fontSize: "clamp(2.8rem, 6vw, 5rem)",
+              color: "#fff",
+              letterSpacing: "-0.5px",
+            }}
+          >
+            The{" "}
+            <em style={{ color: C.gold, fontStyle: "italic" }}>Education</em>{" "}
+            Journal
+          </h1>
+          <p
+            className="max-w-xl text-[0.9rem] leading-relaxed"
+            style={{ color: C.textMuted }}
+          >
+            Explore the science, tradition, and stories behind Australia's most
+            extraordinary honeys — written by the people who live it.
+          </p>
 
-        {/* Bottom rule */}
-        <div className="flex items-center gap-4 mt-12">
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
-          <div className="w-[4px] h-[4px] rotate-45" style={{ background: C.gold, opacity: 0.5 }} />
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
+          {/* Bottom rule */}
+          <div className="flex items-center gap-4 mt-12">
+            <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
+            <div className="w-[4px] h-[4px] rotate-45" style={{ background: C.gold, opacity: 0.5 }} />
+            <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
+          </div>
         </div>
       </div>
 

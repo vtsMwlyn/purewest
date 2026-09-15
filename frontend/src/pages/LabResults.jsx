@@ -48,9 +48,9 @@ function Heading({ children }) {
 }
 
 /* ─── Verification seal (signature accent) ─────────────────── */
-function VerificationSeal() {
+function VerificationSeal({className}) {
   return (
-    <div className="shrink-0 mx-auto md:mx-0" style={{ transform: "rotate(-7deg)" }}>
+    <div className={`shrink-0 mx-auto md:mx-0 ${className}`} style={{ transform: "rotate(-7deg)" }}>
       <svg width="168" height="168" viewBox="0 0 168 168">
         <defs>
           <path id="sealRing" d="M84,84 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" />
@@ -597,27 +597,29 @@ export default function LabResults() {
   const [tab, setTab] = useState("activity");
 
   return (
-    <section id="lab-results" className="px-6 sm:px-[72px] py-[120px]" style={{ background: C.dark, color: C.text, fontFamily: "'Libre Baskerville', serif", minHeight: '100vh' }}>
-      
-      {/* hero header from alt */}
-      <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-12 mb-24 mt-8">
-        <div className="max-w-[560px] text-center md:text-left">
-          <p className="text-[0.55rem] tracking-[6px] uppercase mb-6" style={{ color: C.gold }}>
-            Beyond The Label
-          </p>
-          <h2
-            className="font-light mb-6 leading-[1.1]"
-            style={{ fontFamily: SERIF, fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)", color: "#fff", letterSpacing: "-0.5px" }}
-          >
-            The Proof <em style={{ color: C.gold, fontStyle: "italic" }}>Behind The Jar</em>
-          </h2>
-          <p className="text-[0.82rem] leading-[2.1]" style={{ color: C.textMuted }}>
-            We don&apos;t ask you to take our word for it. Every jar of Jarrah honey carries results 
-            from two government-accredited laboratories — ChemCentre and the National Measurement 
-            Institute. No rounding, no marketing gloss. Below is the certificate, unfolded.
-          </p>
+    <section id="lab-results" className="w-full pb-20" style={{ background: C.dark, color: C.text, fontFamily: "'Libre Baskerville', serif" }}>
+      <div className="w-full h-screen mb-20">
+        <img src="/images/waffle.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
+        
+        <div className="relative z-8 bg-linear-45 from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col justify-end px-6 sm:px-[72px] py-[90px]">
+          <div className="max-w-[560px] text-center md:text-left">
+            <p className="text-[0.55rem] tracking-[6px] uppercase mb-6" style={{ color: C.gold }}>
+              Beyond The Label
+            </p>
+            <h2
+              className="font-light mb-6 leading-[1.1]"
+              style={{ fontFamily: SERIF, fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)", color: "#fff", letterSpacing: "-0.5px" }}
+            >
+              The Proof <em style={{ color: C.gold, fontStyle: "italic" }}>Behind The Jar</em>
+            </h2>
+            <p className="text-[0.82rem] leading-[2.1]" style={{ color: C.textMuted }}>
+              We don&apos;t ask you to take our word for it. Every jar of Jarrah honey carries results 
+              from two government-accredited laboratories — ChemCentre and the National Measurement 
+              Institute. No rounding, no marketing gloss. Below is the certificate, unfolded.
+            </p>
+          </div>
+          <VerificationSeal className="absolute top-25 right-20" />
         </div>
-        <VerificationSeal />
       </div>
 
       <LabBadges />

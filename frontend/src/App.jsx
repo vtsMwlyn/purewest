@@ -19,7 +19,7 @@ import FAQ from "./pages/FAQ";
 import { CartProvider } from "./CartContext";
 
 import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -68,6 +68,8 @@ export default function App() {
       </main>
 
       {/* <Footer /> */}
+      <Footer />
+
       <Toaster 
         position="bottom-right"
         toastOptions={{

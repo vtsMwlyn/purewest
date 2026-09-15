@@ -1,48 +1,84 @@
-import { Link } from "react-router-dom"
+const C = {
+  gold: "#A89060",
+  goldLight: "#C4AA7A",
+  goldPale: "#C8AE80",
+  dark: "#0e0a05",
+  dark2: "#120d07",
+  dark3: "#1a120a",
+  rule: "rgba(168,144,96,0.12)",
+  text: "#d4c4a8",
+  textMuted: "#7a6a55",
+};
 
 export default function Footer() {
-	return (
-		<>
-			<footer className="flex flex-col items-center bg-gray-950 text-white py-10 xl:py-20">
-				<div className="w-11/12 xl:w-5/6 flex flex-col">
-					<div className="grid grid-cols-1 xl:grid-cols-4 gap-10 xl:gap-20">
-						<div className="flex flex-col">
-							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Follow Us</h1>
-							<p>Discover the Power of Wellness with Purewest Australia on Social Media.</p>
-							<div className="flex items-center gap-4">
-								<a href="https://web.facebook.com/profile.php?id=61563743532875" target="_blank"><i className="bi bi-facebook text-2xl"></i></a>
-								<a href="https://www.instagram.com/purewestph/" target="_blank"><i className="bi bi-instagram text-2xl"></i></a>
-							</div>
-						</div>
+  const cols = [
+    { title: "Shop",    links: ["Jarrah Honey TA 35+", "Marri Honey TA 35+", "Marri Honey TA 15+", "Gift Sets", "Bundles"] },
+    { title: "Learn",   links: ["About Jarrah Honey", "TA vs MGO Explained", "Health Benefits", "Sustainability", "Blog"] },
+    { title: "Company", links: ["Our Story", "The Forest", "Contact Us", "Wholesale", "FAQ"] },
+  ];
 
-						<div className="flex flex-col">
-							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Contact</h1>
-							<a href="/" target="_blank">123 Anywhere St., Any City 12345</a>
-							<a href="/" target="_blank">(123) 456 - 7890</a>
-							<a href="/" target="_blank">hello@reallygreatsite.com</a>
-						</div>
+  return (
+    <footer style={{ background: "#050402", padding: "90px 72px 48px" }}>
+      <div
+        className="max-w-[1140px] mx-auto pb-[60px]"
+        style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "60px", borderBottom: `1px solid ${C.rule}` }}
+      >
+        <div>
+          <div className="text-[1.4rem] tracking-[6px] uppercase font-semibold mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
+            Purewest
+          </div>
+          <div className="text-[0.6rem] tracking-[5px] uppercase mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
+            Australia
+          </div>
+          <p className="italic text-[0.85rem] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.textMuted }}>
+            From the world&apos;s last wild places.
+          </p>
+          <p className="text-[0.72rem] leading-[1.95] max-w-[270px]" style={{ color: C.textMuted }}>
+            Premium raw honey from the ancient Jarrah and Marri forests of south-west Western Australia. Independently certified. Uncompromisingly pure.
+          </p>
+        </div>
 
-						<div className="flex flex-col">
-							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Explore Products</h1>
-							<Link to="/shop">Jarrah - Active Honey</Link>
-							<Link to="/shop">Karri - Active Honey</Link>
-							<Link to="/shop">Marri - Active Honey</Link>
-						</div>
+        {cols.map((col) => (
+          <div key={col.title}>
+            <h4 className="text-[0.55rem] tracking-[4px] uppercase mb-[26px]" style={{ color: C.gold }}>{col.title}</h4>
+            <ul className="list-none flex flex-col gap-[14px] p-0">
+              {col.links.map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="no-underline text-[0.72rem] italic transition-colors duration-300"
+                    style={{ color: C.textMuted }}
+                    onMouseEnter={(e) => (e.target.style.color = C.gold)}
+                    onMouseLeave={(e) => (e.target.style.color = C.textMuted)}
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
 
-						<div className="flex flex-col">
-							<h1 className="font-bold text-2xl text-yellow-500 mb-4">Sitemap</h1>
-							<Link to="/shop">Shop</Link>
-							<Link to="/about-us">About Us</Link>
-							<Link to="/health">Health</Link>
-							<Link to="/research">Research</Link>
-							<Link to="/contact-us">Contact Us</Link>
-							<Link to="/cart">Cart</Link>
-						</div>
-					</div>
-
-					<p>Copyright &copy; 2026 Purewest - All Rights Reserved</p>
-				</div>
-			</footer>
-		</>
-	)
+      <div className="max-w-[1140px] mx-auto mt-12 flex justify-between items-center flex-wrap gap-4">
+        <p className="text-[0.6rem] tracking-[1px]" style={{ color: C.textMuted }}>
+          &copy; {new Date().getFullYear()} PureWest Australia. All rights reserved.
+        </p>
+        <div className="flex gap-7">
+          {["Instagram", "Facebook", "Pinterest"].map((s) => (
+            <a
+              key={s}
+              href="#"
+              className="no-underline text-[0.58rem] tracking-[3px] uppercase transition-colors duration-300"
+              style={{ color: C.textMuted }}
+              onMouseEnter={(e) => (e.target.style.color = C.gold)}
+              onMouseLeave={(e) => (e.target.style.color = C.textMuted)}
+            >
+              {s}
+            </a>
+          ))}
+        </div>
+      </div>
+    </footer>
+  );
 }

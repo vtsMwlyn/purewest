@@ -191,19 +191,9 @@ function About() {
 
   return (
     <section id="about" className="px-[72px] py-[90px]" style={{ background: C.dark2 }}>
-      <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6" style={{ color: C.gold }}>
-        Est. in the Ancient Forests
-      </p>
-      <h2
-        className="text-center font-light mb-5 leading-[1.1]"
-        style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", color: "#fff", letterSpacing: "-0.5px" }}
-      >
-        A Honey Unlike <em style={{ color: C.gold, fontStyle: "italic" }}>Any Other</em>
-      </h2>
-      <SectionRule />
-
+      {/* South-West Forest Region */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[100px] items-center max-w-[1140px] mx-auto">
-        {/* Emblem */}
+        {/* Image */}
         <div
           className="flex flex-col items-center justify-center relative h-120"
           style={{ border: `1px solid ${C.rule}` }}
@@ -213,14 +203,61 @@ function About() {
 
           <img src="/images/jarrah-forest.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
 
-          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] from-20% to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end">
-            <div className="text-[0.55rem] tracking-[5px] uppercase mb-[10px] text-white">
-              Wild-Harvested Since Forever
-            </div>
-            <div className="text-base italic tracking-[1px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
-              South-West Forest Region
-            </div>
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end"></div>
+        </div>
 
+        {/* Text */}
+        <div>
+          <p className="text-[0.55rem] tracking-[6px] uppercase text-start mb-6" style={{ color: C.gold }}>
+            Wild-Harvested Since Forever
+          </p>
+          <h2 className="font-light mb-5 leading-[1.1]" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", color: "#fff", letterSpacing: "-0.5px" }}>
+            <em style={{ color: C.gold, fontStyle: "italic" }}>South-West</em> Forest Region
+          </h2>
+          <p className="leading-[2.1] text-[0.82rem] mb-[22px]" style={{ color: C.textMuted }}>In the ancient Jarrah and Marri forests of south-west Western Australia — one of the Earth&apos;s last truly pristine ecosystems — something extraordinary takes place. When conditions align and the trees choose to bloom, our bees gather a honey so rare and so potent that it is unlike anything else found on this planet.</p>
+        </div>
+      </div>
+
+      {/* A Honey Unlike Any Other */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[100px] items-center max-w-[1140px] mx-auto mt-20">
+        {/* Text */}
+        <div>
+          <p className="text-[0.55rem] tracking-[6px] uppercase text-start mb-6" style={{ color: C.gold }}>
+            Est. in the Ancient Forests
+          </p>
+          <h2 className="font-light mb-5 leading-[1.1]" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", color: "#fff", letterSpacing: "-0.5px" }}>
+            A Honey Unlike <em style={{ color: C.gold, fontStyle: "italic" }}>Any Other</em>
+          </h2>
+          <p className="leading-[2.1] text-[0.82rem] mb-[22px]" style={{ color: C.textMuted }}><strong style={{ color: C.goldPale }}>PureWest Australia</strong> exists for one purpose: to bring this honey to you exactly as nature intended. No blending. No heat treatment. No shortcuts. Only raw, cold-extracted honey from old-growth forests, independently tested, and delivered straight to your door.</p>
+        </div>
+
+        {/* Image */}
+        <div
+          className="flex flex-col items-center justify-center relative h-120"
+          style={{ border: `1px solid ${C.rule}` }}
+        >
+          <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
+          <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
+
+          <img src="/images/hive-extract.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
+
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end"></div>
+        </div>
+      </div>
+
+      {/* Unrivaled Quality, Unbeatable Everyday Value */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[100px] items-center max-w-[1140px] mx-auto mt-20">
+        {/* Image */}
+        <div
+          className="flex flex-col items-center justify-center relative h-120"
+          style={{ border: `1px solid ${C.rule}` }}
+        >
+          <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
+          <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
+
+          <img src="/images/holding-marri.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
+
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] from-20% to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end">
             <div className="flex w-full mt-[20px]" style={{ border: `1px solid ${C.rule}` }}>
               {stats.map((s, i) => (
                 <div
@@ -242,15 +279,13 @@ function About() {
 
         {/* Text */}
         <div>
-          {[
-            <>In the ancient Jarrah and Marri forests of south-west Western Australia — one of the Earth&apos;s last truly pristine ecosystems — something extraordinary takes place. When conditions align and the trees choose to bloom, our bees gather a honey so rare and so potent that it is unlike anything else found on this planet.</>,
-            <><strong style={{ color: C.goldPale }}>PureWest Australia</strong> exists for one purpose: to bring this honey to you exactly as nature intended. No blending. No heat treatment. No shortcuts. Only raw, cold-extracted honey from old-growth forests, independently tested, and delivered straight to your door.</>,
-            <>Our Jarrah honey carries a Total Activity (TA) rating that rivals — and in many cases surpasses — the most celebrated honeys in the world, at a fraction of the cost. This is <strong style={{ color: C.goldPale }}>Australia&apos;s best-kept secret</strong>, and it&apos;s time the world knew.</>,
-          ].map((text, i) => (
-            <p key={i} className="leading-[2.1] text-[0.82rem] mb-[22px]" style={{ color: C.textMuted }}>
-              {text}
-            </p>
-          ))}
+          <p className="text-[0.55rem] tracking-[6px] uppercase text-start mb-6" style={{ color: C.gold }}>
+            Unveiling Australia's Best-Kept
+          </p>
+          <h2 className="font-light mb-5 leading-[1.1]" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", color: "#fff", letterSpacing: "-0.5px" }}>
+             Unrivaled Quality, <em style={{ color: C.gold, fontStyle: "italic" }}>Unbeatable Everyday Value</em>
+          </h2>
+          <p className="leading-[2.1] text-[0.82rem] mb-[22px]" style={{ color: C.textMuted }}>Our Jarrah honey carries a Total Activity (TA) rating that rivals — and in many cases surpasses — the most celebrated honeys in the world, at a fraction of the cost. This is <strong style={{ color: C.goldPale }}>Australia&apos;s best-kept secret</strong>, and it&apos;s time the world knew.</p>
         </div>
       </div>
     </section>
@@ -448,7 +483,10 @@ function Shipping() {
   return (
     <section id="shipping" className="w-full relative flex justify-end">
       <div className="w-full relative z-5 bg-linear-to-l from-[#120d07] to-transparent flex justify-end">
-        <div className="w-1/2 py-[90px] px-[72px] grid grid-cols-2">
+        <div className="w-1/2 py-[90px] px-[72px] grid grid-cols-2 relative">
+          <div className="absolute top-22.25 left-17.75 w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
+          <div className="absolute bottom-22.25 right-17.75 w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
+
           {items.map((item, i) => (
             <div key={i} className="py-11 px-[30px] text-center border border-[rgba(168,144,96,0.12)] bg-[#0e0a05]">
               <img src={item.src} className="size-20 mb-[18px] block mx-auto"/>
@@ -465,80 +503,6 @@ function Shipping() {
   );
 }
 
-/* ─── Footer ───────────────────────────────────────────────── */
-function Footer() {
-  const cols = [
-    { title: "Shop",    links: ["Jarrah Honey TA 35+", "Marri Honey TA 35+", "Marri Honey TA 15+", "Gift Sets", "Bundles"] },
-    { title: "Learn",   links: ["About Jarrah Honey", "TA vs MGO Explained", "Health Benefits", "Sustainability", "Blog"] },
-    { title: "Company", links: ["Our Story", "The Forest", "Contact Us", "Wholesale", "FAQ"] },
-  ];
-
-  return (
-    <footer style={{ background: "#050402", padding: "90px 72px 48px" }}>
-      <div
-        className="max-w-[1140px] mx-auto pb-[60px]"
-        style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "60px", borderBottom: `1px solid ${C.rule}` }}
-      >
-        <div>
-          <div className="text-[1.4rem] tracking-[6px] uppercase font-semibold mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
-            Purewest
-          </div>
-          <div className="text-[0.6rem] tracking-[5px] uppercase mb-5" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
-            Australia
-          </div>
-          <p className="italic text-[0.85rem] mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.textMuted }}>
-            From the world&apos;s last wild places.
-          </p>
-          <p className="text-[0.72rem] leading-[1.95] max-w-[270px]" style={{ color: C.textMuted }}>
-            Premium raw honey from the ancient Jarrah and Marri forests of south-west Western Australia. Independently certified. Uncompromisingly pure.
-          </p>
-        </div>
-
-        {cols.map((col) => (
-          <div key={col.title}>
-            <h4 className="text-[0.55rem] tracking-[4px] uppercase mb-[26px]" style={{ color: C.gold }}>{col.title}</h4>
-            <ul className="list-none flex flex-col gap-[14px] p-0">
-              {col.links.map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
-                    className="no-underline text-[0.72rem] italic transition-colors duration-300"
-                    style={{ color: C.textMuted }}
-                    onMouseEnter={(e) => (e.target.style.color = C.gold)}
-                    onMouseLeave={(e) => (e.target.style.color = C.textMuted)}
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="max-w-[1140px] mx-auto mt-12 flex justify-between items-center flex-wrap gap-4">
-        <p className="text-[0.6rem] tracking-[1px]" style={{ color: C.textMuted }}>
-          &copy; {new Date().getFullYear()} PureWest Australia. All rights reserved.
-        </p>
-        <div className="flex gap-7">
-          {["Instagram", "Facebook", "Pinterest"].map((s) => (
-            <a
-              key={s}
-              href="#"
-              className="no-underline text-[0.58rem] tracking-[3px] uppercase transition-colors duration-300"
-              style={{ color: C.textMuted }}
-              onMouseEnter={(e) => (e.target.style.color = C.gold)}
-              onMouseLeave={(e) => (e.target.style.color = C.textMuted)}
-            >
-              {s}
-            </a>
-          ))}
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ─── Home (root) ──────────────────────────────────────────── */
 export default function Home() {
   return (
@@ -550,7 +514,6 @@ export default function Home() {
       <RangePhoto />
       <Quote />
       <Testimonials />
-      <Footer />
     </div>
   );
 }
