@@ -1,21 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const C = {
-  gold: "#A89060",
-  goldLight: "#C4AA7A",
-  goldPale: "#C8AE80",
-  dark: "#0e0a05",
-  dark2: "#120d07",
-  dark3: "#1a120a",
-  rule: "rgba(168,144,96,0.12)",
-  text: "#d4c4a8",
-  textMuted: "#7a6a55",
-};
-
-const SERIF = "'Cormorant Garamond', serif";
-const BODY = "'Libre Baskerville', serif";
-
 const faqData = [
   {
     question: "How can honey improve my health?",
@@ -81,57 +66,25 @@ export default function FAQ() {
   };
 
   return (
-    <div
-      style={{
-        background: C.dark,
-        minHeight: "100svh",
-        fontFamily: BODY,
-        color: C.text,
-      }}
-    >
+    <div className="bg-dark min-h-[100svh] font-baskerville text-text">
       {/* Hero */}
-      <div
-        className="relative flex flex-col items-center justify-center text-center px-6"
-        style={{
-          paddingTop: "160px",
-          paddingBottom: "80px",
-          borderBottom: `1px solid ${C.rule}`,
-          background: `linear-gradient(to bottom, ${C.dark2}, ${C.dark})`,
-        }}
-      >
-        <div
-          className="w-[6px] h-[6px] rotate-45 mx-auto mb-6"
-          style={{ background: C.gold }}
-        />
-        <p
-          className="text-[0.55rem] tracking-[6px] uppercase mb-5"
-          style={{ color: C.gold, fontFamily: BODY }}
-        >
+      <div className="relative flex flex-col items-center justify-center text-center px-6 pt-[160px] pb-[80px] border-b border-rule bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
+        <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
+        <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase mb-5 text-gold">
           Discover More
         </p>
-        <h1
-          className="font-light leading-[1.05] mb-6"
-          style={{
-            fontFamily: SERIF,
-            fontSize: "clamp(2.8rem, 6vw, 5rem)",
-            color: "#fff",
-            letterSpacing: "-0.5px",
-          }}
-        >
-          Frequently Asked <em style={{ color: C.gold, fontStyle: "italic" }}>Questions</em>
+        <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
+          Frequently Asked <em className="text-gold italic">Questions</em>
         </h1>
-        <p
-          className="max-w-xl text-[0.9rem] leading-relaxed"
-          style={{ color: C.textMuted }}
-        >
+        <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
           Learn more about our rare Western Australian honeys, their unique properties, and how best to enjoy them.
         </p>
 
         {/* Bottom rule */}
         <div className="flex items-center gap-4 mt-12">
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
-          <div className="w-[4px] h-[4px] rotate-45" style={{ background: C.gold, opacity: 0.5 }} />
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
+          <div className="w-16 h-px opacity-30 bg-gold" />
+          <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+          <div className="w-16 h-px opacity-30 bg-gold" />
         </div>
       </div>
 
@@ -143,63 +96,35 @@ export default function FAQ() {
             return (
               <div 
                 key={index} 
-                className="transition-colors duration-400"
-                style={{ 
-                  background: isOpen ? C.dark3 : "transparent",
-                  border: `1px solid ${isOpen ? 'rgba(168,144,96,0.35)' : C.rule}` 
-                }}
+                className={`transition-colors duration-400 border ${isOpen ? 'bg-dark3 border-gold/35' : 'bg-transparent border-rule'}`}
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between p-6 cursor-pointer outline-none focus:outline-none"
-                  style={{ background: "transparent", border: "none" }}
+                  className="w-full flex items-center justify-between p-6 cursor-pointer outline-none focus:outline-none bg-transparent border-none"
                 >
                   <h3 
-                    className="text-left font-light m-0 transition-colors duration-300"
-                    style={{ 
-                      fontFamily: SERIF, 
-                      fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
-                      color: isOpen ? C.goldLight : "#fff",
-                    }}
+                    className={`text-left font-light m-0 transition-colors duration-300 font-garamond text-[clamp(1.2rem,2vw,1.5rem)] ${isOpen ? 'text-gold-light' : 'text-white'}`}
                   >
                     {item.question}
                   </h3>
                   <div 
-                    className="ml-6 flex items-center justify-center shrink-0 transition-transform duration-500 ease-in-out"
-                    style={{ 
-                      width: "30px", 
-                      height: "30px",
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)"
-                    }}
+                    className={`ml-6 flex items-center justify-center shrink-0 transition-transform duration-500 ease-in-out w-[30px] h-[30px] ${isOpen ? 'rotate-180' : 'rotate-0'}`}
                   >
-                    <span 
-                      style={{ 
-                        color: C.gold, 
-                        fontSize: "1.5rem",
-                        fontWeight: "300",
-                        display: "inline-block",
-                        lineHeight: 1
-                      }}
-                    >
+                    <span className="text-gold text-[1.5rem] font-light inline-block leading-none">
                       {isOpen ? '−' : '+'}
                     </span>
                   </div>
                 </button>
 
                 <div 
-                  className={`overflow-hidden transition-all duration-500 ease-in-out`}
+                  className="overflow-hidden transition-all duration-500 ease-in-out"
                   style={{ 
                     maxHeight: isOpen ? "1000px" : "0px",
                     opacity: isOpen ? 1 : 0
                   }}
                 >
                   <div 
-                    className="px-6 pb-8 faq-answer"
-                    style={{ 
-                      color: C.text,
-                      lineHeight: "1.9",
-                      fontSize: "0.95rem"
-                    }}
+                    className="px-6 pb-8 faq-answer text-text leading-[1.9] text-[0.95rem]"
                     dangerouslySetInnerHTML={{ __html: item.answer }}
                   />
                 </div>
@@ -210,16 +135,16 @@ export default function FAQ() {
 
         {/* Footer ornament */}
         <div className="flex items-center justify-center gap-4 mt-24">
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
-          <div className="w-[4px] h-[4px] rotate-45" style={{ background: C.gold, opacity: 0.5 }} />
-          <div className="w-16 h-px opacity-30" style={{ background: C.gold }} />
+          <div className="w-16 h-px opacity-30 bg-gold" />
+          <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+          <div className="w-16 h-px opacity-30 bg-gold" />
         </div>
       </div>
 
       <style>{`
         .faq-answer p { margin-bottom: 1.2rem; }
         .faq-answer p:last-child { margin-bottom: 0; }
-        .faq-answer strong { color: ${C.goldPale}; font-weight: 600; }
+        .faq-answer strong { color: #C8AE80; font-weight: 600; }
       `}</style>
     </div>
   );

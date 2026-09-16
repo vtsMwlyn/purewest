@@ -1,18 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
-const C = {
-  gold: "#A89060",
-  goldLight: "#C4AA7A",
-  goldPale: "#C8AE80",
-  dark: "#0e0a05",
-  dark2: "#120d07",
-  dark3: "#1a120a",
-  rule: "rgba(168,144,96,0.12)",
-  text: "#d4c4a8",
-  textMuted: "#7a6a55",
-};
-
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,13 +37,10 @@ export default function AdminLogin() {
   };
 
   return (
-    <div style={{ background: C.dark, minHeight: "100svh", paddingTop: "120px", paddingBottom: "100px", fontFamily: "'Libre Baskerville', serif", display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div className="w-full max-w-md p-10" style={{ background: C.dark2, border: `1px solid ${C.rule}` }}>
-        <h2
-          className="text-center font-light mb-8 leading-[1.1]"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem", color: "#fff" }}
-        >
-          Admin <em style={{ color: C.gold, fontStyle: "italic" }}>Login</em>
+    <div className="bg-dark min-h-[100svh] pt-[120px] pb-[100px] font-baskerville flex justify-center items-center">
+      <div className="w-full max-w-md p-10 bg-dark2 border border-rule">
+        <h2 className="text-center font-light mb-8 leading-[1.1] font-garamond text-[2rem] text-white">
+          Admin <em className="text-gold italic">Login</em>
         </h2>
         {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
         <form onSubmit={handleLogin} className="flex flex-col gap-6">
@@ -65,8 +50,7 @@ export default function AdminLogin() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 text-[0.8rem] outline-none"
-            style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }}
+            className="w-full p-4 text-[0.8rem] outline-none bg-dark border border-rule text-text"
           />
           <input
             type="password"
@@ -74,14 +58,12 @@ export default function AdminLogin() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-4 text-[0.8rem] outline-none"
-            style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }}
+            className="w-full p-4 text-[0.8rem] outline-none bg-dark border border-rule text-text"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-[16px] text-[0.6rem] tracking-[4px] uppercase font-bold transition-all duration-400 mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}
+            className="w-full py-[16px] text-[0.6rem] tracking-[4px] uppercase font-bold transition-all duration-400 mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light"
           >
             {isSubmitting ? "Signing In..." : "Sign In"}
           </button>

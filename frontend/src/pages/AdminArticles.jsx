@@ -4,18 +4,6 @@ import AdminLayout from "../components/AdminLayout";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
-const C = {
-  gold: "#A89060",
-  goldLight: "#C4AA7A",
-  goldPale: "#C8AE80",
-  dark: "#0e0a05",
-  dark2: "#120d07",
-  dark3: "#1a120a",
-  rule: "rgba(168,144,96,0.12)",
-  text: "#d4c4a8",
-  textMuted: "#7a6a55",
-};
-
 export default function AdminArticles() {
   const [articles, setArticles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -195,17 +183,13 @@ export default function AdminArticles() {
     window.location.href = "/admin";
   };
 
-  // Optional styling for Quill toolbar and container so it fits the dark theme better
-  // (You could also override .ql-toolbar in a CSS file)
-  
   return (
     <AdminLayout
-      title={<>Articles <em style={{ color: C.gold, fontStyle: "italic" }}>Management</em></>}
+      title={<>Articles <em className="text-gold italic">Management</em></>}
       action={
         <button
           onClick={openAddModal}
-          className="px-5 py-2 text-[0.55rem] tracking-[2px] uppercase font-bold cursor-pointer"
-          style={{ background: C.gold, color: C.dark, border: "none" }}
+          className="px-5 py-2 text-[0.55rem] tracking-[2px] uppercase font-bold cursor-pointer bg-gold text-dark border-none hover:bg-gold-light transition-colors"
         >
           + Add Article
         </button>
@@ -213,74 +197,74 @@ export default function AdminArticles() {
     >
       {/* Basic dark overrides for quill since .snow is light by default */}
       <style>{`
-        .ql-toolbar.ql-snow { border-color: ${C.rule}; background: #1a1a1a; }
-        .ql-container.ql-snow { border-color: ${C.rule}; background: ${C.dark}; font-family: 'Libre Baskerville', serif; color: #fff; min-height: 250px; font-size: 0.85rem; }
+        .ql-toolbar.ql-snow { border-color: rgba(168,144,96,0.12); background: #1a1a1a; }
+        .ql-container.ql-snow { border-color: rgba(168,144,96,0.12); background: #0e0a05; font-family: 'Libre Baskerville', serif; color: #fff; min-height: 250px; font-size: 0.85rem; }
         .ql-editor { min-height: 250px; }
-        .ql-snow .ql-stroke { stroke: ${C.goldPale}; }
-        .ql-snow .ql-fill { fill: ${C.goldPale}; }
-        .ql-snow .ql-picker { color: ${C.goldPale}; }
+        .ql-snow .ql-stroke { stroke: #C8AE80; }
+        .ql-snow .ql-fill { fill: #C8AE80; }
+        .ql-snow .ql-picker { color: #C8AE80; }
       `}</style>
 
       {/* Article list */}
       <div className="flex flex-col gap-4">
-            {articles.length === 0 ? (
-              <p style={{ color: C.textMuted }}>No articles found.</p>
-            ) : (
-              articles.map((a) => (
-                <div key={a.id} className="flex gap-6 items-center p-4 transition-colors duration-300" style={{ background: C.dark3, border: `1px solid ${C.rule}` }}>
-                  <img src={a.featured_image && a.featured_image.startsWith('/') && !a.featured_image.includes('localhost') ? a.featured_image : (a.featured_image || '/placeholder.png')} alt={a.title} className="w-20 h-20 object-cover" />
-                  <div className="flex-1">
-                    <div className="text-[1.4rem] font-light mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>{a.title}</div>
-                    <div className="text-[0.6rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>
-                      {a.date ? new Date(a.date).toLocaleDateString() : ""}
-                    </div>
-                  </div>
-                  <div className="flex gap-3">
-                    <button onClick={() => handleEdit(a)} className="px-5 py-[10px] text-[0.55rem] tracking-[2px] uppercase cursor-pointer" style={{ background: C.gold, color: C.dark, border: "none" }}>
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete(a.id)} className="px-5 py-[10px] text-[0.55rem] tracking-[2px] uppercase cursor-pointer transition-colors hover:bg-red-900" style={{ background: "transparent", color: "#ff4444", border: "1px solid #ff4444" }}>
-                      Delete
-                    </button>
-                  </div>
+        {articles.length === 0 ? (
+          <p className="text-text-muted">No articles found.</p>
+        ) : (
+          articles.map((a) => (
+            <div key={a.id} className="flex gap-6 items-center p-4 transition-colors duration-300 bg-dark3 border border-rule">
+              <img src={a.featured_image && a.featured_image.startsWith('/') && !a.featured_image.includes('localhost') ? a.featured_image : (a.featured_image || '/placeholder.png')} alt={a.title} className="w-20 h-20 object-cover" />
+              <div className="flex-1">
+                <div className="text-[1.4rem] font-light mb-1 font-garamond text-white">{a.title}</div>
+                <div className="text-[0.6rem] tracking-[2px] uppercase text-gold-pale">
+                  {a.date ? new Date(a.date).toLocaleDateString() : ""}
                 </div>
-              ))
-            )}
-        </div>
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => handleEdit(a)} className="px-5 py-[10px] text-[0.55rem] tracking-[2px] uppercase cursor-pointer bg-gold text-dark border-none hover:bg-gold-light transition-colors">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(a.id)} className="px-5 py-[10px] text-[0.55rem] tracking-[2px] uppercase cursor-pointer transition-colors hover:bg-red-900 hover:text-white bg-transparent text-[#ff4444] border border-[#ff4444]">
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
 
       {/* Modal Popup */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6" style={{ background: "rgba(5,4,2,0.9)", backdropFilter: "blur(4px)" }}>
-          <div className="w-full max-w-[900px] max-h-[95vh] overflow-y-auto p-10 relative flex flex-col" style={{ background: C.dark2, border: `1px solid ${C.gold}` }}>
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10" style={{ color: C.textMuted, background: "none", border: "none" }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
+          <div className="w-full max-w-[900px] max-h-[95vh] overflow-y-auto p-10 relative flex flex-col bg-dark2 border border-gold">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10 text-text-muted bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>
-            <h3 className="text-[1.8rem] font-light mb-6 pb-4 shrink-0" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff", borderBottom: `1px solid ${C.rule}` }}>
+            <h3 className="text-[1.8rem] font-light mb-6 pb-4 shrink-0 font-garamond text-white border-b border-rule">
               {editingArticle ? "Edit Article" : "Add New Article"}
             </h3>
             
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
                 <div>
-                  <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Title</label>
-                  <input type="text" name="title" required value={formData.title} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                  <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Title</label>
+                  <input type="text" name="title" required value={formData.title} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none bg-dark border border-rule text-text" />
                 </div>
                 <div>
-                  <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Date</label>
-                  <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                  <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Date</label>
+                  <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none bg-dark border border-rule text-text" />
                 </div>
               </div>
               
               <div className="shrink-0">
-                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Subtitle (Excerpt)</label>
-                <textarea name="subtitle" rows={3} value={formData.subtitle} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none resize-y" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Subtitle (Excerpt)</label>
+                <textarea name="subtitle" rows={3} value={formData.subtitle} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none resize-y bg-dark border border-rule text-text" />
               </div>
 
               <div className="shrink-0">
-                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Featured Image</label>
-                <input type="file" accept="image/*" onChange={handleFileChange} className="w-full p-2 text-[0.85rem]" style={{ background: C.dark, border: `1px solid ${C.rule}`, color: C.text }} />
+                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Featured Image</label>
+                <input type="file" accept="image/*" onChange={handleFileChange} className="w-full p-2 text-[0.85rem] bg-dark border border-rule text-text" />
                 {(imageFile || (editingArticle && editingArticle.featured_image)) && (
-                  <div className="mt-4 p-2" style={{ background: C.dark3, border: `1px solid ${C.rule}`, display: "inline-block" }}>
+                  <div className="mt-4 p-2 inline-block bg-dark3 border border-rule">
                     <img 
                       src={imageFile ? URL.createObjectURL(imageFile) : (editingArticle.featured_image.startsWith('/') && !editingArticle.featured_image.includes('localhost') ? editingArticle.featured_image : editingArticle.featured_image)} 
                       alt="Preview" 
@@ -291,17 +275,17 @@ export default function AdminArticles() {
               </div>
 
               <div className="flex-1 flex flex-col min-h-[300px]">
-                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2" style={{ color: C.goldPale }}>Content</label>
+                <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Content</label>
                 <div className="flex-1">
                   <div ref={quillRef} />
                 </div>
               </div>
 
-              <div className="flex gap-4 mt-6 pt-6 shrink-0" style={{ borderTop: `1px solid ${C.rule}` }}>
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer" style={{ background: "transparent", color: C.textMuted, border: `1px solid ${C.rule}` }}>
+              <div className="flex gap-4 mt-6 pt-6 shrink-0 border-t border-rule">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent text-text-muted border border-rule hover:text-gold hover:border-gold transition-colors">
                   Cancel
                 </button>
-                <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark, border: "none" }}>
+                <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light">
                   {isSubmitting ? "Saving..." : (editingArticle ? "Update Article" : "Save Article")}
                 </button>
               </div>

@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import Home from "./pages/Home";
+import Home from "./pages/home/Index";
 import LabResults from "./pages/LabResults";
 import Cart from "./pages/Cart";
 import AdminLogin from "./pages/AdminLogin";

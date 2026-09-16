@@ -1,75 +1,29 @@
 import { useState, useEffect } from "react";
 
-/* ─── Design tokens (matching the PureWest Australia theme) ─── */
-const C = {
-  gold: "#A89060",
-  goldLight: "#C4AA7A",
-  goldPale: "#C8AE80",
-  dark: "#0e0a05",
-  dark2: "#120d07",
-  dark3: "#1a120a",
-  rule: "rgba(168,144,96,0.12)",
-  text: "#d4c4a8",
-  textMuted: "#7a6a55",
-};
-
-const MONO = "'JetBrains Mono','IBM Plex Mono',ui-monospace,monospace";
-const SERIF = "'Cormorant Garamond', serif";
-const BODY = "'Libre Baskerville', serif";
-
-/* ─── Shared helpers ───────────────────────────────────────── */
-function SectionRule() {
-  return (
-    <div className="flex items-center justify-center gap-4 mb-16">
-      <div className="w-10 h-px opacity-50" style={{ background: C.gold }} />
-      <div className="w-[5px] h-[5px] rotate-45" style={{ background: C.gold }} />
-      <div className="w-10 h-px opacity-50" style={{ background: C.gold }} />
-    </div>
-  );
-}
-
-function Eyebrow({ children }) {
-  return (
-    <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6" style={{ color: C.gold }}>
-      {children}
-    </p>
-  );
-}
-
-function Heading({ children }) {
-  return (
-    <h2
-      className="text-center font-light mb-5 leading-[1.1]"
-      style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)", color: "#fff", letterSpacing: "-0.5px" }}
-    >
-      {children}
-    </h2>
-  );
-}
 
 /* ─── Verification seal (signature accent) ─────────────────── */
 function VerificationSeal({className}) {
   return (
-    <div className={`shrink-0 mx-auto md:mx-0 ${className}`} style={{ transform: "rotate(-7deg)" }}>
+    <div className={`shrink-0 mx-auto md:mx-0 rotate-[7deg] ${className}`}>
       <svg width="168" height="168" viewBox="0 0 168 168">
         <defs>
           <path id="sealRing" d="M84,84 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" />
         </defs>
-        <circle cx="84" cy="84" r="80" fill="none" stroke={C.gold} strokeWidth="1" opacity="0.35" />
-        <circle cx="84" cy="84" r="66" fill="none" stroke={C.gold} strokeWidth="1" strokeDasharray="2 4" opacity="0.6" />
-        <circle cx="84" cy="84" r="56" fill="none" stroke={C.gold} strokeWidth="1" opacity="0.35" />
-        <text fill={C.goldPale} fontSize="8.5" letterSpacing="3" fontFamily={BODY}>
+        <circle cx="84" cy="84" r="80" fill="none" stroke="var(--color-gold)" strokeWidth="1" opacity="0.35" />
+        <circle cx="84" cy="84" r="66" fill="none" stroke="var(--color-gold)" strokeWidth="1" strokeDasharray="2 4" opacity="0.6" />
+        <circle cx="84" cy="84" r="56" fill="none" stroke="var(--color-gold)" strokeWidth="1" opacity="0.35" />
+        <text fill="var(--color-gold-pale)" fontSize="8.5" letterSpacing="3" fontFamily="var(--font-baskerville)">
           <textPath href="#sealRing" startOffset="2%">
             CERTIFICATE OF ANALYSIS · INDEPENDENTLY VERIFIED ·
           </textPath>
         </text>
-        <text x="84" y="80" textAnchor="middle" fill={C.gold} fontSize="30" fontFamily={SERIF} fontWeight="300">
+        <text x="84" y="80" textAnchor="middle" fill="var(--color-gold)" fontSize="30" fontFamily="var(--font-garamond)" fontWeight="300">
           &gt;35
         </text>
-        <text x="84" y="98" textAnchor="middle" fill={C.textMuted} fontSize="7" letterSpacing="2" fontFamily={BODY}>
+        <text x="84" y="98" textAnchor="middle" fill="var(--color-text-muted)" fontSize="7" letterSpacing="2" fontFamily="var(--font-baskerville)">
           % PHENOL EQUIV.
         </text>
-        <text x="84" y="112" textAnchor="middle" fill={C.goldPale} fontSize="6" letterSpacing="1.5" fontFamily={BODY} fontStyle="italic">
+        <text x="84" y="112" textAnchor="middle" fill="var(--color-gold-pale)" fontSize="6" letterSpacing="1.5" fontFamily="var(--font-baskerville)" fontStyle="italic">
           off the standard curve
         </text>
       </svg>
@@ -109,11 +63,11 @@ function ChromatogramTrace() {
       <svg viewBox="0 0 900 220" className="w-full h-auto" preserveAspectRatio="none">
         {/* baseline grid */}
         {[0, 1, 2, 3].map((i) => (
-          <line key={i} x1="0" x2="900" y1={60 + i * 40} y2={60 + i * 40} stroke={C.rule} strokeWidth="1" />
+          <line key={i} x1="0" x2="900" y1={60 + i * 40} y2={60 + i * 40} stroke="var(--color-rule)" strokeWidth="1" />
         ))}
         {/* trace */}
-        <path d={d} fill="none" stroke={C.gold} strokeWidth="1.75" />
-        <path d={d} fill="none" stroke={C.goldLight} strokeWidth="1.75" opacity="0.25" strokeDasharray="0 0" />
+        <path d={d} fill="none" stroke="var(--color-gold)" strokeWidth="1.75" />
+        <path d={d} fill="none" stroke="var(--color-gold-light)" strokeWidth="1.75" opacity="0.25" strokeDasharray="0 0" />
 
         {/* peak markers */}
         {peaks.map((p) => (
@@ -121,16 +75,16 @@ function ChromatogramTrace() {
             key={p.key}
             onMouseEnter={() => setHover(p.key)}
             onMouseLeave={() => setHover(null)}
-            style={{ cursor: "pointer" }}
+            className="cursor-pointer"
           >
             <line
               x1={p.x} x2={p.x}
               y1={baseline - p.height} y2={baseline + 14}
-              stroke={hover === p.key ? C.goldLight : C.rule}
+              stroke={hover === p.key ? "var(--color-gold-light)" : "var(--color-rule)"}
               strokeWidth="1"
               strokeDasharray="3 3"
             />
-            <circle cx={p.x} cy={baseline - p.height} r={hover === p.key ? 4 : 3} fill={C.gold} />
+            <circle cx={p.x} cy={baseline - p.height} r={hover === p.key ? 4 : 3} fill="var(--color-gold)" />
           </g>
         ))}
       </svg>
@@ -143,8 +97,8 @@ function ChromatogramTrace() {
             className="absolute text-center transition-opacity duration-300"
             style={{ left: `${(p.x / 900) * 100}%`, transform: "translateX(-50%)", opacity: hover && hover !== p.key ? 0.45 : 1 }}
           >
-            <div className="text-[0.62rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>{p.label}</div>
-            <div className="text-[0.68rem] mt-1" style={{ fontFamily: MONO, color: C.gold }}>{p.value}</div>
+            <div className="text-[0.62rem] tracking-[2px] uppercase text-gold-pale">{p.label}</div>
+            <div className="font-mono text-[0.68rem] mt-1 text-gold">{p.value}</div>
           </div>
         ))}
       </div>
@@ -163,23 +117,22 @@ function DataTable() {
   ];
 
   return (
-    <div className="max-w-[620px] mx-auto" style={{ fontFamily: MONO }}>
-      <div className="flex justify-between text-[0.6rem] tracking-[2px] uppercase pb-3 mb-3" style={{ color: C.textMuted, borderBottom: `1px solid ${C.rule}` }}>
+    <div className="font-mono max-w-[620px] mx-auto">
+      <div className="flex justify-between text-[0.6rem] tracking-[2px] uppercase pb-3 mb-3 text-text-muted border-b border-rule">
         <span>Analyte</span>
         <span>Result</span>
       </div>
       {rows.map((r, i) => (
         <div
           key={i}
-          className="flex justify-between items-baseline py-3 text-[0.78rem]"
-          style={{ borderBottom: i < rows.length - 1 ? `1px solid rgba(168,144,96,0.08)` : "none" }}
+          className={`flex justify-between items-baseline py-3 text-[0.78rem] ${i < rows.length - 1 ? 'border-b border-gold/8' : ''}`}
         >
-          <span style={{ color: r.strong ? C.goldPale : C.textMuted, letterSpacing: "1px" }}>{r.k}</span>
+          <span className={`tracking-[1px] ${r.strong ? 'text-gold-pale' : 'text-text-muted'}`}>{r.k}</span>
           <span className="flex items-baseline gap-2">
-            <span style={{ color: r.strong ? C.gold : C.text, fontSize: r.strong ? "1rem" : "0.85rem" }}>{r.v}</span>
-            <span className="text-[0.6rem]" style={{ color: C.textMuted }}>{r.u}</span>
+            <span className={r.strong ? 'text-gold text-[1rem]' : 'text-text text-[0.85rem]'}>{r.v}</span>
+            <span className="text-[0.6rem] text-text-muted">{r.u}</span>
             {r.flagged && (
-              <span className="text-[0.55rem] italic ml-2" style={{ color: C.goldLight, fontFamily: BODY }}>
+              <span className="font-baskerville text-[0.55rem] italic ml-2 text-gold-light">
                 ← exceeds lab's standard curve
               </span>
             )}
@@ -200,13 +153,13 @@ function LabBadges() {
     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-14 mb-20">
       {labs.map((l, i) => (
         <div key={i} className="text-center">
-          <div className="text-[0.95rem] tracking-[1px]" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.goldPale }}>
+          <div className="font-garamond text-[0.95rem] tracking-[1px] text-gold-pale">
             {l.name}
           </div>
-          <div className="text-[0.52rem] tracking-[1.5px] uppercase mt-1" style={{ color: C.textMuted }}>
+          <div className="text-[0.52rem] tracking-[1.5px] uppercase mt-1 text-text-muted">
             {l.sub}
           </div>
-          <div className="text-[0.5rem] tracking-[2px] uppercase mt-1" style={{ color: C.gold }}>
+          <div className="text-[0.5rem] tracking-[2px] uppercase mt-1 text-gold">
             {l.ref}
           </div>
         </div>
@@ -224,20 +177,19 @@ function StatRow() {
     { num: "2", label: "Independent Labs", sub: "ChemCentre & NMI" },
   ];
   return (
-    <div className="flex flex-wrap max-w-[1000px] mx-auto mb-24" style={{ border: `1px solid ${C.rule}` }}>
+    <div className="flex flex-wrap max-w-[1000px] mx-auto mb-24 border border-rule">
       {stats.map((s, i) => (
         <div
           key={i}
-          className="flex-1 min-w-[140px] text-center py-9 px-4"
-          style={{ borderRight: i < stats.length - 1 ? `1px solid ${C.rule}` : "none" }}
+          className={`flex-1 min-w-[140px] text-center py-9 px-4 ${i < stats.length - 1 ? '[&:not(:last-child)]:border-r [&:not(:last-child)]:border-rule' : ''}`}
         >
-          <div className="text-[2.1rem] font-light leading-none" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.gold }}>
+          <div className="font-garamond text-[2.1rem] font-light leading-none text-gold">
             {s.num}
           </div>
-          <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-3" style={{ color: C.goldPale }}>
+          <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-3 text-gold-pale">
             {s.label}
           </div>
-          <div className="text-[0.62rem] italic mt-1" style={{ color: C.textMuted }}>
+          <div className="text-[0.62rem] italic mt-1 text-text-muted">
             {s.sub}
           </div>
         </div>
@@ -259,14 +211,11 @@ function TabSwitch({ active, onChange }) {
         <button
           key={t.id}
           onClick={() => onChange(t.id)}
-          className="px-7 py-3 text-[0.58rem] tracking-[3px] uppercase transition-all duration-300 cursor-pointer"
-          style={{
-            fontFamily: "'Libre Baskerville', serif",
-            background: active === t.id ? C.gold : "transparent",
-            color: active === t.id ? C.dark : C.textMuted,
-            border: `1px solid ${active === t.id ? C.gold : C.rule}`,
-            fontWeight: active === t.id ? 700 : 400,
-          }}
+          className={`font-baskerville px-7 py-3 text-[0.58rem] tracking-[3px] uppercase transition-all duration-300 cursor-pointer border ${
+            active === t.id
+              ? 'bg-gold text-dark border-gold font-bold'
+              : 'bg-transparent text-text-muted border-rule font-normal hover:border-gold hover:text-gold-pale'
+          }`}
         >
           {t.label}
         </button>
@@ -277,8 +226,8 @@ function TabSwitch({ active, onChange }) {
 
 /* ─── Antimicrobial Activity panel (signature element) ─────── */
 function ActivityPanel() {
-  const scaleMax = 40; // nominal frame for the visual, not a lab value
-  const curveLimit = 35; // where the standard curve stops
+  const scaleMax = 40;
+  const curveLimit = 35;
   const measurablePct = (curveLimit / scaleMax) * 100; // 87.5%
 
   return (
@@ -286,36 +235,27 @@ function ActivityPanel() {
       <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-16 items-center">
         {/* Gauge / overflow bar */}
         <div>
-          <p className="text-[0.52rem] tracking-[4px] uppercase mb-8" style={{ color: C.textMuted }}>
+          <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-text-muted">
             Total Antimicrobial Activity — Method VM1.29
           </p>
 
-          <div className="relative h-[70px] mb-3" style={{ background: C.dark3, border: `1px solid ${C.rule}` }}>
+          <div className="relative h-[70px] mb-3 bg-dark3 border border-rule">
             {/* measurable zone fill */}
             <div
-              className="absolute inset-y-0 left-0"
-              style={{
-                width: `${measurablePct}%`,
-                background: `linear-gradient(90deg, ${C.gold}55, ${C.gold})`,
-              }}
+              className="absolute inset-y-0 left-0 bg-[linear-gradient(90deg,#A89060_55,#A89060)]"
+              style={{ width: `${measurablePct}%` }}
             />
             {/* boundary line at the standard curve's limit */}
             <div
-              className="absolute inset-y-0"
-              style={{ left: `${measurablePct}%`, width: "1px", background: C.dark }}
+              className="absolute inset-y-0 w-px bg-dark"
+              style={{ left: `${measurablePct}%` }}
             />
-            {/* beyond-range zone: fades, glows, and overflows */}
+            {/* beyond-range zone */}
             <div
-              className="absolute inset-y-0 right-0 flex items-center justify-center overflow-visible"
-              style={{
-                left: `${measurablePct}%`,
-                background: `repeating-linear-gradient(135deg, ${C.goldLight}22 0 6px, transparent 6px 12px)`,
-              }}
+              className="absolute inset-y-0 right-0 flex items-center justify-center overflow-visible bg-[repeating-linear-gradient(135deg,#C4AA7A22_0_6px,transparent_6px_12px)]"
+              style={{ left: `${measurablePct}%` }}
             >
-              <div
-                className="w-3 h-3 rotate-45 animate-pulse"
-                style={{ background: C.goldLight, boxShadow: `0 0 18px 4px ${C.goldLight}88` }}
-              />
+              <div className="w-3 h-3 rotate-45 animate-pulse bg-gold-light [box-shadow:0_0_18px_4px_#C4AA7A88]" />
             </div>
           </div>
 
@@ -324,22 +264,22 @@ function ActivityPanel() {
             {[0, 10, 20, 30].map((v) => (
               <span
                 key={v}
-                className="absolute text-[0.5rem]"
-                style={{ left: `${(v / scaleMax) * 100}%`, color: C.textMuted, transform: "translateX(-50%)" }}
+                className="absolute text-[0.5rem] text-text-muted -translate-x-1/2"
+                style={{ left: `${(v / scaleMax) * 100}%` }}
               >
                 {v}
               </span>
             ))}
             <span
-              className="absolute text-[0.5rem] font-bold"
-              style={{ left: `${measurablePct}%`, color: C.gold, transform: "translateX(-50%)" }}
+              className="absolute text-[0.5rem] font-bold text-gold -translate-x-1/2"
+              style={{ left: `${measurablePct}%` }}
             >
               35
             </span>
           </div>
 
-          <p className="text-[0.75rem] leading-[1.9]" style={{ color: C.textMuted }}>
-            <span style={{ color: C.goldPale }}>Result: &gt;35% phenol equivalent.</span> The
+          <p className="text-[0.75rem] leading-[1.9] text-text-muted">
+            <span className="text-gold-pale">Result: &gt;35% phenol equivalent.</span> The
             testing laboratory's standard curve is calibrated only to 35% — our Jarrah honey's
             activity sits above the top of that curve, so the certified result is reported as
             &ldquo;greater than&rdquo; rather than an exact figure.
@@ -347,21 +287,21 @@ function ActivityPanel() {
         </div>
 
         {/* explainer card */}
-        <div className="p-9" style={{ border: `1px solid ${C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}>
-          <p className="text-[0.5rem] tracking-[3px] uppercase mb-4" style={{ color: C.gold }}>
+        <div className="p-9 border border-rule bg-[linear-gradient(145deg,#1a120a,#0e0a05)]">
+          <p className="text-[0.5rem] tracking-[3px] uppercase mb-4 text-gold">
             What Total Activity Means
           </p>
-          <p className="text-[0.75rem] leading-[1.9] mb-5" style={{ color: C.textMuted }}>
+          <p className="text-[0.75rem] leading-[1.9] mb-5 text-text-muted">
             Total Activity (TA) measures a honey's overall antimicrobial strength, expressed as
             a phenol equivalent percentage. Jarrah's activity is naturally hydrogen
             peroxide-based rather than the MGO-driven activity found in Manuka — a different,
             stable chemistry unique to this forest.
           </p>
-          <div className="h-px my-5" style={{ background: C.rule }} />
-          <ul className="text-[0.68rem] leading-[1.9] space-y-1" style={{ color: C.textMuted }}>
-            <li><span style={{ color: C.gold }}>Tested by:</span> National Measurement Institute, Port Melbourne VIC</li>
-            <li><span style={{ color: C.gold }}>Date tested:</span> 13 Sep 2024</li>
-            <li><span style={{ color: C.gold }}>Sample:</span> M/0924-775JH — Jarrah</li>
+          <div className="h-px my-5 bg-rule" />
+          <ul className="text-[0.68rem] leading-[1.9] space-y-1 text-text-muted">
+            <li><span className="text-gold">Tested by:</span> National Measurement Institute, Port Melbourne VIC</li>
+            <li><span className="text-gold">Date tested:</span> 13 Sep 2024</li>
+            <li><span className="text-gold">Sample:</span> M/0924-775JH — Jarrah</li>
           </ul>
         </div>
       </div>
@@ -372,21 +312,21 @@ function ActivityPanel() {
 /* ─── Sugar Profile panel ────────────────────────────────────── */
 function SugarPanel() {
   const rows = [
-    { label: "Fructose", value: 40.6, color: C.gold },
-    { label: "Glucose", value: 20.6, color: C.goldLight },
-    { label: "Sucrose", value: 0.1, display: "<0.10", color: C.goldPale },
+    { label: "Fructose",  value: 40.6, color: "var(--color-gold)" },
+    { label: "Glucose",   value: 20.6, color: "var(--color-gold-light)" },
+    { label: "Sucrose",   value: 0.1,  display: "<0.10", color: "var(--color-gold-pale)" },
   ];
   const measured = 63.7;
   const remainder = +(100 - measured).toFixed(1);
 
   return (
     <div className="max-w-[860px] mx-auto mb-24">
-      <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-center" style={{ color: C.textMuted }}>
+      <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-center text-text-muted">
         Sugar Composition — Method ORG155F (HPLC), per 100g
       </p>
 
       {/* stacked composition bar */}
-      <div className="flex w-full h-12 mb-6 overflow-hidden" style={{ border: `1px solid ${C.rule}` }}>
+      <div className="flex w-full h-12 mb-6 overflow-hidden border border-rule">
         {rows.map((r, i) => (
           <div
             key={i}
@@ -394,7 +334,7 @@ function SugarPanel() {
             title={`${r.label}: ${r.display ?? r.value + "g"}`}
           />
         ))}
-        <div className="flex-1" style={{ background: C.dark3 }} />
+        <div className="flex-1 bg-dark3" />
       </div>
 
       {/* legend */}
@@ -402,39 +342,39 @@ function SugarPanel() {
         {rows.map((r, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-3 h-3 inline-block" style={{ background: r.color }} />
-            <span className="text-[0.62rem] tracking-[1px] uppercase" style={{ color: C.text }}>
+            <span className="text-[0.62rem] tracking-[1px] uppercase text-text">
               {r.label}
             </span>
-            <span className="text-[0.62rem]" style={{ color: C.textMuted }}>
+            <span className="text-[0.62rem] text-text-muted">
               {r.display ?? `${r.value}g`}
             </span>
           </div>
         ))}
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 inline-block" style={{ background: C.dark3, border: `1px solid ${C.rule}` }} />
-          <span className="text-[0.62rem] tracking-[1px] uppercase" style={{ color: C.text }}>
+          <span className="w-3 h-3 inline-block bg-dark3 border border-rule" />
+          <span className="text-[0.62rem] tracking-[1px] uppercase text-text">
             Water &amp; minor constituents
           </span>
-          <span className="text-[0.62rem]" style={{ color: C.textMuted }}>~{remainder}g</span>
+          <span className="text-[0.62rem] text-text-muted">~{remainder}g</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         {rows.map((r, i) => (
-          <div key={i} className="py-8 px-4" style={{ border: `1px solid ${C.rule}` }}>
-            <div className="text-[1.9rem] font-light" style={{ fontFamily: "'Cormorant Garamond', serif", color: r.color }}>
+          <div key={i} className="py-8 px-4 border border-rule">
+            <div className="font-garamond text-[1.9rem] font-light" style={{ color: r.color }}>
               {r.display ?? `${r.value}g`}
             </div>
-            <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-2" style={{ color: C.textMuted }}>
+            <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-2 text-text-muted">
               {r.label} / 100g
             </div>
           </div>
         ))}
       </div>
 
-      <p className="text-[0.72rem] leading-[1.9] mt-10 max-w-[600px] mx-auto text-center" style={{ color: C.textMuted }}>
+      <p className="text-[0.72rem] leading-[1.9] mt-10 max-w-[600px] mx-auto text-center text-text-muted">
         Sucrose sits below the lab's limit of quantitation — a signature of raw, unadulterated
-        honey. Total simple sugars measured <span style={{ color: C.goldPale }}>63.7g per 100g</span>,
+        honey. Total simple sugars measured <span className="text-gold-pale">63.7g per 100g</span>,
         with the balance made up of water and the trace compounds native to Jarrah forest nectar.
       </p>
     </div>
@@ -483,47 +423,44 @@ function CertificateGrid() {
     <div className="max-w-[1000px] mx-auto mb-16">
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="w-[6px] h-[6px] rotate-45 animate-pulse" style={{ background: C.gold }} />
-          <p className="text-[0.6rem] tracking-[4px] uppercase" style={{ color: C.textMuted, fontFamily: BODY }}>Loading certificates…</p>
+          <div className="w-[6px] h-[6px] rotate-45 animate-pulse bg-gold" />
+          <p className="font-baskerville text-[0.6rem] tracking-[4px] uppercase text-text-muted">Loading certificates…</p>
         </div>
       ) : certs.length === 0 ? (
         <div className="text-center py-20">
-          <p className="text-[0.8rem]" style={{ color: C.textMuted, fontFamily: BODY }}>No lab certificates have been uploaded yet.</p>
+          <p className="font-baskerville text-[0.8rem] text-text-muted">No lab certificates have been uploaded yet.</p>
         </div>
       ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {certs.map((c, i) => (
-          <div key={i} className="relative p-10 flex flex-col h-full transition-colors duration-300" style={{ border: `1px solid ${activePdf === c.pdfUrl ? C.gold : C.rule}`, background: `linear-gradient(145deg, ${C.dark3}, ${C.dark})` }}>
-            <div className="absolute top-[-1px] left-[-1px] w-5 h-5 border-t border-l opacity-50" style={{ borderColor: C.gold }} />
-            <div className="absolute bottom-[-1px] right-[-1px] w-5 h-5 border-b border-r opacity-50" style={{ borderColor: C.gold }} />
+          <div key={i} className={`relative p-10 flex flex-col h-full transition-colors duration-300 bg-[linear-gradient(145deg,#1a120a,#0e0a05)] ${activePdf === c.pdfUrl ? 'border border-gold' : 'border border-rule'}`}>
+            <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
+            <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
-            <div className="text-[1.15rem] mb-1" style={{ fontFamily: "'Cormorant Garamond', serif", color: "#fff" }}>
+            <div className="font-garamond text-[1.15rem] mb-1 text-white">
               {c.org}
             </div>
-            <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7" style={{ color: C.gold }}>
+            <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7 text-gold">
               {c.tag}
             </div>
 
             <div className="mb-7 flex-1">
               {c.rows.map(([k, v], j) => (
-                <div key={j} className="flex justify-between py-[10px] text-[0.72rem]" style={{ borderBottom: "1px solid rgba(168,144,96,0.07)" }}>
-                  <span style={{ color: C.textMuted }}>{k}</span>
-                  <span style={{ color: C.text }}>{v}</span>
+                <div key={j} className="flex justify-between py-[10px] text-[0.72rem] border-b border-gold/7">
+                  <span className="text-text-muted">{k}</span>
+                  <span className="text-text">{v}</span>
                 </div>
               ))}
             </div>
 
-            <p className="text-[0.62rem] italic leading-[1.7] mb-6" style={{ color: C.textMuted }}>
+            <p className="text-[0.62rem] italic leading-[1.7] mb-6 text-text-muted">
               Signed — {c.signoff}
             </p>
 
-            <div className="mt-auto pt-5" style={{ borderTop: `1px dashed ${C.rule}` }}>
+            <div className="mt-auto pt-5 border-t border-dashed border-rule">
               <button 
                 onClick={() => setActivePdf(activePdf === c.pdfUrl ? null : c.pdfUrl)}
-                className="inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
-                style={{ color: activePdf === c.pdfUrl ? C.goldLight : C.goldPale, fontFamily: "'Libre Baskerville', serif", fontWeight: 700 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = activePdf === c.pdfUrl ? C.goldLight : C.goldPale)}
+                className={`font-baskerville inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 font-bold hover:text-gold-light ${activePdf === c.pdfUrl ? 'text-gold-light' : 'text-gold-pale'}`}
               >
                 {activePdf === c.pdfUrl ? (
                   <>
@@ -552,27 +489,21 @@ function CertificateGrid() {
       )}
 
       {activePdf && (
-        <div className="mt-12 animate-in fade-in slide-in-from-top-4 duration-700" style={{ border: `1px solid ${C.gold}`, background: C.dark2 }}>
-          <div className="flex justify-between items-center px-6 py-4" style={{ borderBottom: `1px solid ${C.rule}`, background: C.dark3 }}>
-            <span className="text-[0.6rem] tracking-[2px] uppercase" style={{ color: C.goldPale }}>Document Viewer</span>
+        <div className="mt-12 animate-in fade-in slide-in-from-top-4 duration-700 border border-gold bg-dark2">
+          <div className="flex justify-between items-center px-6 py-4 border-b border-rule bg-dark3">
+            <span className="text-[0.6rem] tracking-[2px] uppercase text-gold-pale">Document Viewer</span>
             <div className="flex gap-4">
               <a 
                 href={activePdf}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 no-underline"
-                style={{ color: C.textMuted }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = C.textMuted)}
+                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 no-underline text-text-muted hover:text-gold-light"
               >
                 Open in new tab ↗
               </a>
               <button 
                 onClick={() => setActivePdf(null)}
-                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
-                style={{ color: C.goldPale }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.goldLight)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = C.goldPale)}
+                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 text-gold-pale hover:text-gold-light"
               >
                 Close ✕
               </button>
@@ -582,8 +513,7 @@ function CertificateGrid() {
             <iframe 
               src={`${activePdf}#view=FitH`} 
               title="Lab Result PDF Document"
-              className="w-full h-full rounded-sm"
-              style={{ border: "none", background: "white" }}
+              className="w-full h-full rounded-sm border-none bg-white"
             />
           </div>
         </div>
@@ -597,22 +527,19 @@ export default function LabResults() {
   const [tab, setTab] = useState("activity");
 
   return (
-    <section id="lab-results" className="w-full pb-20" style={{ background: C.dark, color: C.text, fontFamily: "'Libre Baskerville', serif" }}>
+    <section id="lab-results" className="font-baskerville w-full pb-20 bg-dark text-text">
       <div className="w-full h-screen mb-20">
         <img src="/images/waffle.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
         
         <div className="relative z-8 bg-linear-45 from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col justify-end px-6 sm:px-[72px] py-[90px]">
           <div className="max-w-[560px] text-center md:text-left">
-            <p className="text-[0.55rem] tracking-[6px] uppercase mb-6" style={{ color: C.gold }}>
+            <p className="text-[0.55rem] tracking-[6px] uppercase mb-6 text-gold">
               Beyond The Label
             </p>
-            <h2
-              className="font-light mb-6 leading-[1.1]"
-              style={{ fontFamily: SERIF, fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)", color: "#fff", letterSpacing: "-0.5px" }}
-            >
-              The Proof <em style={{ color: C.gold, fontStyle: "italic" }}>Behind The Jar</em>
+            <h2 className="font-garamond font-light mb-6 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.6rem)] tracking-[-0.5px]">
+              The Proof <em className="text-gold italic">Behind The Jar</em>
             </h2>
-            <p className="text-[0.82rem] leading-[2.1]" style={{ color: C.textMuted }}>
+            <p className="text-[0.82rem] leading-[2.1] text-text-muted">
               We don&apos;t ask you to take our word for it. Every jar of Jarrah honey carries results 
               from two government-accredited laboratories — ChemCentre and the National Measurement 
               Institute. No rounding, no marketing gloss. Below is the certificate, unfolded.
@@ -635,7 +562,7 @@ export default function LabResults() {
             <div className="max-w-[900px] mx-auto mb-6">
               <ChromatogramTrace />
             </div>
-            <p className="text-center text-[0.6rem] italic mb-24" style={{ color: C.textMuted }}>
+            <p className="text-center text-[0.6rem] italic mb-24 text-text-muted">
               Sugar profile, illustrative trace scaled to lab results · Method ORG155F (HPLC) · run 06.09.2024
             </p>
             <div className="mb-24">
@@ -645,14 +572,14 @@ export default function LabResults() {
         )}
       </div>
 
-      <div className="h-px max-w-[1000px] mx-auto mb-16" style={{ background: C.rule }} />
+      <div className="h-px max-w-[1000px] mx-auto mb-16 bg-rule" />
 
-      <p className="text-center text-[0.5rem] tracking-[3px] uppercase mb-10" style={{ color: C.gold }}>
+      <p className="text-center text-[0.5rem] tracking-[3px] uppercase mb-10 text-gold">
         The Certificates
       </p>
       <CertificateGrid />
 
-      <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16" style={{ color: C.textMuted }}>
+      <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16 text-text-muted">
         Results apply only to the sample as received and tested. Full Certificates of Analysis
         are available on request.
       </p>
