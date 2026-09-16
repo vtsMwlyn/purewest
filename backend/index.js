@@ -36,7 +36,7 @@ app.get('/health', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
   db.sequelize.sync().then(() => {
     console.log("Database connected.");
     app.listen(PORT, () => {
