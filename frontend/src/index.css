@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-gold: "#A89060";
+  --color-gold-light: "#C4AA7A";
+  --color-gold-pale: "#C8AE80";
+  --color-dark: "#0e0a05";
+  --color-dark2: "#120d07";
+  --color-dark3: "#1a120a";
+  --color-rule: "rgba(168,144,96,0.12)";
+  --color-text: "#d4c4a8";
+  --color-text-muted: "#7a6a55";
+}
+
 body {
 	font-family: "Montserrat", sans-serif;
 	@apply w-full overflow-x-hidden;

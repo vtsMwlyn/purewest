@@ -49,61 +49,73 @@ export default function Navbar({ onShopNow }) {
         color: scrolled ? '#7a6a55' : 'white',
       }}
     >
-      <a href="/" className="no-underline">
-        <img src="/images/logo.webp" className="h-12" alt="Purewest" />
-      </a>
-
       {/* Desktop links */}
-      <ul className="hidden md:flex items-center gap-10 list-none m-0 p-0">
-        {links.map((l) => (
-          <li key={l.href}>
-            <a
+      <div className="w-full grid grid-cols-[1fr_auto_1fr] m-0 p-0 gap-10">
+        <div className="flex items-center justify-end gap-10">
+          {links.slice(0, 4).map((l) => (
+            <a key={l.href}
               href={l.href}
               className="no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300 hover:text-[#A89060]"
               style={{ fontFamily: "'Libre Baskerville', serif" }}
             >
               {l.label}
             </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center gap-4">
-        <button
-          onClick={onShopNow}
-          className="hidden md:block text-[0.5rem] tracking-[3px] uppercase px-6 py-3 transition-all duration-300 font-bold"
-          style={{
-            fontFamily: "'Libre Baskerville', serif",
-            background: C.gold,
-            color: C.dark,
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
-          onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
-        >
-          Shop Now
-        </button>
-        <Link to="/cart" className="relative flex items-center justify-center p-2 text-white no-underline transition-colors duration-300 hover:text-[#C4AA7A]">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          {totalItems > 0 && (
-            <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-[0.55rem] text-[#0e0a05] bg-[#A89060] rounded-full font-bold">
-              {totalItems}
-            </span>
-          )}
-        </Link>
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"
-          onClick={() => setMenuOpen((p) => !p)}
-          aria-label="Menu"
-        >
-          {[0, 1, 2].map((i) => (
-            <span key={i} className="block w-5 h-px transition-all duration-300" style={{ background: C.gold }} />
           ))}
-        </button>
+        </div>
+
+        <a href="/" className="no-underline">
+          <img src="/images/logo.webp" className="h-12" alt="Purewest" />
+        </a>
+
+        <div className="flex items-center gap-10">
+          {links.slice(-3).map((l) => (
+            <a key={l.href}
+              href={l.href}
+              className="no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300 hover:text-[#A89060]"
+              style={{ fontFamily: "'Libre Baskerville', serif" }}
+            >
+              {l.label}
+            </a>
+          ))}
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onShopNow}
+              className="hidden md:block text-[0.5rem] tracking-[3px] uppercase px-6 py-3 transition-all duration-300 font-bold"
+              style={{
+                fontFamily: "'Libre Baskerville', serif",
+                background: C.gold,
+                color: C.dark,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
+            >
+              Shop Now
+            </button>
+            <Link to="/cart" className="relative flex items-center justify-center p-2 text-white no-underline transition-colors duration-300 hover:text-[#C4AA7A]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-[0.55rem] text-[#0e0a05] bg-[#A89060] rounded-full font-bold">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"
+              onClick={() => setMenuOpen((p) => !p)}
+              aria-label="Menu"
+            >
+              {[0, 1, 2].map((i) => (
+                <span key={i} className="block w-5 h-px transition-all duration-300" style={{ background: C.gold }} />
+              ))}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Mobile menu */}

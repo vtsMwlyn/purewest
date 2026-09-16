@@ -72,9 +72,9 @@ function Hero() {
   }
 
   return (
-    <div id="hero" className="flex flex-col" style={{ background: C.dark, minHeight: "100svh" }}>
+    <div id="hero" className="flex flex-col w-full h-screen" style={{ background: C.dark }}>
       {/* Photo zone */}
-      <div id="heroPhotoZone" className="relative overflow-hidden flex-1" style={{ minHeight: "60vh" }}>
+      <div id="heroPhotoZone" className="relative overflow-hidden flex w-full h-full">
         {HERO_SLIDES.map((s, i) => (
           <div
             key={s.id}
@@ -109,71 +109,73 @@ function Hero() {
         />
       </div>
 
-      {/* Dot indicators */}
-      <div id="heroDots" className="flex justify-center items-center gap-3 py-[10px] relative z-[5]" style={{ background: C.dark }}>
-        {HERO_SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className="border-none cursor-pointer transition-all duration-400"
-            style={{
-              width: i === current ? "44px" : "28px",
-              height: "12px",
-              background: "transparent",
-              padding: "5px 0",
-              backgroundImage: `linear-gradient(${i === current ? C.gold : "rgba(168,144,96,0.3)"}, ${i === current ? C.gold : "rgba(168,144,96,0.3)"})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 2px",
-              backgroundPosition: "center",
-            }}
-            aria-label={`Slide ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Content zone */}
-      <div id="heroContent" className="w-full flex flex-col items-center justify-center px-10 pt-5 pb-9 relative z-[5]" style={{ background: C.dark }}>
-        <div className="flex items-center justify-center gap-4 mb-4">
-          <div className="w-[50px] h-px" style={{ background: `linear-gradient(to right, transparent, ${C.gold})` }} />
-          <span className="text-[0.5rem] tracking-[4px] uppercase whitespace-nowrap" style={{ color: C.gold }}>
-            Pure · Wild · Western Australia
-          </span>
-          <div className="w-[50px] h-px" style={{ background: `linear-gradient(to left, transparent, ${C.gold})` }} />
+      <div className="w-full h-full absolute inset-0 z-5 flex flex-col justify-end">
+        {/* Dot indicators */}
+        <div id="heroDots" className="flex justify-center items-center gap-3 py-[10px] relative z-[5]" style={{ background: C.dark }}>
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className="border-none cursor-pointer transition-all duration-400"
+              style={{
+                width: i === current ? "44px" : "28px",
+                height: "12px",
+                background: "transparent",
+                padding: "5px 0",
+                backgroundImage: `linear-gradient(${i === current ? C.gold : "rgba(168,144,96,0.3)"}, ${i === current ? C.gold : "rgba(168,144,96,0.3)"})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "100% 2px",
+                backgroundPosition: "center",
+              }}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
         </div>
 
-        <img
-          src="/images/logo.webp"
-          alt="PureWest Australia"
-          className="w-40 h-auto mb-3"
-          style={{ filter: "drop-shadow(0 0 20px rgba(168,144,96,0.2))" }}
-        />
+        {/* Content zone */}
+        <div id="heroContent" className="w-full flex flex-col items-center justify-center px-10 pt-5 pb-9 relative z-[5]" style={{ background: C.dark }}>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-[50px] h-px" style={{ background: `linear-gradient(to right, transparent, ${C.gold})` }} />
+            <span className="text-[0.5rem] tracking-[4px] uppercase whitespace-nowrap" style={{ color: C.gold }}>
+              Pure · Wild · Western Australia
+            </span>
+            <div className="w-[50px] h-px" style={{ background: `linear-gradient(to left, transparent, ${C.gold})` }} />
+          </div>
 
-        <p
-          className="font-light italic mb-[18px] tracking-[1px] text-center"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1rem, 2vw, 1.5rem)", color: C.goldPale }}
-        >
-          From the World&apos;s Last Wild Places
-        </p>
+          <img
+            src="/images/logo.webp"
+            alt="PureWest Australia"
+            className="w-40 h-auto mb-3"
+            style={{ filter: "drop-shadow(0 0 20px rgba(168,144,96,0.2))" }}
+          />
 
-        <div className="flex gap-3 justify-center flex-wrap">
-          <Link
-            link="/products"
-            className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400"
-            style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
+          <p
+            className="font-light italic mb-[18px] tracking-[1px] text-center"
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1rem, 2vw, 1.5rem)", color: C.goldPale }}
           >
-            Explore the Collection
-          </Link>
-          <button
-            className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400"
-            style={{ fontFamily: "'Libre Baskerville', serif", background: "transparent", color: C.goldPale, border: "1px solid rgba(168,144,96,0.35)" }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.gold; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(168,144,96,0.35)"; e.currentTarget.style.color = C.goldPale; }}
-            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            Our Story
-          </button>
+            From the World&apos;s Last Wild Places
+          </p>
+
+          <div className="flex gap-3 justify-center flex-wrap">
+            <Link
+              to="/products"
+              className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400"
+              style={{ fontFamily: "'Libre Baskerville', serif", background: C.gold, color: C.dark }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = C.goldLight)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = C.gold)}
+            >
+              Explore the Collection
+            </Link>
+            <button
+              className="px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400"
+              style={{ fontFamily: "'Libre Baskerville', serif", background: "transparent", color: C.goldPale, border: "1px solid rgba(168,144,96,0.35)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.gold; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(168,144,96,0.35)"; e.currentTarget.style.color = C.goldPale; }}
+              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Our Story
+            </button>
+          </div>
         </div>
       </div>
     </div>
