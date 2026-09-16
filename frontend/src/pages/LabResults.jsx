@@ -528,23 +528,34 @@ export default function LabResults() {
 
   return (
     <section id="lab-results" className="font-baskerville w-full pb-20 bg-dark text-text">
-      <div className="w-full h-screen mb-20">
+      {/* Hero */}
+      <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
         <img src="/images/waffle.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
         
-        <div className="relative z-8 bg-linear-45 from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col justify-end px-6 sm:px-[72px] py-[90px]">
-          <div className="max-w-[560px] text-center md:text-left">
-            <p className="text-[0.55rem] tracking-[6px] uppercase mb-6 text-gold">
+        <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
+          {/* Decorative diamond */}
+          <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
+            <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-white">
               Beyond The Label
             </p>
-            <h2 className="font-garamond font-light mb-6 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.6rem)] tracking-[-0.5px]">
-              The Proof <em className="text-gold italic">Behind The Jar</em>
-            </h2>
-            <p className="text-[0.82rem] leading-[2.1] text-text-muted">
-              We don&apos;t ask you to take our word for it. Every jar of Jarrah honey carries results 
-              from two government-accredited laboratories — ChemCentre and the National Measurement 
-              Institute. No rounding, no marketing gloss. Below is the certificate, unfolded.
-            </p>
+            <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
+          <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
+            The Proof <em className="text-gold italic">Behind The Jar</em>
+          </h1>
+          <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+            Every jar of Jarrah honey carries results from two government-accredited laboratories. No rounding, no marketing gloss. Below is the certificate, unfolded.
+          </p>
+
+          {/* Bottom rule */}
+          <div className="flex items-center gap-4 my-8">
+            <div className="w-16 h-px opacity-30 bg-gold" />
+            <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+            <div className="w-16 h-px opacity-30 bg-gold" />
+          </div>
+
           <VerificationSeal className="absolute top-25 right-20" />
         </div>
       </div>

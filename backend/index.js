@@ -19,12 +19,14 @@ const productRoutes = require("./routes/productRoutes");
 const checkoutRoutes = require("./routes/checkoutRoutes");
 const articleRoutes = require("./routes/articleRoutes");
 const labTestRoutes = require("./routes/labTestRoutes");
+const testimonialRoutes = require("./routes/testimonialRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/articles", articleRoutes);
 app.use("/api/lab-tests", labTestRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 app.get('/health', (req, res) => {
   res.json({

@@ -1,16 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../CartContext";
 
-function SectionRule() {
-  return (
-    <div className="flex items-center justify-center gap-4 mb-20">
-      <div className="w-10 h-px opacity-50 bg-gold" />
-      <div className="w-[5px] h-[5px] rotate-45 bg-gold" />
-      <div className="w-10 h-px opacity-50 bg-gold" />
-    </div>
-  );
-}
-
 function ProductPanel({ productId, products, onClose }) {
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const [toast, setToast] = useState(false);
@@ -161,16 +151,35 @@ export default function Product() {
   };
 
   return (
-    <div className="bg-dark min-h-[100svh] pt-[100px] text-text font-baskerville">
-      <section id="products" className="px-[72px] py-[80px] bg-dark">
-        <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6 text-gold">
-          The Collection
-        </p>
-        <h2 className="text-center font-light mb-5 leading-[1.1] font-garamond text-[clamp(2.2rem,4.5vw,3.8rem)] text-white tracking-[-0.5px]">
-          Select Your <em className="text-gold italic">Expression</em>
-        </h2>
-        <SectionRule />
+    <div className="bg-dark min-h-[100svh] font-baskerville text-text">
+      <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
+        <img src="/images/jarrah-hero-product.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
 
+        <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
+            <p className="text-[0.55rem] tracking-[6px] uppercase text-center text-white">
+              Explore The Collection
+            </p>
+            <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
+          </div>
+          <h2 className="text-center font-light mb-5 leading-[1.1] font-garamond text-[clamp(2.2rem,4.5vw,3.8rem)] text-white tracking-[-0.5px]">
+            Select Your <em className="text-gold italic">Expression</em>
+          </h2>
+          <p className="font-garamond text-2xl font-light text-gold">
+            Harvested & Bottled in Western Australia
+          </p>
+
+          {/* Bottom rule */}
+          <div className="flex items-center gap-4 my-8">
+            <div className="w-16 h-px opacity-30 bg-gold" />
+            <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+            <div className="w-16 h-px opacity-30 bg-gold" />
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full bg-dark py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto gap-[1px] bg-rule">
           {products.map((t) => (
             <div
@@ -206,7 +215,7 @@ export default function Product() {
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       {panelId && <ProductPanel productId={panelId} products={products} onClose={closePanel} />}
     </div>

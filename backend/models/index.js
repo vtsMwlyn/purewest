@@ -19,6 +19,7 @@ db.Admin = require('./admin.js')(sequelize, Sequelize.DataTypes);
 db.Article = require('./article.js')(sequelize, Sequelize.DataTypes);
 db.Product = require('./product.js')(sequelize, Sequelize.DataTypes);
 db.LabTest = require('./labTest.js')(sequelize, Sequelize.DataTypes);
+db.Testimonial = require('./testimonial.js')(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

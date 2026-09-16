@@ -124,14 +124,18 @@ export default function Education() {
     <div className="font-baskerville min-h-[100svh] bg-dark text-text">
       {/* Hero */}
       <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
-        <img src="/images/jarrah-hero-product.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
+        <img src="/images/bee-flower.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
         
         <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
           {/* Decorative diamond */}
           <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
-          <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase mb-5">
-            Knowledge · Wellness · Nature
-          </p>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
+            <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-white">
+              Knowledge · Wellness · Nature
+            </p>
+            <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
+          </div>
           <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
             The <em className="text-gold italic">Education</em> Journal
           </h1>
@@ -141,7 +145,7 @@ export default function Education() {
           </p>
 
           {/* Bottom rule */}
-          <div className="flex items-center gap-4 mt-12">
+          <div className="flex items-center gap-4 my-8">
             <div className="w-16 h-px opacity-30 bg-gold" />
             <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
             <div className="w-16 h-px opacity-30 bg-gold" />
