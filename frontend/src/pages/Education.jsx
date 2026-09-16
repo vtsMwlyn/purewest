@@ -75,26 +75,79 @@ function ArticleCard({ article }) {
 }
 
 function HoneyComparison() {
-  const h2Class = "font-garamond text-white font-light mt-10 mb-4 leading-[1.2] text-[clamp(1.4rem,2.5vw,1.9rem)]";
-  const pClass = "mb-5.5 leading-[1.9] text-[0.95rem] text-text";
+  const pClass = "leading-[2.1] text-[0.82rem] mb-[22px] text-text-muted";
   
   return (
-    <div className="max-w-[800px] mx-auto px-6 md:px-10 pt-24 pb-12">
-      <h2 className={h2Class}>Manuka Honey vs. Jarrah Honey</h2>
-      <p className={pClass}>Manuka and Jarrah honeys, both renowned for their therapeutic properties, offer distinct qualities that set them apart.</p>
-      <p className={pClass}>Manuka honey, sourced from New Zealand, is revered for its potent antibacterial powers, particularly effective in wound care and immune support. Its robust, earthy flavor carries subtle medicinal nuances, adding to its distinctive character.</p>
-      <p className={pClass}>Jarrah honey, a rare treasure from Western Australia, boasts elevated levels of hydrogen peroxide, delivering powerful antibacterial and antifungal benefits. Its flavor profile is notably smoother, with refined notes of caramel and toffee, offering a more elegant and versatile culinary experience.</p>
-      <p className={pClass}>While both honeys are esteemed for their healing properties, Jarrah’s rarity and sophisticated taste elevate it as a luxurious alternative to Manuka.</p>
-      
-      <h2 className={h2Class}>Medicinal Qualities</h2>
-      <p className={pClass}>Both Jarrah and Manuka honeys offer significant health benefits, particularly their antibacterial properties.</p>
-      <p className={pClass}>Manuka honey is renowned for its high methylglyoxal (MGO) content, making it highly effective for wound healing, soothing inflammation, and combating bacterial infections.</p>
-      <p className={pClass}>Jarrah honey not only provides antibacterial and antifungal benefits due to its high hydrogen peroxide content but also has a low glycemic index, making it a healthier option for blood sugar control.</p>
-      <p className={pClass}>Additionally, its higher antioxidant levels support immune health. While both are potent, Jarrah honey stands out for its versatility and suitability for a broader range of health concerns.</p>
+    <div className="w-full pt-6 pb-12">
+      {/* Manuka Honey vs Jarrah Honey */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+        {/* Text */}
+        <div>
+          <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
+            Manuka Honey vs <em className="text-gold italic">Jarrah Honey</em>
+          </h2>
+          <p className={pClass}>Manuka and Jarrah honeys, both renowned for their therapeutic properties, offer distinct qualities that set them apart.</p>
+          <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong>, sourced from New Zealand, is revered for its potent antibacterial powers, particularly effective in wound care and immune support. Its robust, earthy flavor carries subtle medicinal nuances, adding to its distinctive character.</p>
+          <p className={pClass}><strong className="text-gold-pale">Jarrah honey</strong>, a rare treasure from Western Australia, boasts elevated levels of hydrogen peroxide, delivering powerful antibacterial and antifungal benefits. Its flavor profile is notably smoother, with refined notes of caramel and toffee, offering a more elegant and versatile culinary experience.</p>
+          <p className={pClass}>While both honeys are esteemed for their healing properties, Jarrah’s rarity and sophisticated taste elevate it as a luxurious alternative to Manuka.</p>
+        </div>
 
-      <h2 className={h2Class}>The Science Behind their Unique Healing Properties</h2>
-      <p className={pClass}>Manuka honey’s antibacterial power comes from methylglyoxal (MGO), which gives it unique healing properties. Since it lacks hydrogen peroxide, it is classified as a "non-peroxide" honey, relying on MGO for its antimicrobial effects.</p>
-      <p className={pClass}>Jarrah honey gains its antimicrobial qualities from glucose oxidase, an enzyme introduced by bees. When the honey’s glucose and water interact, the enzyme produces hydrogen peroxide. This reaction gives Jarrah honey its antibacterial, antimicrobial, and antifungal properties. With three times more antioxidants than Manuka, it also offers enhanced immune support.</p>
+        {/* Image */}
+        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+          <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
+          <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
+
+          <img src="/images/smiling-beehive.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
+
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end"></div>
+        </div>
+      </div>
+
+      {/* Medicinal Qualities */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+        {/* Image */}
+        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+          <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
+          <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
+
+          <img src="/images/with-lemon.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
+
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end"></div>
+        </div>
+
+        {/* Text */}
+        <div>
+          <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
+            <em className="text-gold italic">Medicinal</em> Qualities
+          </h2>
+          <p className={pClass}>Both Jarrah and Manuka honeys offer significant health benefits, particularly their antibacterial properties.</p>
+          <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong> is renowned for its high methylglyoxal (MGO) content, making it highly effective for wound healing, soothing inflammation, and combating bacterial infections.</p>
+          <p className={pClass}><strong className="text-gold-pale">Jarrah honey</strong> not only provides antibacterial and antifungal benefits due to its high hydrogen peroxide content but also has a low glycemic index, making it a healthier option for blood sugar control.</p>
+          <p className={pClass}>Additionally, its higher antioxidant levels support immune health. While both are potent, Jarrah honey stands out for its versatility and suitability for a broader range of health concerns.</p>
+        </div>
+      </div>
+
+      {/* The Science Behind their Unique Healing Properties */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+        {/* Text */}
+        <div>
+          <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
+            <em className="text-gold italic">The Science Behind their</em> Unique Healing Properties
+          </h2>
+          <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong>’s antibacterial power comes from methylglyoxal (MGO), which gives it unique healing properties. Since it lacks hydrogen peroxide, it is classified as a "non-peroxide" honey, relying on MGO for its antimicrobial effects.</p>
+          <p className={pClass}><strong className="text-gold-pale">Jarrah honey</strong> gains its antimicrobial qualities from glucose oxidase, an enzyme introduced by bees. When the honey’s glucose and water interact, the enzyme produces hydrogen peroxide. This reaction gives Jarrah honey its antibacterial, antimicrobial, and antifungal properties. With three times more antioxidants than Manuka, it also offers enhanced immune support.</p>
+        </div>
+
+        {/* Image */}
+        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+          <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
+          <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
+
+          <img src="/images/holding-marri.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
+
+          <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end"></div>
+        </div>
+      </div>
     </div>
   );
 }

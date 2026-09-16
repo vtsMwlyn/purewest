@@ -6,7 +6,7 @@ const HERO_SLIDES = [
   { id: "heroSlide0", img: "/images/panelimg.webp", label: "Products" },
   { id: "heroSlide1", img: "/images/beehive-closer.webp", label: "Beehive" },
   { id: "heroSlide2", img: "/images/mom-and-kid.webp", label: "Mom and Kids" },
-  { id: "heroSlide3", img: "/images/bee-flower.webp", label: "Bee Flower" },
+  { id: "heroSlide3", img: "/images/green-energy.webp", label: "Green Energy" },
 ];
 
 export default function Hero() {
