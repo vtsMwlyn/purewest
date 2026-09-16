@@ -1,18 +1,21 @@
 'use strict';
 
-require('pg'); // Force Vercel to bundle the PostgreSQL driver
-require('pg-hstore'); // Also bundle pg-hstore
 const Sequelize = require('sequelize');
 const process = require('process');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.js')[env];
 const db = {};
 
+const pg = require('pg');
+require('pg-hstore'); // Also bundle pg-hstore
+
+let sequelizeOptions = { ...config, dialectModule: pg };
+
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], sequelizeOptions);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password, sequelizeOptions);
 }
 
 // Explicitly require models for Vercel Serverless compatibility
