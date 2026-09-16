@@ -14,7 +14,7 @@ export default function Shipping() {
           <div className="absolute bottom-22.25 right-17.75 w-5 h-5 border-b border-r opacity-50 border-gold" />
 
           {items.map((item, i) => (
-            <div key={i} className="py-11 px-[30px] text-center border border-rule bg-dark">
+            <div key={i} className="py-11 px-[30px] text-center border border-rule bg-dark/60">
               <img src={item.src} className="size-20 mb-4.5 block mx-auto"/>
               <h4 className="font-garamond text-base font-normal mb-2.5 text-gold-pale">
                 {item.title}
