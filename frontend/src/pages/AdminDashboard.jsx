@@ -213,7 +213,7 @@ export default function AdminDashboard() {
       {/* Modal Popup */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
-          <div className="w-full max-w-[800px] max-h-[90vh] overflow-y-auto p-10 relative bg-dark2 border border-gold">
+          <div className="w-[95vw] md:max-w-[800px] max-h-[90vh] overflow-y-auto p-6 md:p-10 relative bg-dark2 border border-gold">
             <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer text-text-muted bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>

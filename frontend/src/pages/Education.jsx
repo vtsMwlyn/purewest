@@ -79,11 +79,11 @@ function HoneyComparison() {
   const pClass = "leading-[2.1] text-[0.82rem] mb-[22px] text-text-muted";
   
   return (
-    <div className="w-full pt-6 pb-12">
+    <div className="w-full pt-6 pb-12 flex flex-col items-center px-6 md:px-18">
       {/* Manuka Honey vs Jarrah Honey */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mt-20">
         {/* Text */}
-        <div>
+        <div className="order-2 md:order-1">
           <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
             Manuka Honey vs <em className="text-gold italic">Jarrah Honey</em>
           </h2>
@@ -94,7 +94,7 @@ function HoneyComparison() {
         </div>
 
         {/* Image */}
-        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+        <div className="order-1 md:order-2 flex flex-col items-center justify-center relative h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
@@ -105,7 +105,7 @@ function HoneyComparison() {
       </div>
 
       {/* Medicinal Qualities */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mt-20">
         {/* Image */}
         <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
@@ -129,9 +129,9 @@ function HoneyComparison() {
       </div>
 
       {/* The Science Behind their Unique Healing Properties */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mt-20">
         {/* Text */}
-        <div>
+        <div className="order-2 md:order-1">
           <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
             <em className="text-gold italic">The Science Behind their</em> Unique Healing Properties
           </h2>
@@ -140,7 +140,7 @@ function HoneyComparison() {
         </div>
 
         {/* Image */}
-        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+        <div className="order-1 md:order-2 flex flex-col items-center justify-center relative h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 

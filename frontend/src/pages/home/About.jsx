@@ -7,11 +7,11 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="px-18 py-[90px] bg-dark2">
+    <section id="about" className="px-6 md:px-18 py-16 md:py-[90px] bg-dark2">
       {/* South-West Forest Region */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto">
         {/* Image */}
-        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+        <div className="flex flex-col items-center justify-center relative h-80 md:h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
@@ -37,7 +37,7 @@ export default function About() {
       {/* A Honey Unlike Any Other */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
         {/* Text */}
-        <div>
+        <div className="order-2 lg:order-1">
           <p className="text-[0.55rem] tracking-[6px] uppercase text-start mb-6 text-gold">
             Est. in the Ancient Forests
           </p>
@@ -50,7 +50,7 @@ export default function About() {
         </div>
 
         {/* Image */}
-        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+        <div className="order-1 lg:order-2 flex flex-col items-center justify-center relative h-80 md:h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
@@ -63,14 +63,14 @@ export default function About() {
       {/* Unrivaled Quality, Unbeatable Everyday Value */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-25 items-center max-w-[1140px] mx-auto mt-20">
         {/* Image */}
-        <div className="flex flex-col items-center justify-center relative h-120 border border-rule">
+        <div className="flex flex-col items-center justify-center relative h-80 md:h-120 border border-rule">
           <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
           <img src="/images/holding-marri.webp" className="absolute inset-0 h-full w-full object-cover object-center" alt="Jarah Forest" />
 
           <div className="relative z-5 bg-linear-to-t from-[rgba(14,10,5,1)] from-20% to-[rgba(26,18,10,0)] px-10 py-[50px] h-full w-full flex flex-col justify-end">
-            <div className="flex w-full mt-5 border border-rule">
+            <div className="hidden lg:flex w-full mt-5 border border-rule">
               {stats.map((s, i) => (
                 <div
                   key={i}

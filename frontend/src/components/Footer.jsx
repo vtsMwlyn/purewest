@@ -6,8 +6,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#050402] pt-[90px] px-[72px] pb-[48px]">
-      <div className="max-w-[1140px] mx-auto pb-[60px] grid grid-cols-[2fr_1fr_1fr_1fr] gap-[60px] border-b border-rule">
+    <footer className="bg-[#050402] pt-16 lg:pt-[90px] px-6 lg:px-[72px] pb-10 lg:pb-[48px]">
+      <div className="max-w-[1140px] mx-auto pb-12 lg:pb-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 lg:gap-[60px] border-b border-rule">
         <div>
           <div className="font-garamond text-[1.4rem] tracking-[6px] uppercase font-semibold mb-1 text-gold">
             Purewest

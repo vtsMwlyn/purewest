@@ -9,7 +9,7 @@ export default function Shipping() {
   return (
     <section id="shipping" className="w-full relative flex justify-end">
       <div className="w-full relative z-5 bg-linear-to-l from-dark2 to-transparent flex justify-end">
-        <div className="w-1/2 py-[90px] px-18 grid grid-cols-2 relative">
+        <div className="w-full lg:w-1/2 py-12 md:py-[90px] px-6 md:px-18 grid grid-cols-1 sm:grid-cols-2 relative">
           <div className="absolute top-22.25 left-17.75 w-5 h-5 border-t border-l opacity-50 border-gold" />
           <div className="absolute bottom-22.25 right-17.75 w-5 h-5 border-b border-r opacity-50 border-gold" />
 

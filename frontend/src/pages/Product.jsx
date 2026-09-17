@@ -40,7 +40,7 @@ function ProductPanel({ productId, products, onClose }) {
 
       <div
         id="productPanel"
-        className="fixed top-0 right-0 bottom-0 z-[201] overflow-hidden bg-dark2 w-[min(900px,100vw)] shadow-[-20px_0_60px_rgba(0,0,0,0.6)]"
+        className="fixed top-0 right-0 bottom-0 z-[201] overflow-hidden bg-dark2 w-full md:w-[min(900px,100vw)] shadow-[-20px_0_60px_rgba(0,0,0,0.6)]"
       >
         <div className="h-full grid grid-cols-1 md:grid-cols-2">
           {/* Image */}
@@ -49,7 +49,7 @@ function ProductPanel({ productId, products, onClose }) {
           </div>
 
           {/* Details */}
-          <div id="panelDetails" className="overflow-y-auto h-full px-12 py-[60px] bg-dark2">
+          <div id="panelDetails" className="overflow-y-auto h-full px-6 py-10 md:px-12 md:py-[60px] bg-dark2">
             <p className="text-[0.52rem] tracking-[5px] uppercase mb-4 text-gold">
               {product.eyebrow}
             </p>

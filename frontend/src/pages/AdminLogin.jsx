@@ -38,7 +38,7 @@ export default function AdminLogin() {
 
   return (
     <div className="bg-dark min-h-[100svh] pt-[120px] pb-[100px] font-baskerville flex justify-center items-center">
-      <div className="w-full max-w-md p-10 bg-dark2 border border-rule">
+      <div className="w-[90%] md:w-full max-w-md p-6 md:p-10 bg-dark2 border border-rule">
         <h2 className="text-center font-light mb-8 leading-[1.1] font-garamond text-[2rem] text-white">
           Admin <em className="text-gold italic">Login</em>
         </h2>

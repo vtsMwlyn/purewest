@@ -10,9 +10,9 @@ function WhyCards({info}){
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img src={info.img} className={`absolute inset-0 w-full h-full object-cover object-center ${hovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'} transition duration-1000`} alt="Pancake" />
+      <img src={info.img} className={`absolute inset-0 w-full h-full object-cover object-center transition duration-1000 ${hovered ? 'opacity-100 scale-105' : 'opacity-100 lg:opacity-0 scale-100'}`} alt="Pancake" />
 
-      <div className="relative z-5 bg-dark3/70 w-full h-full p-[52px_40px] ">
+      <div className="relative z-5 bg-dark3/70 w-full h-full p-6 md:p-[52px_40px]">
         <div className="font-garamond text-[3.5rem] font-light leading-none mb-5">
           {info.num}
         </div>
@@ -41,7 +41,7 @@ export default function Why() {
   ];
 
   return (
-    <section id="why" className="px-18 py-[90px] bg-dark">
+    <section id="why" className="px-6 md:px-18 py-16 md:py-[90px] bg-dark">
       <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6 text-gold">
         Why Jarrah
       </p>

@@ -13,19 +13,21 @@ export default function Quote() {
         PureWest Australia · South-West Western Australia
       </p>
 
-      <Link
-        to="/products"
-        className="font-baskerville inline-block px-9 py-[13px] mt-10 text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400 bg-gold hover:bg-gold-light text-dark"
-      >
-        Explore the Collection
-      </Link>
-      <Link
-        to="/lab-result"
-        className="font-baskerville inline-block px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400 ml-5 text-gold-pale bg-transparent border border-gold/35 hover:border-gold hover:text-gold"
-        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-      >
-        Check Lab Result
-      </Link>
+      <div className="flex flex-col lg:flex-row gap-5 items-center">
+        <Link
+          to="/products"
+          className="font-baskerville inline-block px-9 py-[13px] mt-10 text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400 bg-gold hover:bg-gold-light text-dark"
+        >
+          Explore the Collection
+        </Link>
+        <Link
+          to="/lab-result"
+          className="font-baskerville inline-block px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase cursor-pointer transition-all duration-400 text-gold-pale bg-transparent border border-gold/35 hover:border-gold hover:text-gold"
+          onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+        >
+          Check Lab Result
+        </Link>
+      </div>
     </section>
   );
 }

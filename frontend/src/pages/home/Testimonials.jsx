@@ -34,7 +34,7 @@ export default function Testimonials() {
   if (cards.length === 0) return null;
 
   return (
-    <section id="testimonials" className="px-18 py-[90px] bg-dark2">
+    <section id="testimonials" className="px-6 md:px-18 py-16 md:py-[90px] bg-dark2">
       <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6 text-gold">
         What Our Customers Say
       </p>
@@ -47,7 +47,7 @@ export default function Testimonials() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto gap-6">
         {cards.map((c, i) => (
-          <div key={i} className="p-[38px_30px] bg-dark">
+          <div key={i} className="p-6 md:p-[38px_30px] bg-dark">
             <div className="mb-5">
               <Stars rating={c.rating} />
             </div>

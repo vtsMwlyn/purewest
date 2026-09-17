@@ -39,7 +39,7 @@ export default function Cart() {
 
   return (
     <div className="bg-dark min-h-[100svh] pt-[120px] pb-[100px] font-baskerville">
-      <div className="max-w-[1000px] mx-auto px-[40px]">
+      <div className="max-w-[1000px] mx-auto px-6 md:px-[40px]">
         <p className="text-[0.55rem] tracking-[6px] uppercase text-center mb-6 text-gold">
           Your Selection
         </p>

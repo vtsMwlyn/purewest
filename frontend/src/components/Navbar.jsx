@@ -17,7 +17,7 @@ export default function Navbar({ onShopNow }) {
   const links = [
     { label: "Our Story", href: "/#about" },
     { label: "The Difference", href: "/#why" },
-    { label: "Collection", href: "/products" },
+    { label: "Collection", href: "/#products" },
     { label: "Reviews", href: "/#testimonials" },
     { label: "Lab Results", href: "/lab-results" },
     { label: "Education", href: "/education" },
@@ -29,13 +29,15 @@ export default function Navbar({ onShopNow }) {
       id="nav"
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-500 ${
         scrolled
-          ? "py-[14px] px-10 bg-[rgba(8,6,4,0.97)] backdrop-blur-md text-text-muted"
-          : "py-6 px-10 bg-[linear-gradient(to_bottom,rgba(8,6,4,0.7),transparent)] backdrop-blur-none text-white"
+          ? "py-[14px] px-6 lg:px-10 bg-[rgba(8,6,4,0.97)] backdrop-blur-md text-text-muted"
+          : "py-4 lg:py-6 px-6 lg:px-10 bg-[linear-gradient(to_bottom,rgba(8,6,4,0.7),transparent)] backdrop-blur-none text-white"
       }`}
     >
-      {/* Desktop links */}
-      <div className="w-full grid grid-cols-[1fr_auto_1fr] m-0 p-0 gap-10">
-        <div className="flex items-center justify-end gap-10">
+      {/* Navbar Layout */}
+      <div className="w-full flex justify-between items-center lg:grid lg:grid-cols-[1fr_auto_1fr] m-0 p-0 gap-4 lg:gap-10">
+        
+        {/* Left Links (Desktop) */}
+        <div className="hidden lg:flex items-center justify-end gap-10">
           {links.slice(0, 4).map((l) => (
             <a key={l.href}
               href={l.href}
@@ -46,27 +48,32 @@ export default function Navbar({ onShopNow }) {
           ))}
         </div>
 
+        {/* Logo */}
         <a href="/" className="no-underline">
-          <img src="/images/logo.webp" className="h-12" alt="Purewest" />
+          <img src="/images/logo.webp" className="h-10 lg:h-12" alt="Purewest" />
         </a>
 
-        <div className="flex items-center gap-10">
-          {links.slice(-3).map((l) => (
-            <a key={l.href}
-              href={l.href}
-              className="font-baskerville no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300 hover:text-gold text-inherit"
-            >
-              {l.label}
-            </a>
-          ))}
+        {/* Right Links & Icons */}
+        <div className="flex items-center justify-end gap-4 lg:gap-10">
+          <div className="hidden lg:flex items-center gap-10">
+            {links.slice(-3).map((l) => (
+              <a key={l.href}
+                href={l.href}
+                className="font-baskerville no-underline text-[0.6rem] tracking-[3px] uppercase transition-colors duration-300 hover:text-gold text-inherit"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={onShopNow}
-              className="font-baskerville hidden md:block text-[0.5rem] tracking-[3px] uppercase px-6 py-3 transition-all duration-300 font-bold bg-gold text-dark hover:bg-gold-light"
+              className="font-baskerville hidden lg:block text-[0.5rem] tracking-[3px] uppercase px-6 py-3 transition-all duration-300 font-bold bg-gold text-dark hover:bg-gold-light cursor-pointer"
             >
               Shop Now
             </button>
+            
             <Link to="/cart" className="relative flex items-center justify-center p-2 text-inherit no-underline transition-colors duration-300 hover:text-gold-light">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
@@ -79,9 +86,10 @@ export default function Navbar({ onShopNow }) {
                 </span>
               )}
             </Link>
+            
             {/* Mobile hamburger */}
             <button
-              className="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"
+              className="lg:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"
               onClick={() => setMenuOpen((p) => !p)}
               aria-label="Menu"
             >

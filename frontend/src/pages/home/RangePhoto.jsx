@@ -1,6 +1,6 @@
 export default function RangePhoto() {
   return (
-    <section id="range-photo" className="p-0 overflow-hidden bg-dark">
+    <section id="products" className="p-0 overflow-hidden bg-dark">
       <div className="relative min-h-[420px] overflow-hidden bg-dark3">
         <img
           src="/images/rangeimg.webp"

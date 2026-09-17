@@ -232,7 +232,7 @@ function ActivityPanel() {
 
   return (
     <div className="max-w-[860px] mx-auto mb-24">
-      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-16 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 md:gap-16 items-center">
         {/* Gauge / overflow bar */}
         <div>
           <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-text-muted">
@@ -560,40 +560,42 @@ export default function LabResults() {
         </div>
       </div>
 
-      <LabBadges />
-      <StatRow />
+      <div className="px-6 md:px-12">
+        <LabBadges />
+        <StatRow />
 
-      <TabSwitch active={tab} onChange={setTab} />
-      
-      <div className="min-h-[400px]">
-        {tab === "activity" && <ActivityPanel />}
-        {tab === "sugar" && <SugarPanel />}
-        {tab === "trace" && (
-          <div className="animate-in fade-in duration-500">
-            <div className="max-w-[900px] mx-auto mb-6">
-              <ChromatogramTrace />
+        <TabSwitch active={tab} onChange={setTab} />
+        
+        <div className="min-h-[400px]">
+          {tab === "activity" && <ActivityPanel />}
+          {tab === "sugar" && <SugarPanel />}
+          {tab === "trace" && (
+            <div className="animate-in fade-in duration-500">
+              <div className="max-w-[900px] mx-auto mb-6">
+                <ChromatogramTrace />
+              </div>
+              <p className="text-center text-[0.6rem] italic mb-24 text-text-muted">
+                Sugar profile, illustrative trace scaled to lab results · Method ORG155F (HPLC) · run 06.09.2024
+              </p>
+              <div className="mb-24">
+                <DataTable />
+              </div>
             </div>
-            <p className="text-center text-[0.6rem] italic mb-24 text-text-muted">
-              Sugar profile, illustrative trace scaled to lab results · Method ORG155F (HPLC) · run 06.09.2024
-            </p>
-            <div className="mb-24">
-              <DataTable />
-            </div>
-          </div>
-        )}
+          )}
+        </div>
+
+        <div className="h-px max-w-[1000px] mx-auto mb-16 bg-rule" />
+
+        <p className="text-center text-[0.5rem] tracking-[3px] uppercase mb-10 text-gold">
+          The Certificates
+        </p>
+        <CertificateGrid />
+
+        <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16 text-text-muted">
+          Results apply only to the sample as received and tested. Full Certificates of Analysis
+          are available on request.
+        </p>
       </div>
-
-      <div className="h-px max-w-[1000px] mx-auto mb-16 bg-rule" />
-
-      <p className="text-center text-[0.5rem] tracking-[3px] uppercase mb-10 text-gold">
-        The Certificates
-      </p>
-      <CertificateGrid />
-
-      <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16 text-text-muted">
-        Results apply only to the sample as received and tested. Full Certificates of Analysis
-        are available on request.
-      </p>
     </section>
   );
 }
