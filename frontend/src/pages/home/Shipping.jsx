@@ -24,7 +24,7 @@ export default function Shipping() {
           ))}
         </div>
       </div>
-      <img src="/images/traktor.webp" className="absolute z-0 inset-0 w-full h-full object-cover object-center"/>
+      <img src="/images/traktor.webp" className="absolute z-0 inset-0 w-full h-full object-cover object-center -scale-x-100"/>
     </section>
   );
 }
