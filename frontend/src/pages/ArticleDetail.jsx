@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 export default function ArticleDetail() {
   const { id } = useParams();
@@ -38,14 +39,7 @@ export default function ArticleDetail() {
   return (
     <div className="bg-dark min-h-[100svh] font-baskerville text-text">
       {/* ── Loading ── */}
-      {loading && (
-        <div className="flex flex-col items-center justify-center min-h-[100svh]">
-          <div className="w-[6px] h-[6px] rotate-45 animate-pulse mb-4 bg-gold" />
-          <p className="text-[0.6rem] tracking-[4px] uppercase text-text-muted font-baskerville">
-            Loading…
-          </p>
-        </div>
-      )}
+      {loading && <Spinner className="min-h-[100svh]" />}
 
       {/* ── Error ── */}
       {error && !loading && (
@@ -64,65 +58,34 @@ export default function ArticleDetail() {
       {!loading && !error && article && (
         <>
           {/* Hero */}
-          <div className="relative pt-[120px] border-b border-rule">
-            {article.featured_image && (
-              <>
-                {/* Blurred background */}
-                <div
-                  className="absolute inset-0 scale-[1.1] blur-[60px] brightness-20 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${article.featured_image})` }}
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(14,10,5,0.8),#0e0a05)]" />
-              </>
-            )}
-
-            <div className="relative max-w-[800px] mx-auto px-6 md:px-10 pb-12 text-center">
-              {/* Back link */}
-              <Link
-                to="/education"
-                className="inline-flex items-center gap-2 no-underline mb-10 transition-colors duration-300 text-text-muted font-baskerville hover:text-gold"
-              >
-                <span className="text-[0.7rem]">←</span>
-                <span className="text-[0.5rem] tracking-[3px] uppercase">
-                  Education Journal
-                </span>
-              </Link>
-
-              {formattedDate && (
-                <p className="text-[0.55rem] tracking-[4px] uppercase mb-4 text-gold font-baskerville">
+          <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
+            {article.featured_image && <img src={article.featured_image} className="absolute inset-0 w-full h-full object-cover z-0" />}
+            
+            <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
+              {/* Decorative diamond */}
+              <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
+                <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-white">
                   {formattedDate}
                 </p>
-              )}
-
-              <h1 className="font-light leading-[1.1] mb-6 font-garamond text-[clamp(2.2rem,5vw,4rem)] text-white tracking-[-0.5px]">
+                <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
+              </div>
+              <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
                 {article.title}
               </h1>
+              <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+                {article.subtitle}
+              </p>
 
-              {article.subtitle && (
-                <p className="text-[0.9rem] leading-relaxed max-w-lg mx-auto text-text-muted font-baskerville">
-                  {article.subtitle}
-                </p>
-              )}
-
-              {/* Bottom ornament */}
-              <div className="flex items-center justify-center gap-4 mt-10">
-                <div className="w-10 h-px opacity-30 bg-gold" />
-                <div className="w-[4px] h-[4px] rotate-45 opacity-60 bg-gold" />
-                <div className="w-10 h-px opacity-30 bg-gold" />
+              {/* Bottom rule */}
+              <div className="flex items-center gap-4 my-8">
+                <div className="w-16 h-px opacity-30 bg-gold" />
+                <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+                <div className="w-16 h-px opacity-30 bg-gold" />
               </div>
             </div>
           </div>
-
-          {/* Featured image */}
-          {article.featured_image && (
-            <div className="max-w-[900px] mx-auto px-6 md:px-10 -mt-0 pt-12">
-              <img
-                src={article.featured_image}
-                alt={article.title}
-                className="w-full object-cover max-h-[480px] border border-rule"
-              />
-            </div>
-          )}
 
           {/* Body */}
           <div className="max-w-[720px] mx-auto px-6 md:px-10 py-16">
@@ -136,10 +99,12 @@ export default function ArticleDetail() {
             )}
 
             {/* Footer ornament */}
-            <div className="flex items-center gap-4 mt-16">
-              <div className="w-16 h-px opacity-30 bg-gold" />
-              <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
-              <div className="w-16 h-px opacity-30 bg-gold" />
+            <div className="w-full flex justify-center mt-4">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-px opacity-30 bg-gold" />
+                <div className="w-[4px] h-[4px] rotate-45 opacity-50 bg-gold" />
+                <div className="w-16 h-px opacity-30 bg-gold" />
+              </div>
             </div>
 
             {/* Back */}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCart } from "../CartContext";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
@@ -51,12 +52,12 @@ export default function Cart() {
             <p className="text-[1.2rem] font-light mb-6 font-garamond text-text">
               Your cart is currently empty.
             </p>
-            <a
-              href="/#products"
-              className="inline-block px-9 py-[13px] text-[0.58rem] tracking-[3px] uppercase no-underline font-bold transition-all duration-400 bg-gold text-dark hover:bg-gold-light"
+            <Link
+              to="/products"
+              className="font-baskerville px-9 py-3.25 text-[0.58rem] tracking-[3px] uppercase border-none cursor-pointer font-bold transition-all duration-400 bg-gold hover:bg-gold-light text-dark"
             >
               Continue Shopping
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12">

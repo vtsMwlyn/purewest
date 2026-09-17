@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SectionRule from "./SectionRule";
 import Stars from "./Stars";
+import Spinner from "../../components/Spinner";
 
 export default function Testimonials() {
   const [cards, setCards] = useState([]);
@@ -29,7 +30,7 @@ export default function Testimonials() {
     fetchTestimonials();
   }, []);
 
-  if (loading) return <div className="py-[90px] bg-dark2 text-center text-text-muted text-[0.85rem] uppercase tracking-[2px]">Loading testimonials...</div>;
+  if (loading) return <Spinner />;
   if (cards.length === 0) return null;
 
   return (

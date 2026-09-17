@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function SectionRule() {
   return (
@@ -212,14 +213,7 @@ export default function Education() {
 
       {/* Articles Grid */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pb-20">
-        {loading && (
-          <div className="flex flex-col items-center justify-center py-32 gap-4">
-            <div className="w-[6px] h-[6px] rotate-45 animate-pulse bg-gold" />
-            <p className="font-baskerville text-[0.6rem] tracking-[4px] uppercase text-text-muted">
-              Loading articles…
-            </p>
-          </div>
-        )}
+        {loading && <Spinner className="py-32" />}
 
         {error && !loading && (
           <div className="text-center py-32">

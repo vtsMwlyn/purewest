@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../CartContext";
+import Spinner from "../components/Spinner";
 
 function ProductPanel({ productId, products, onClose }) {
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
@@ -133,12 +134,19 @@ function ProductPanel({ productId, products, onClose }) {
 export default function Product() {
   const [panelId, setPanelId] = useState(null);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   }, []);
 
   const openPanel = (id) => {
@@ -180,41 +188,45 @@ export default function Product() {
       </div>
 
       <div className="w-full bg-dark py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto gap-[1px] bg-rule">
-          {products.map((t) => (
-            <div
-              key={t.id}
-              id={`tile-${t.id}`}
-              className="relative overflow-hidden cursor-pointer group min-h-[480px] bg-dark3"
-              onClick={() => openPanel(t.id)}
-            >
-              <img
-                src={t.img.startsWith('/') && !t.img.includes('localhost') && t.img.startsWith('/uploads') ? t.img : t.img}
-                alt={t.name}
-                className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105 brightness-85"
-              />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 max-w-[1140px] mx-auto gap-[1px] bg-rule">
+            {products.map((t) => (
               <div
-                className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,6,4,0.85)_0%,rgba(8,6,4,0.1)_50%,transparent_100%)]"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-[2]">
-                <span className="text-[0.48rem] tracking-[3px] uppercase px-3 py-1 mb-3 inline-block bg-gold text-dark">
-                  {t.ta}
-                </span>
-                <div className="text-[1.6rem] font-light leading-tight mb-1 font-garamond text-white">
-                  {t.name}
-                </div>
-                <div className="text-[0.55rem] tracking-[2px] uppercase text-gold-pale">
-                  {t.eyebrow}
-                </div>
-              </div>
-              <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.5rem] tracking-[3px] uppercase px-5 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[3] whitespace-nowrap border border-gold text-gold bg-[rgba(8,6,4,0.7)]"
+                key={t.id}
+                id={`tile-${t.id}`}
+                className="relative overflow-hidden cursor-pointer group min-h-[480px] bg-dark3"
+                onClick={() => openPanel(t.id)}
               >
-                View Details
+                <img
+                  src={t.img.startsWith('/') && !t.img.includes('localhost') && t.img.startsWith('/uploads') ? t.img : t.img}
+                  alt={t.name}
+                  className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105 brightness-85"
+                />
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,6,4,0.85)_0%,rgba(8,6,4,0.1)_50%,transparent_100%)]"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-8 z-[2]">
+                  <span className="text-[0.48rem] tracking-[3px] uppercase px-3 py-1 mb-3 inline-block bg-gold text-dark">
+                    {t.ta}
+                  </span>
+                  <div className="text-[1.6rem] font-light leading-tight mb-1 font-garamond text-white">
+                    {t.name}
+                  </div>
+                  <div className="text-[0.55rem] tracking-[2px] uppercase text-gold-pale">
+                    {t.eyebrow}
+                  </div>
+                </div>
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.5rem] tracking-[3px] uppercase px-5 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[3] whitespace-nowrap border border-gold text-gold bg-[rgba(8,6,4,0.7)]"
+                >
+                  View Details
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {panelId && <ProductPanel productId={panelId} products={products} onClose={closePanel} />}
