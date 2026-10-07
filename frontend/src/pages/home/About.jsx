@@ -1,7 +1,7 @@
 export default function About() {
   const stats = [
     { num: "35+", label: "Total Activity" },
-    { num: "100%", label: "Wild-Sourced" },
+    { num: "100%", label: "Nature-Sourced" },
     { num: "2yr", label: "Bloom Cycle" },
     { num: "WA", label: "Origin Only" },
   ];
@@ -22,9 +22,6 @@ export default function About() {
 
         {/* Text */}
         <div>
-          <p className="text-[0.55rem] tracking-[6px] uppercase text-start mb-6 text-gold">
-            Wild-Harvested Since Forever
-          </p>
           <h2
             className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]"
           >

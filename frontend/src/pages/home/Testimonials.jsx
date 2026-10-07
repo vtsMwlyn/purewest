@@ -56,7 +56,7 @@ export default function Testimonials() {
             </p>
             <div className="w-6 h-px mb-4 opacity-50 bg-gold" />
             <div className="flex items-center gap-3">
-              <img src={c.photo && c.photo.startsWith('/') && !c.photo.includes('localhost') ? c.photo : (c.photo || '/images/mom-and-kid.webp')} className="w-10 h-10 object-cover object-center border border-rule" alt="Photo" />
+              {/* <img src={c.photo && c.photo.startsWith('/') && !c.photo.includes('localhost') ? c.photo : (c.photo || '/images/mom-and-kid.webp')} className="w-10 h-10 object-cover object-center border border-rule" alt="Photo" /> */}
               <div className="flex flex-col">
                 <div className="text-[0.6rem] tracking-[3px] uppercase text-gold">{c.name}</div>
                 <div className="text-[0.58rem] mt-1 italic text-text-muted">{c.address || 'Verified Customer'}</div>

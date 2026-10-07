@@ -54,7 +54,7 @@ export default function Navbar({ onShopNow }) {
         </a>
 
         {/* Right Links & Icons */}
-        <div className="flex items-center justify-end gap-4 lg:gap-10">
+        <div className="flex items-center justify-end lg:justify-start gap-4 lg:gap-10">
           <div className="hidden lg:flex items-center gap-10">
             {links.slice(-3).map((l) => (
               <a key={l.href}

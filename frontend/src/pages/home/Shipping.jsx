@@ -1,6 +1,6 @@
 export default function Shipping() {
   const items = [
-    { src: "/images/product-benefit-1.webp", title: "Free Shipping",    body: "Complimentary shipping on all orders over $50. Express options available." },
+    { src: "/images/product-benefit-1.webp", title: "Free Shipping",    body: "Complimentary shipping on all orders over $100. Express options available." },
     { src: "/images/product-benefit-2.webp", title: "Raw & Pure",        body: "Cold-extracted and never heat treated. Exactly as nature intended." },
     { src: "/images/product-benefit-3.webp", title: "Certified Quality", body: "Every batch independently tested and certified for Total Activity rating." },
     { src: "/images/product-benefit-4.webp", title: "Easy Returns",      body: "Not completely satisfied? We offer a 30-day money-back guarantee." },

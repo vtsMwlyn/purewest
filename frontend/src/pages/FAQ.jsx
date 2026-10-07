@@ -13,7 +13,7 @@ const faqData = [
   {
     question: "What is Total Activity (TA)?",
     answer: `
-      <p>Total Activity (TA) measures how effectively honey kills bacteria, with higher TA numbers indicating greater antimicrobial strength. Our Jarrah and Marri Wild honeys are among the highest rated TA honeys available, ensuring top-notch antimicrobial protection.</p>
+      <p>Total Activity (TA) measures how effectively honey kills bacteria, with higher TA numbers indicating greater antimicrobial strength. Our Jarrah and Marri honeys are among the highest rated TA honeys available, ensuring top-notch antimicrobial protection.</p>
 
       <p>The exceptional antimicrobial and antibacterial properties of our honeys come from an enzyme called glucose oxidase, naturally introduced by bees during honey production. This enzyme interacts with glucose and oxygen from the water present in honey to produce hydrogen peroxide—a safe yet powerful antimicrobial agent.</p>
     `
