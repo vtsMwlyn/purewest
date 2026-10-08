@@ -73,7 +73,7 @@ router.put("/:id", auth, upload.single("pdf_file"), async (req, res) => {
     const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
       pdfPath = `${baseUrl}/uploads/${req.file.filename}`;
-      
+
       // Optionally delete the old file
       if (labTest.pdf_path && labTest.pdf_path.includes("/uploads/")) {
         const parts = labTest.pdf_path.split("/uploads/");

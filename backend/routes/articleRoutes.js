@@ -69,7 +69,7 @@ router.put("/:id", auth, upload.single("featured_image"), async (req, res) => {
     const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
       imgPath = `${baseUrl}/uploads/${req.file.filename}`;
-      
+
       // Delete old file
       if (article.featured_image && article.featured_image.includes("/uploads/")) {
         const parts = article.featured_image.split("/uploads/");

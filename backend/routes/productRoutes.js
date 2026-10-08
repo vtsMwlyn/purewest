@@ -69,7 +69,7 @@ router.put("/:id", auth, upload.single("img"), async (req, res) => {
     const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
       imgPath = `${baseUrl}/uploads/${req.file.filename}`;
-      
+
       if (product.img && product.img.includes("/uploads/")) {
         const parts = product.img.split("/uploads/");
         const oldPath = path.join(__dirname, "../public/uploads", parts[1]);
