@@ -5,11 +5,7 @@ const path = require("path");
 const fs = require("fs");
 const { Product } = require("../models");
 const auth = require("../middleware/auth");
-
-const supabase = require("../config/supabase");
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = require("../middleware/upload");
 
 const parseJSONField = (field, fallback = []) => {
   if (typeof field === "string") {
@@ -38,17 +34,9 @@ router.post("/", auth, upload.single("img"), async (req, res) => {
   try {
     const { name, eyebrow, ta, desc, specs, sizes, icons } = req.body;
     let imgPath = "";
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `product-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("Image upload failed: " + error.message);
-      
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      imgPath = publicUrlData.publicUrl;
+      imgPath = `${baseUrl}/uploads/${req.file.filename}`;
     }
 
     const product = await Product.create({
@@ -78,17 +66,15 @@ router.put("/:id", auth, upload.single("img"), async (req, res) => {
     if (!product) return res.status(404).json({ message: "Product not found" });
 
     let imgPath = product.img;
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `product-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("Image upload failed: " + error.message);
+      imgPath = `${baseUrl}/uploads/${req.file.filename}`;
       
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      imgPath = publicUrlData.publicUrl;
+      if (product.img && product.img.includes("/uploads/")) {
+        const parts = product.img.split("/uploads/");
+        const oldPath = path.join(__dirname, "../public/uploads", parts[1]);
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      }
     }
 
     await product.update({
@@ -115,6 +101,13 @@ router.delete("/:id", auth, async (req, res) => {
     const product = await Product.findByPk(req.params.id);
     if (!product) return res.status(404).json({ message: "Product not found" });
 
+    if (product.img && product.img.includes("/uploads/")) {
+      const parts = product.img.split("/uploads/");
+      const filePath = path.join(__dirname, "../public/uploads", parts[1]);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
     await product.destroy();
     res.json({ message: "Product deleted" });
   } catch (error) {

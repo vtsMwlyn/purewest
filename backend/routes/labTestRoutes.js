@@ -2,13 +2,10 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const { LabTest } = require("../models");
 const auth = require("../middleware/auth");
-
-const supabase = require("../config/supabase");
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = require("../middleware/upload");
 
 // GET all lab tests (public)
 router.get("/", async (req, res) => {
@@ -40,17 +37,9 @@ router.post("/", auth, upload.single("pdf_file"), async (req, res) => {
   try {
     const { title, subtitle, reference, sample_id, sampled_at, analyzed_at, method, signed_by } = req.body;
     let pdfPath = "";
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `labtest-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("PDF upload failed: " + error.message);
-      
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      pdfPath = publicUrlData.publicUrl;
+      pdfPath = `${baseUrl}/uploads/${req.file.filename}`;
     }
 
     const labTest = await LabTest.create({
@@ -81,27 +70,15 @@ router.put("/:id", auth, upload.single("pdf_file"), async (req, res) => {
     if (!labTest) return res.status(404).json({ message: "Lab Test not found" });
 
     let pdfPath = labTest.pdf_path;
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `labtest-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("PDF upload failed: " + error.message);
-      
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      pdfPath = publicUrlData.publicUrl;
+      pdfPath = `${baseUrl}/uploads/${req.file.filename}`;
       
       // Optionally delete the old file
-      if (labTest.pdf_path && labTest.pdf_path.includes("supabase.co")) {
-        const oldParts = labTest.pdf_path.split("/");
-        const oldFileName = oldParts[oldParts.length - 1];
-        if (oldFileName) {
-          supabase.storage.from("uploads").remove([oldFileName]).catch(err => {
-            console.error("[Supabase Delete Old File Error]:", err);
-          });
-        }
+      if (labTest.pdf_path && labTest.pdf_path.includes("/uploads/")) {
+        const parts = labTest.pdf_path.split("/uploads/");
+        const oldPath = path.join(__dirname, "../public/uploads", parts[1]);
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
       }
     }
 
@@ -130,14 +107,11 @@ router.delete("/:id", auth, async (req, res) => {
     const labTest = await LabTest.findByPk(req.params.id);
     if (!labTest) return res.status(404).json({ message: "Lab Test not found" });
 
-    if (labTest.pdf_path && labTest.pdf_path.includes("supabase.co")) {
-      const parts = labTest.pdf_path.split("/");
-      const fileName = parts[parts.length - 1];
-      if (fileName) {
-        const { error: deleteError } = await supabase.storage.from("uploads").remove([fileName]);
-        if (deleteError) {
-          console.error("[Supabase Delete Error]:", deleteError);
-        }
+    if (labTest.pdf_path && labTest.pdf_path.includes("/uploads/")) {
+      const parts = labTest.pdf_path.split("/uploads/");
+      const filePath = path.join(__dirname, "../public/uploads", parts[1]);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
       }
     }
 

@@ -6,10 +6,9 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.js')[env];
 const db = {};
 
-const pg = require('pg');
-require('pg-hstore'); // Also bundle pg-hstore
+const mysql2 = require('mysql2');
 
-let sequelizeOptions = { ...config, dialectModule: pg };
+let sequelizeOptions = { ...config, dialectModule: mysql2 };
 
 let sequelize;
 if (config.use_env_variable) {

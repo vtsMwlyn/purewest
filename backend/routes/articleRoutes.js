@@ -2,13 +2,10 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const { Article } = require("../models");
 const auth = require("../middleware/auth");
-
-const supabase = require("../config/supabase");
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = require("../middleware/upload");
 
 // GET all articles (public)
 router.get("/", async (req, res) => {
@@ -40,17 +37,9 @@ router.post("/", auth, upload.single("featured_image"), async (req, res) => {
   try {
     const { title, date, subtitle, content } = req.body;
     let imgPath = "";
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `article-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("Image upload failed: " + error.message);
-      
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      imgPath = publicUrlData.publicUrl;
+      imgPath = `${baseUrl}/uploads/${req.file.filename}`;
     }
 
     const article = await Article.create({
@@ -77,17 +66,16 @@ router.put("/:id", auth, upload.single("featured_image"), async (req, res) => {
     if (!article) return res.status(404).json({ message: "Article not found" });
 
     let imgPath = article.featured_image;
+    const baseUrl = process.env.BACKEND_URL || "http://localhost:3000";
     if (req.file) {
-      if (!supabase) throw new Error("Supabase client is not configured");
-      const fileExt = path.extname(req.file.originalname);
-      const fileName = `article-${Date.now()}-${Math.round(Math.random() * 1e9)}${fileExt}`;
-      const { error } = await supabase.storage.from('uploads').upload(fileName, req.file.buffer, {
-        contentType: req.file.mimetype,
-      });
-      if (error) throw new Error("Image upload failed: " + error.message);
+      imgPath = `${baseUrl}/uploads/${req.file.filename}`;
       
-      const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(fileName);
-      imgPath = publicUrlData.publicUrl;
+      // Delete old file
+      if (article.featured_image && article.featured_image.includes("/uploads/")) {
+        const parts = article.featured_image.split("/uploads/");
+        const oldPath = path.join(__dirname, "../public/uploads", parts[1]);
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      }
     }
 
     await article.update({
@@ -111,14 +99,11 @@ router.delete("/:id", auth, async (req, res) => {
     const article = await Article.findByPk(req.params.id);
     if (!article) return res.status(404).json({ message: "Article not found" });
 
-    if (article.featured_image && article.featured_image.includes("supabase.co")) {
-      const parts = article.featured_image.split("/");
-      const fileName = parts[parts.length - 1];
-      if (fileName) {
-        const { error: deleteError } = await supabase.storage.from("uploads").remove([fileName]);
-        if (deleteError) {
-          console.error("[Supabase Delete Error]:", deleteError);
-        }
+    if (article.featured_image && article.featured_image.includes("/uploads/")) {
+      const parts = article.featured_image.split("/uploads/");
+      const filePath = path.join(__dirname, "../public/uploads", parts[1]);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
       }
     }
 
