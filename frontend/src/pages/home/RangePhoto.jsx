@@ -17,7 +17,7 @@ export default function RangePhoto() {
           <p className="font-garamond text-2xl font-light text-white">
             Jarrah · Marri · Karri
           </p>
-          <p className="text-[0.62rem] tracking-[2px] mt-2 text-text-muted">
+          <p className="text-[0.62rem] tracking-[2px] mt-2 ">
             Harvested &amp; Bottled in Western Australia
           </p>
         </div>

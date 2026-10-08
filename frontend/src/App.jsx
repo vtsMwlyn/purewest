@@ -52,7 +52,7 @@ export default function App() {
 
       <ConditionalNavbar />
 
-      <main className="bg-black text-white">
+      <main className="bg-black text-text">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lab-results" element={<LabResults />} />

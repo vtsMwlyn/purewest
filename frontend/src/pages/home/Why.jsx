@@ -48,7 +48,7 @@ export default function Why() {
       <h2
         className="font-garamond text-center font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]"
       >
-        Nature&apos;s Most <em className="text-gold italic">Remarkable</em> Honey
+        Nature&apos;s most <em className="text-gold italic">remarkable</em> honey
       </h2>
       <SectionRule />
 

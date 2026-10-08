@@ -33,7 +33,7 @@ function ProductPanel({ productId, products, onClose }) {
         onClick={onClose}
         aria-label="Close panel"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-text-muted" strokeWidth="1.5" strokeLinecap="round">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="" strokeWidth="1.5" strokeLinecap="round">
           <path d="M18 6L6 18M6 6l12 12" />
         </svg>
       </button>
@@ -64,15 +64,14 @@ function ProductPanel({ productId, products, onClose }) {
             </div>
             <div className="h-px mb-8 bg-rule" />
 
-            <p className="text-[0.52rem] tracking-[3px] uppercase mb-3 text-text-muted">Select Size</p>
+            <p className="text-[0.52rem] tracking-[3px] uppercase mb-3 ">Select Size</p>
             <div id="panelSizes" className="flex gap-3 mb-8 flex-wrap">
               {(typeof product.sizes === 'string' ? JSON.parse(product.sizes) : product.sizes).map((s, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveSizeIdx(i)}
-                  className={`px-5 py-[10px] text-[0.58rem] tracking-[2px] uppercase transition-all duration-300 min-w-[72px] font-baskerville border cursor-pointer ${
-                    i === activeSizeIdx ? 'bg-gold text-dark border-gold' : 'bg-transparent text-text-muted border-rule hover:border-gold'
-                  }`}
+                  className={`px-5 py-[10px] text-[0.58rem] tracking-[2px] uppercase transition-all duration-300 min-w-[72px] font-baskerville border cursor-pointer ${i === activeSizeIdx ? 'bg-gold text-dark border-gold' : 'bg-transparent  border-rule hover:border-gold'
+                    }`}
                 >
                   {s.s}
                 </button>
@@ -92,7 +91,7 @@ function ProductPanel({ productId, products, onClose }) {
               ♡ &nbsp; Save to Wishlist
             </button>
 
-            <p id="panelDesc" className="text-[0.8rem] leading-[2] mb-9 text-text-muted">
+            <p id="panelDesc" className="text-[0.8rem] leading-[2] mb-9 ">
               {product.desc}
             </p>
 
@@ -101,7 +100,7 @@ function ProductPanel({ productId, products, onClose }) {
             </p>
             <ul id="panelSpecs" className="list-none mb-8 p-0">
               {(typeof product.specs === 'string' ? JSON.parse(product.specs) : product.specs).map((s, i) => (
-                <li key={i} className="text-[0.75rem] py-[10px] flex gap-3 leading-[1.6] text-text-muted border-b border-[rgba(168,144,96,0.07)]">
+                <li key={i} className="text-[0.75rem] py-[10px] flex gap-3 leading-[1.6]  border-b border-[rgba(168,144,96,0.07)]">
                   <span className="text-gold shrink-0">—</span>
                   {s}
                 </li>
@@ -112,7 +111,7 @@ function ProductPanel({ productId, products, onClose }) {
               {(typeof product.icons === 'string' ? JSON.parse(product.icons) : product.icons).map((ic, i) => (
                 <div key={i} className="flex flex-col items-center gap-[6px] text-center">
                   <span className="text-[1.4rem]">{ic.emoji}</span>
-                  <p className="text-[0.48rem] tracking-[1.5px] uppercase leading-[1.4] text-text-muted max-w-[60px]">
+                  <p className="text-[0.48rem] tracking-[1.5px] uppercase leading-[1.4]  max-w-[60px]">
                     {ic.label}
                   </p>
                 </div>
@@ -172,10 +171,10 @@ export default function Product() {
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
           <h2 className="text-center font-light mb-5 leading-[1.1] font-garamond text-[clamp(2.2rem,4.5vw,3.8rem)] text-white tracking-[-0.5px]">
-            Select Your <em className="text-gold italic">Expression</em>
+            Select your <em className="text-gold italic">expression</em>
           </h2>
           <p className="font-garamond text-2xl font-light text-gold">
-            Harvested & Bottled in Western Australia
+            Harvested & bottled in Western Australia
           </p>
 
           {/* Bottom rule */}

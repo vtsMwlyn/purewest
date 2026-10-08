@@ -30,10 +30,10 @@ export default function ArticleDetail() {
 
   const formattedDate = article?.date
     ? new Date(article.date).toLocaleDateString("en-AU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
     : "";
 
   return (
@@ -60,13 +60,13 @@ export default function ArticleDetail() {
           {/* Hero */}
           <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
             {article.featured_image && <img src={article.featured_image} className="absolute inset-0 w-full h-full object-cover z-0" />}
-            
+
             <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
               {/* Decorative diamond */}
               <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
               <div className="flex items-center justify-center gap-4 mb-4">
                 <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
-                <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-white">
+                <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-gold-pale">
                   {formattedDate}
                 </p>
                 <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
@@ -74,7 +74,7 @@ export default function ArticleDetail() {
               <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
                 {article.title}
               </h1>
-              <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+              <p className="max-w-xl text-[0.9rem] leading-relaxed text-gold-light">
                 {article.subtitle}
               </p>
 
@@ -91,11 +91,11 @@ export default function ArticleDetail() {
           <div className="max-w-[720px] mx-auto px-6 md:px-10 py-16">
             {article.content ? (
               <div
-                className="article-body leading-[1.9] text-[0.95rem] text-text"
+                className="article-body leading-[1.9] text-[0.95rem] text-text text-justify"
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
             ) : (
-              <p className="text-text-muted">No content available.</p>
+              <p className="">No content available.</p>
             )}
 
             {/* Footer ornament */}
@@ -111,7 +111,7 @@ export default function ArticleDetail() {
             <div className="mt-10">
               <Link
                 to="/education"
-                className="inline-flex items-center gap-2 no-underline transition-colors duration-300 text-text-muted font-baskerville hover:text-gold"
+                className="inline-flex items-center gap-2 no-underline transition-colors duration-300  font-baskerville hover:text-gold"
               >
                 <span className="text-[0.7rem]">←</span>
                 <span className="text-[0.5rem] tracking-[3px] uppercase">

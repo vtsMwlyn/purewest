@@ -6,7 +6,7 @@ export default function AdminTestimonials() {
   const [testimonials, setTestimonials] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState(null);
-  
+
   const initialFormState = {
     name: "",
     rating: 5,
@@ -17,7 +17,7 @@ export default function AdminTestimonials() {
   const [formData, setFormData] = useState(initialFormState);
   const [imageFile, setImageFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const token = localStorage.getItem("purewest_admin_token");
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function AdminTestimonials() {
     data.append("rating", formData.rating);
     data.append("address", formData.address);
     data.append("comment", formData.comment);
-    
+
     if (imageFile) {
       data.append("photo", imageFile);
     }
@@ -143,7 +143,7 @@ export default function AdminTestimonials() {
     >
       <div className="flex flex-col gap-4">
         {testimonials.length === 0 ? (
-          <p className="text-text-muted">No testimonials found.</p>
+          <p className="">No testimonials found.</p>
         ) : (
           testimonials.map((t) => (
             <div key={t.id} className="flex gap-6 items-center p-4 transition-colors duration-300 bg-dark3 border border-rule">
@@ -157,7 +157,7 @@ export default function AdminTestimonials() {
                     </svg>
                   ))}
                 </div>
-                <div className="text-[0.8rem] text-text-muted italic">"{t.comment}"</div>
+                <div className="text-[0.8rem]  italic">"{t.comment}"</div>
                 {t.address && <div className="text-[0.6rem] text-gold-pale uppercase mt-2 tracking-[1px]">{t.address}</div>}
               </div>
               <div className="flex gap-3">
@@ -176,13 +176,13 @@ export default function AdminTestimonials() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
           <div className="w-[95vw] md:max-w-[700px] max-h-[95vh] overflow-y-auto p-6 md:p-10 relative flex flex-col bg-dark2 border border-gold">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10 text-text-muted bg-none border-none hover:text-gold transition-colors">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10  bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>
             <h3 className="text-[1.8rem] font-light mb-6 pb-4 shrink-0 font-garamond text-white border-b border-rule">
               {editingTestimonial ? "Edit Testimonial" : "Add New Testimonial"}
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
                 <div>
@@ -198,15 +198,15 @@ export default function AdminTestimonials() {
                   <input type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none bg-dark border border-rule text-text" placeholder="e.g. Sydney, NSW" />
                 </div>
               </div>
-              
+
               <div className="shrink-0">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Photo</label>
                 <input type="file" accept="image/*" onChange={handleFileChange} className="w-full p-2 text-[0.85rem] bg-dark border border-rule text-text" />
                 {(imageFile || (editingTestimonial && editingTestimonial.photo)) && (
                   <div className="mt-4 p-2 inline-block bg-dark3 border border-rule">
-                    <img 
-                      src={imageFile ? URL.createObjectURL(imageFile) : (editingTestimonial.photo.startsWith('/') && !editingTestimonial.photo.includes('localhost') ? editingTestimonial.photo : editingTestimonial.photo)} 
-                      alt="Preview" 
+                    <img
+                      src={imageFile ? URL.createObjectURL(imageFile) : (editingTestimonial.photo.startsWith('/') && !editingTestimonial.photo.includes('localhost') ? editingTestimonial.photo : editingTestimonial.photo)}
+                      alt="Preview"
                       className="w-24 h-24 rounded-full object-cover"
                     />
                   </div>
@@ -219,7 +219,7 @@ export default function AdminTestimonials() {
               </div>
 
               <div className="flex gap-4 mt-6 pt-6 shrink-0 border-t border-rule">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent text-text-muted border border-rule hover:text-gold hover:border-gold transition-colors">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent  border border-rule hover:text-gold hover:border-gold transition-colors">
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light">

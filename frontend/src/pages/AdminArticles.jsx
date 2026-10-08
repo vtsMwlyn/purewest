@@ -8,7 +8,7 @@ export default function AdminArticles() {
   const [articles, setArticles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState(null);
-  
+
   const initialFormState = {
     title: "",
     date: "",
@@ -19,7 +19,7 @@ export default function AdminArticles() {
   const [contentHtml, setContentHtml] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const token = localStorage.getItem("purewest_admin_token");
 
   const quillRef = useRef(null);
@@ -40,8 +40,8 @@ export default function AdminArticles() {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
               [{ align: [] }],
-              [{ list: 'ordered'}, { list: 'bullet' }],
-              [{ indent: '-1'}, { indent: '+1' }],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ indent: '-1' }, { indent: '+1' }],
               [{ size: ['small', false, 'large', 'huge'] }],
               [{ header: [1, 2, 3, 4, 5, 6, false] }],
               ['link', 'image', 'video'],
@@ -144,7 +144,7 @@ export default function AdminArticles() {
     data.append("date", formData.date);
     data.append("subtitle", formData.subtitle);
     data.append("content", contentHtml);
-    
+
     if (imageFile) {
       data.append("featured_image", imageFile);
     }
@@ -208,7 +208,7 @@ export default function AdminArticles() {
       {/* Article list */}
       <div className="flex flex-col gap-4">
         {articles.length === 0 ? (
-          <p className="text-text-muted">No articles found.</p>
+          <p className="">No articles found.</p>
         ) : (
           articles.map((a) => (
             <div key={a.id} className="flex gap-6 items-center p-4 transition-colors duration-300 bg-dark3 border border-rule">
@@ -236,13 +236,13 @@ export default function AdminArticles() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
           <div className="w-full max-w-[900px] max-h-[95vh] overflow-y-auto p-10 relative flex flex-col bg-dark2 border border-gold">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10 text-text-muted bg-none border-none hover:text-gold transition-colors">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10  bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>
             <h3 className="text-[1.8rem] font-light mb-6 pb-4 shrink-0 font-garamond text-white border-b border-rule">
               {editingArticle ? "Edit Article" : "Add New Article"}
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
                 <div>
@@ -254,7 +254,7 @@ export default function AdminArticles() {
                   <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none bg-dark border border-rule text-text" />
                 </div>
               </div>
-              
+
               <div className="shrink-0">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">Subtitle (Excerpt)</label>
                 <textarea name="subtitle" rows={3} value={formData.subtitle} onChange={handleInputChange} className="w-full p-3 text-[0.85rem] outline-none resize-y bg-dark border border-rule text-text" />
@@ -265,9 +265,9 @@ export default function AdminArticles() {
                 <input type="file" accept="image/*" onChange={handleFileChange} className="w-full p-2 text-[0.85rem] bg-dark border border-rule text-text" />
                 {(imageFile || (editingArticle && editingArticle.featured_image)) && (
                   <div className="mt-4 p-2 inline-block bg-dark3 border border-rule">
-                    <img 
-                      src={imageFile ? URL.createObjectURL(imageFile) : (editingArticle.featured_image.startsWith('/') && !editingArticle.featured_image.includes('localhost') ? editingArticle.featured_image : editingArticle.featured_image)} 
-                      alt="Preview" 
+                    <img
+                      src={imageFile ? URL.createObjectURL(imageFile) : (editingArticle.featured_image.startsWith('/') && !editingArticle.featured_image.includes('localhost') ? editingArticle.featured_image : editingArticle.featured_image)}
+                      alt="Preview"
                       className="max-h-[150px] object-contain"
                     />
                   </div>
@@ -282,7 +282,7 @@ export default function AdminArticles() {
               </div>
 
               <div className="flex gap-4 mt-6 pt-6 shrink-0 border-t border-rule">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent text-text-muted border border-rule hover:text-gold hover:border-gold transition-colors">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent  border border-rule hover:text-gold hover:border-gold transition-colors">
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light">

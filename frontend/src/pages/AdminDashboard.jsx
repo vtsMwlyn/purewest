@@ -7,7 +7,7 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  
+
   const initialFormState = {
     name: "",
     eyebrow: "",
@@ -133,12 +133,12 @@ export default function AdminDashboard() {
     data.append("eyebrow", formData.eyebrow);
     data.append("ta", formData.ta);
     data.append("desc", formData.desc);
-    
+
     // Clean up empty arrays before sending
     data.append("specs", JSON.stringify(formData.specs.filter(s => s.trim() !== "")));
     data.append("sizes", JSON.stringify(formData.sizes.filter(sz => sz.s.trim() !== "" && sz.p.trim() !== "")));
     data.append("icons", JSON.stringify(formData.icons.filter(ic => ic.emoji.trim() !== "" && ic.label.trim() !== "")));
-    
+
     if (imageFile) {
       data.append("img", imageFile);
     }
@@ -214,13 +214,13 @@ export default function AdminDashboard() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
           <div className="w-[95vw] md:max-w-[800px] max-h-[90vh] overflow-y-auto p-6 md:p-10 relative bg-dark2 border border-gold">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer text-text-muted bg-none border-none hover:text-gold transition-colors">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer  bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>
             <h3 className="text-[1.8rem] font-light mb-8 pb-4 font-garamond text-white border-b border-rule">
               {editingProduct ? "Edit Product" : "Add New Product"}
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -285,7 +285,7 @@ export default function AdminDashboard() {
               </div>
 
               <div className="flex gap-4 mt-6 pt-6 border-t border-rule">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent text-text-muted border border-rule hover:text-gold hover:border-gold transition-colors">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent  border border-rule hover:text-gold hover:border-gold transition-colors">
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light">

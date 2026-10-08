@@ -6,7 +6,7 @@ export default function AdminLabTests() {
   const [labTests, setLabTests] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTest, setEditingTest] = useState(null);
-  
+
   const initialFormState = {
     title: "",
     subtitle: "",
@@ -21,7 +21,7 @@ export default function AdminLabTests() {
   const [formData, setFormData] = useState(initialFormState);
   const [pdfFile, setPdfFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const token = localStorage.getItem("purewest_admin_token");
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function AdminLabTests() {
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
     });
-    
+
     if (pdfFile) {
       data.append("pdf_file", pdfFile);
     }
@@ -144,7 +144,7 @@ export default function AdminLabTests() {
     >
       <div className="flex flex-col gap-4">
         {labTests.length === 0 ? (
-          <p className="text-text-muted">No lab tests found.</p>
+          <p className="">No lab tests found.</p>
         ) : (
           labTests.map((t) => (
             <div key={t.id} className="flex flex-col md:flex-row gap-6 items-start md:items-center p-6 transition-colors duration-300 bg-dark3 border border-rule">
@@ -155,7 +155,7 @@ export default function AdminLabTests() {
                 <div className="text-[0.6rem] tracking-[2px] uppercase mb-3 text-gold-pale">
                   Sample ID: {t.sample_id || "N/A"}
                 </div>
-                <div className="text-[0.8rem] text-text-muted">
+                <div className="text-[0.8rem] ">
                   {t.subtitle}
                 </div>
                 {t.pdf_path && (
@@ -182,13 +182,13 @@ export default function AdminLabTests() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[rgba(5,4,2,0.9)] backdrop-blur-sm">
           <div className="w-[95vw] md:max-w-[900px] max-h-[95vh] overflow-y-auto p-6 md:p-10 relative flex flex-col bg-dark2 border border-gold">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10 text-text-muted bg-none border-none hover:text-gold transition-colors">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-2xl cursor-pointer z-10  bg-none border-none hover:text-gold transition-colors">
               &times;
             </button>
             <h3 className="text-[1.8rem] font-light mb-6 pb-4 shrink-0 font-garamond text-white border-b border-rule">
               {editingTest ? "Edit Lab Test" : "Add New Lab Test"}
             </h3>
-            
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
                 <div>
@@ -228,11 +228,11 @@ export default function AdminLabTests() {
               <div className="shrink-0">
                 <label className="block text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">PDF Report</label>
                 <input type="file" accept="application/pdf" onChange={handleFileChange} className="w-full p-2 text-[0.85rem] bg-dark border border-rule text-text" />
-                
+
                 {(pdfFile || (editingTest && editingTest.pdf_path)) && (
                   <div className="mt-4 p-2 h-[400px] bg-dark3 border border-rule">
-                    <iframe 
-                      src={pdfFile ? URL.createObjectURL(pdfFile) : editingTest.pdf_path} 
+                    <iframe
+                      src={pdfFile ? URL.createObjectURL(pdfFile) : editingTest.pdf_path}
                       title="PDF Preview"
                       className="w-full h-full border-none"
                     />
@@ -241,7 +241,7 @@ export default function AdminLabTests() {
               </div>
 
               <div className="flex gap-4 mt-6 pt-6 shrink-0 border-t border-rule">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent text-text-muted border border-rule hover:text-gold hover:border-gold transition-colors">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-[14px] text-[0.6rem] tracking-[3px] uppercase cursor-pointer bg-transparent  border border-rule hover:text-gold hover:border-gold transition-colors">
                   Cancel
                 </button>
                 <button type="submit" disabled={isSubmitting} className="flex-1 py-[14px] text-[0.6rem] tracking-[3px] uppercase font-bold transition-all duration-400 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed font-baskerville bg-gold text-dark border-none hover:bg-gold-light">

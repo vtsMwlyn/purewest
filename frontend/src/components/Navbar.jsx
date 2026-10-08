@@ -27,15 +27,14 @@ export default function Navbar({ onShopNow }) {
   return (
     <nav
       id="nav"
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-500 ${
-        scrolled
-          ? "py-[14px] px-6 lg:px-10 bg-[rgba(8,6,4,0.97)] backdrop-blur-md text-text-muted"
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between transition-all duration-500 ${scrolled
+          ? "py-[14px] px-6 lg:px-10 bg-[rgba(8,6,4,0.97)] backdrop-blur-md text-text"
           : "py-4 lg:py-6 px-6 lg:px-10 bg-[linear-gradient(to_bottom,rgba(8,6,4,0.7),transparent)] backdrop-blur-none text-white"
-      }`}
+        }`}
     >
       {/* Navbar Layout */}
       <div className="w-full flex justify-between items-center lg:grid lg:grid-cols-[1fr_auto_1fr] m-0 p-0 gap-4 lg:gap-10">
-        
+
         {/* Left Links (Desktop) */}
         <div className="hidden lg:flex items-center justify-end gap-10">
           {links.slice(0, 4).map((l) => (
@@ -73,7 +72,7 @@ export default function Navbar({ onShopNow }) {
             >
               Shop Now
             </button>
-            
+
             <Link to="/cart" className="relative flex items-center justify-center p-2 text-inherit no-underline transition-colors duration-300 hover:text-gold-light">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
@@ -86,7 +85,7 @@ export default function Navbar({ onShopNow }) {
                 </span>
               )}
             </Link>
-            
+
             {/* Mobile hamburger */}
             <button
               className="lg:hidden flex flex-col gap-[5px] p-2 cursor-pointer border-none bg-transparent"
@@ -108,7 +107,7 @@ export default function Navbar({ onShopNow }) {
             <a
               key={l.href}
               href={l.href}
-              className="font-baskerville text-[0.6rem] tracking-[3px] uppercase no-underline text-text-muted"
+              className="font-baskerville text-[0.6rem] tracking-[3px] uppercase no-underline "
               onClick={() => setMenuOpen(false)}
             >
               {l.label}

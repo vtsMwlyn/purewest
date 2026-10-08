@@ -1,9 +1,9 @@
 export default function Shipping() {
   const items = [
-    { src: "/images/product-benefit-1.webp", title: "Free Shipping",    body: "Complimentary shipping on all orders over $100. Express options available." },
-    { src: "/images/product-benefit-2.webp", title: "Raw & Pure",        body: "Cold-extracted and never heat treated. Exactly as natural intended." },
+    { src: "/images/product-benefit-1.webp", title: "Free Shipping", body: "Complimentary shipping on all orders over $100. Express options available." },
+    { src: "/images/product-benefit-2.webp", title: "Raw & Pure", body: "Cold-extracted and never heat treated. Exactly as natural intended." },
     { src: "/images/product-benefit-3.webp", title: "Certified Quality", body: "Every batch independently tested and certified for Total Activity rating." },
-    { src: "/images/product-benefit-4.webp", title: "Easy Returns",      body: "Not completely satisfied? We offer a 30-day money-back guarantee." },
+    { src: "/images/product-benefit-4.webp", title: "Easy Returns", body: "Not completely satisfied? We offer a 30-day money-back guarantee." },
   ];
 
   return (
@@ -15,16 +15,16 @@ export default function Shipping() {
 
           {items.map((item, i) => (
             <div key={i} className="py-11 px-[30px] text-center border border-rule bg-dark/60">
-              <img src={item.src} className="size-20 mb-4.5 block mx-auto"/>
+              <img src={item.src} className="size-20 mb-4.5 block mx-auto" />
               <h4 className="font-garamond text-base font-normal mb-2.5 text-gold-pale">
                 {item.title}
               </h4>
-              <p className="text-[0.68rem] leading-[1.7] text-text-muted">{item.body}</p>
+              <p className="text-[0.68rem] leading-[1.7] ">{item.body}</p>
             </div>
           ))}
         </div>
       </div>
-      <img src="/images/traktor.webp" className="absolute z-0 inset-0 w-full h-full object-cover object-center -scale-x-100"/>
+      <img src="/images/traktor.webp" className="absolute z-0 inset-0 w-full h-full object-cover object-center -scale-x-100" />
     </section>
   );
 }

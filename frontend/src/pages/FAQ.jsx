@@ -58,9 +58,9 @@ export default function FAQ() {
   const [openIndices, setOpenIndices] = useState([]);
 
   const toggleAccordion = (index) => {
-    setOpenIndices((prev) => 
-      prev.includes(index) 
-        ? prev.filter((i) => i !== index) 
+    setOpenIndices((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index)
         : [...prev, index]
     );
   };
@@ -70,7 +70,7 @@ export default function FAQ() {
       {/* Hero */}
       <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
         <img src="/images/sitting-on-hive.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
-        
+
         <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
           <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
           <div className="flex items-center justify-center gap-4 mb-4">
@@ -83,7 +83,7 @@ export default function FAQ() {
           <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
             Frequently Asked <em className="text-gold italic">Questions</em>
           </h1>
-          <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+          <p className="max-w-xl text-[0.9rem] leading-relaxed ">
             Learn more about our rare Western Australian honeys, their unique properties, and how best to enjoy them.
           </p>
 
@@ -102,20 +102,20 @@ export default function FAQ() {
           {faqData.map((item, index) => {
             const isOpen = openIndices.includes(index);
             return (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`transition-colors duration-400 border ${isOpen ? 'bg-dark3 border-gold/35' : 'bg-transparent border-rule'}`}
               >
                 <button
                   onClick={() => toggleAccordion(index)}
                   className="w-full flex items-center justify-between p-6 cursor-pointer outline-none focus:outline-none bg-transparent border-none"
                 >
-                  <h3 
+                  <h3
                     className={`text-left font-light m-0 transition-colors duration-300 font-garamond text-[clamp(1.2rem,2vw,1.5rem)] ${isOpen ? 'text-gold-light' : 'text-white'}`}
                   >
                     {item.question}
                   </h3>
-                  <div 
+                  <div
                     className={`ml-6 flex items-center justify-center shrink-0 transition-transform duration-500 ease-in-out w-[30px] h-[30px] ${isOpen ? 'rotate-180' : 'rotate-0'}`}
                   >
                     <span className="text-gold text-[1.5rem] font-light inline-block leading-none">
@@ -124,14 +124,14 @@ export default function FAQ() {
                   </div>
                 </button>
 
-                <div 
+                <div
                   className="overflow-hidden transition-all duration-500 ease-in-out"
-                  style={{ 
+                  style={{
                     maxHeight: isOpen ? "1000px" : "0px",
                     opacity: isOpen ? 1 : 0
                   }}
                 >
-                  <div 
+                  <div
                     className="px-6 pb-8 faq-answer text-text leading-[1.9] text-[0.95rem]"
                     dangerouslySetInnerHTML={{ __html: item.answer }}
                   />

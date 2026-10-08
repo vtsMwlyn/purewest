@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
             <span className="text-[0.5rem] tracking-[4px] uppercase whitespace-nowrap text-white">
-              Pure · Natural · Western Australia
+              FINE HONEYS <span className="text-[5pt]">OF</span> WESTERN AUSTRALIA
             </span>
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
@@ -86,7 +86,7 @@ export default function Hero() {
           <p
             className="font-garamond font-light italic mb-4.5 tracking-[1px] text-center text-gold-pale text-[clamp(1rem,2vw,1.5rem)]"
           >
-            From the World&apos;s Last Natural Places
+            From the ancient forests <span className="text-[12pt]">of</span> Australia&apos;s south-west
           </p>
 
           <div className="flex gap-3 justify-center flex-wrap">

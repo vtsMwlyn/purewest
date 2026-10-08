@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 
 /* ─── Verification seal (signature accent) ─────────────────── */
-function VerificationSeal({className}) {
+function VerificationSeal({ className }) {
   return (
     <div className={`shrink-0 mx-auto md:mx-0 rotate-[7deg] ${className}`}>
       <svg width="168" height="168" viewBox="0 0 168 168">
@@ -118,7 +118,7 @@ function DataTable() {
 
   return (
     <div className="font-mono max-w-[620px] mx-auto">
-      <div className="flex justify-between text-[0.6rem] tracking-[2px] uppercase pb-3 mb-3 text-text-muted border-b border-rule">
+      <div className="flex justify-between text-[0.6rem] tracking-[2px] uppercase pb-3 mb-3  border-b border-rule">
         <span>Analyte</span>
         <span>Result</span>
       </div>
@@ -127,10 +127,10 @@ function DataTable() {
           key={i}
           className={`flex justify-between items-baseline py-3 text-[0.78rem] ${i < rows.length - 1 ? 'border-b border-gold/8' : ''}`}
         >
-          <span className={`tracking-[1px] ${r.strong ? 'text-gold-pale' : 'text-text-muted'}`}>{r.k}</span>
+          <span className={`tracking-[1px] ${r.strong ? 'text-gold-pale' : ''}`}>{r.k}</span>
           <span className="flex items-baseline gap-2">
             <span className={r.strong ? 'text-gold text-[1rem]' : 'text-text text-[0.85rem]'}>{r.v}</span>
-            <span className="text-[0.6rem] text-text-muted">{r.u}</span>
+            <span className="text-[0.6rem] ">{r.u}</span>
             {r.flagged && (
               <span className="font-baskerville text-[0.55rem] italic ml-2 text-gold-light">
                 ← exceeds lab's standard curve
@@ -156,7 +156,7 @@ function LabBadges() {
           <div className="font-garamond text-[0.95rem] tracking-[1px] text-gold-pale">
             {l.name}
           </div>
-          <div className="text-[0.52rem] tracking-[1.5px] uppercase mt-1 text-text-muted">
+          <div className="text-[0.52rem] tracking-[1.5px] uppercase mt-1 ">
             {l.sub}
           </div>
           <div className="text-[0.5rem] tracking-[2px] uppercase mt-1 text-gold">
@@ -189,7 +189,7 @@ function StatRow() {
           <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-3 text-gold-pale">
             {s.label}
           </div>
-          <div className="text-[0.62rem] italic mt-1 text-text-muted">
+          <div className="text-[0.62rem] italic mt-1 ">
             {s.sub}
           </div>
         </div>
@@ -211,11 +211,10 @@ function TabSwitch({ active, onChange }) {
         <button
           key={t.id}
           onClick={() => onChange(t.id)}
-          className={`font-baskerville px-7 py-3 text-[0.58rem] tracking-[3px] uppercase transition-all duration-300 cursor-pointer border ${
-            active === t.id
+          className={`font-baskerville px-7 py-3 text-[0.58rem] tracking-[3px] uppercase transition-all duration-300 cursor-pointer border ${active === t.id
               ? 'bg-gold text-dark border-gold font-bold'
-              : 'bg-transparent text-text-muted border-rule font-normal hover:border-gold hover:text-gold-pale'
-          }`}
+              : 'bg-transparent  border-rule font-normal hover:border-gold hover:text-gold-pale'
+            }`}
         >
           {t.label}
         </button>
@@ -235,7 +234,7 @@ function ActivityPanel() {
       <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-8 md:gap-16 items-center">
         {/* Gauge / overflow bar */}
         <div>
-          <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-text-muted">
+          <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 ">
             Total Antimicrobial Activity — Method VM1.29
           </p>
 
@@ -264,7 +263,7 @@ function ActivityPanel() {
             {[0, 10, 20, 30].map((v) => (
               <span
                 key={v}
-                className="absolute text-[0.5rem] text-text-muted -translate-x-1/2"
+                className="absolute text-[0.5rem]  -translate-x-1/2"
                 style={{ left: `${(v / scaleMax) * 100}%` }}
               >
                 {v}
@@ -278,7 +277,7 @@ function ActivityPanel() {
             </span>
           </div>
 
-          <p className="text-[0.75rem] leading-[1.9] text-text-muted">
+          <p className="text-[0.75rem] leading-[1.9] ">
             <span className="text-gold-pale">Result: &gt;35% phenol equivalent.</span> The
             testing laboratory's standard curve is calibrated only to 35% — our Jarrah honey's
             activity sits above the top of that curve, so the certified result is reported as
@@ -291,14 +290,14 @@ function ActivityPanel() {
           <p className="text-[0.5rem] tracking-[3px] uppercase mb-4 text-gold">
             What Total Activity Means
           </p>
-          <p className="text-[0.75rem] leading-[1.9] mb-5 text-text-muted">
+          <p className="text-[0.75rem] leading-[1.9] mb-5 ">
             Total Activity (TA) measures a honey's overall antimicrobial strength, expressed as
             a phenol equivalent percentage. Jarrah's activity is naturally hydrogen
             peroxide-based rather than the MGO-driven activity found in Manuka — a different,
             stable chemistry unique to this forest.
           </p>
           <div className="h-px my-5 bg-rule" />
-          <ul className="text-[0.68rem] leading-[1.9] space-y-1 text-text-muted">
+          <ul className="text-[0.68rem] leading-[1.9] space-y-1 ">
             <li><span className="text-gold">Tested by:</span> National Measurement Institute, Port Melbourne VIC</li>
             <li><span className="text-gold">Date tested:</span> 13 Sep 2024</li>
             <li><span className="text-gold">Sample:</span> M/0924-775JH — Jarrah</li>
@@ -312,16 +311,16 @@ function ActivityPanel() {
 /* ─── Sugar Profile panel ────────────────────────────────────── */
 function SugarPanel() {
   const rows = [
-    { label: "Fructose",  value: 40.6, color: "var(--color-gold)" },
-    { label: "Glucose",   value: 20.6, color: "var(--color-gold-light)" },
-    { label: "Sucrose",   value: 0.1,  display: "<0.10", color: "var(--color-gold-pale)" },
+    { label: "Fructose", value: 40.6, color: "var(--color-gold)" },
+    { label: "Glucose", value: 20.6, color: "var(--color-gold-light)" },
+    { label: "Sucrose", value: 0.1, display: "<0.10", color: "var(--color-gold-pale)" },
   ];
   const measured = 63.7;
   const remainder = +(100 - measured).toFixed(1);
 
   return (
     <div className="max-w-[860px] mx-auto mb-24">
-      <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-center text-text-muted">
+      <p className="text-[0.52rem] tracking-[4px] uppercase mb-8 text-center ">
         Sugar Composition — Method ORG155F (HPLC), per 100g
       </p>
 
@@ -345,7 +344,7 @@ function SugarPanel() {
             <span className="text-[0.62rem] tracking-[1px] uppercase text-text">
               {r.label}
             </span>
-            <span className="text-[0.62rem] text-text-muted">
+            <span className="text-[0.62rem] ">
               {r.display ?? `${r.value}g`}
             </span>
           </div>
@@ -355,7 +354,7 @@ function SugarPanel() {
           <span className="text-[0.62rem] tracking-[1px] uppercase text-text">
             Water &amp; minor constituents
           </span>
-          <span className="text-[0.62rem] text-text-muted">~{remainder}g</span>
+          <span className="text-[0.62rem] ">~{remainder}g</span>
         </div>
       </div>
 
@@ -365,14 +364,14 @@ function SugarPanel() {
             <div className="font-garamond text-[1.9rem] font-light" style={{ color: r.color }}>
               {r.display ?? `${r.value}g`}
             </div>
-            <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-2 text-text-muted">
+            <div className="text-[0.55rem] tracking-[2.5px] uppercase mt-2 ">
               {r.label} / 100g
             </div>
           </div>
         ))}
       </div>
 
-      <p className="text-[0.72rem] leading-[1.9] mt-10 max-w-[600px] mx-auto text-center text-text-muted">
+      <p className="text-[0.72rem] leading-[1.9] mt-10 max-w-[600px] mx-auto text-center ">
         Sucrose sits below the lab's limit of quantitation — a signature of raw, unadulterated
         honey. Total simple sugars measured <span className="text-gold-pale">63.7g per 100g</span>,
         with the balance made up of water and the trace compounds native to Jarrah forest nectar.
@@ -393,7 +392,7 @@ function CertificateGrid() {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/lab-tests`);
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
-        
+
         const mappedCerts = data.map(test => ({
           org: test.title || "Independent Laboratory",
           tag: test.subtitle || "Certificate of Analysis",
@@ -407,7 +406,7 @@ function CertificateGrid() {
           signoff: test.signed_by || "Authorized Signatory",
           pdfUrl: test.pdf_path
         }));
-        
+
         setCerts(mappedCerts);
       } catch (err) {
         console.error("Failed to fetch lab tests:", err);
@@ -415,7 +414,7 @@ function CertificateGrid() {
         setLoading(false);
       }
     };
-    
+
     fetchLabTests();
   }, []);
 
@@ -424,68 +423,68 @@ function CertificateGrid() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
           <div className="w-[6px] h-[6px] rotate-45 animate-pulse bg-gold" />
-          <p className="font-baskerville text-[0.6rem] tracking-[4px] uppercase text-text-muted">Loading certificates…</p>
+          <p className="font-baskerville text-[0.6rem] tracking-[4px] uppercase ">Loading certificates…</p>
         </div>
       ) : certs.length === 0 ? (
         <div className="text-center py-20">
-          <p className="font-baskerville text-[0.8rem] text-text-muted">No lab certificates have been uploaded yet.</p>
+          <p className="font-baskerville text-[0.8rem] ">No lab certificates have been uploaded yet.</p>
         </div>
       ) : (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {certs.map((c, i) => (
-          <div key={i} className={`relative p-10 flex flex-col h-full transition-colors duration-300 bg-[linear-gradient(145deg,#1a120a,#0e0a05)] ${activePdf === c.pdfUrl ? 'border border-gold' : 'border border-rule'}`}>
-            <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
-            <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {certs.map((c, i) => (
+            <div key={i} className={`relative p-10 flex flex-col h-full transition-colors duration-300 bg-[linear-gradient(145deg,#1a120a,#0e0a05)] ${activePdf === c.pdfUrl ? 'border border-gold' : 'border border-rule'}`}>
+              <div className="absolute -top-px -left-px w-5 h-5 border-t border-l opacity-50 border-gold" />
+              <div className="absolute -bottom-px -right-px w-5 h-5 border-b border-r opacity-50 border-gold" />
 
-            <div className="font-garamond text-[1.15rem] mb-1 text-white">
-              {c.org}
-            </div>
-            <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7 text-gold">
-              {c.tag}
-            </div>
+              <div className="font-garamond text-[1.15rem] mb-1 text-white">
+                {c.org}
+              </div>
+              <div className="text-[0.5rem] tracking-[2.5px] uppercase mb-7 text-gold">
+                {c.tag}
+              </div>
 
-            <div className="mb-7 flex-1">
-              {c.rows.map(([k, v], j) => (
-                <div key={j} className="flex justify-between py-[10px] text-[0.72rem] border-b border-gold/7">
-                  <span className="text-text-muted">{k}</span>
-                  <span className="text-text">{v}</span>
-                </div>
-              ))}
-            </div>
+              <div className="mb-7 flex-1">
+                {c.rows.map(([k, v], j) => (
+                  <div key={j} className="flex justify-between py-[10px] text-[0.72rem] border-b border-gold/7">
+                    <span className="">{k}</span>
+                    <span className="text-text">{v}</span>
+                  </div>
+                ))}
+              </div>
 
-            <p className="text-[0.62rem] italic leading-[1.7] mb-6 text-text-muted">
-              Signed — {c.signoff}
-            </p>
+              <p className="text-[0.62rem] italic leading-[1.7] mb-6 ">
+                Signed — {c.signoff}
+              </p>
 
-            <div className="mt-auto pt-5 border-t border-dashed border-rule">
-              <button 
-                onClick={() => setActivePdf(activePdf === c.pdfUrl ? null : c.pdfUrl)}
-                className={`font-baskerville inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 font-bold hover:text-gold-light ${activePdf === c.pdfUrl ? 'text-gold-light' : 'text-gold-pale'}`}
-              >
-                {activePdf === c.pdfUrl ? (
-                  <>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                    Close PDF
-                  </>
-                ) : (
-                  <>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                      <polyline points="14 2 14 8 20 8"></polyline>
-                      <line x1="12" y1="18" x2="12" y2="12"></line>
-                      <line x1="9" y1="15" x2="15" y2="15"></line>
-                    </svg>
-                    View Original PDF
-                  </>
-                )}
-              </button>
+              <div className="mt-auto pt-5 border-t border-dashed border-rule">
+                <button
+                  onClick={() => setActivePdf(activePdf === c.pdfUrl ? null : c.pdfUrl)}
+                  className={`font-baskerville inline-flex items-center gap-3 text-[0.55rem] tracking-[3px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 font-bold hover:text-gold-light ${activePdf === c.pdfUrl ? 'text-gold-light' : 'text-gold-pale'}`}
+                >
+                  {activePdf === c.pdfUrl ? (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                      Close PDF
+                    </>
+                  ) : (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="12" y1="18" x2="12" y2="12"></line>
+                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                      </svg>
+                      View Original PDF
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       )}
 
       {activePdf && (
@@ -493,15 +492,15 @@ function CertificateGrid() {
           <div className="flex justify-between items-center px-6 py-4 border-b border-rule bg-dark3">
             <span className="text-[0.6rem] tracking-[2px] uppercase text-gold-pale">Document Viewer</span>
             <div className="flex gap-4">
-              <a 
+              <a
                 href={activePdf}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 no-underline text-text-muted hover:text-gold-light"
+                className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 no-underline  hover:text-gold-light"
               >
                 Open in new tab ↗
               </a>
-              <button 
+              <button
                 onClick={() => setActivePdf(null)}
                 className="text-[0.55rem] tracking-[2px] uppercase transition-colors duration-300 cursor-pointer bg-transparent border-none p-0 text-gold-pale hover:text-gold-light"
               >
@@ -510,8 +509,8 @@ function CertificateGrid() {
             </div>
           </div>
           <div className="w-full h-[80vh] min-h-[600px] p-2">
-            <iframe 
-              src={`${activePdf}#view=FitH`} 
+            <iframe
+              src={`${activePdf}#view=FitH`}
               title="Lab Result PDF Document"
               className="w-full h-full rounded-sm border-none bg-white"
             />
@@ -531,7 +530,7 @@ export default function LabResults() {
       {/* Hero */}
       <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
         <img src="/images/waffle.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
-        
+
         <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
           {/* Decorative diamond */}
           <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
@@ -543,9 +542,9 @@ export default function LabResults() {
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
           <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
-            The Proof <em className="text-gold italic">Behind The Jar</em>
+            The proof <em className="text-gold italic">behind the jar</em>
           </h1>
-          <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+          <p className="max-w-xl text-[0.9rem] leading-relaxed ">
             Every jar of Jarrah honey carries results from two government-accredited laboratories. No rounding, no marketing gloss. Below is the certificate, unfolded.
           </p>
 
@@ -565,7 +564,7 @@ export default function LabResults() {
         <StatRow />
 
         <TabSwitch active={tab} onChange={setTab} />
-        
+
         <div className="min-h-[400px]">
           {tab === "activity" && <ActivityPanel />}
           {tab === "sugar" && <SugarPanel />}
@@ -574,7 +573,7 @@ export default function LabResults() {
               <div className="max-w-[900px] mx-auto mb-6">
                 <ChromatogramTrace />
               </div>
-              <p className="text-center text-[0.6rem] italic mb-24 text-text-muted">
+              <p className="text-center text-[0.6rem] italic mb-24 ">
                 Sugar profile, illustrative trace scaled to lab results · Method ORG155F (HPLC) · run 06.09.2024
               </p>
               <div className="mb-24">
@@ -591,7 +590,7 @@ export default function LabResults() {
         </p>
         <CertificateGrid />
 
-        <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16 text-text-muted">
+        <p className="text-center text-[0.65rem] italic max-w-[600px] mx-auto mt-16 ">
           Results apply only to the sample as received and tested. Full Certificates of Analysis
           are available on request.
         </p>

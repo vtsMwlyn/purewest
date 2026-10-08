@@ -67,7 +67,7 @@ export default function AdminLayout({ children, title, action }) {
             <div className="text-lg tracking-[5px] uppercase font-semibold leading-none mb-1 font-garamond text-gold">
               Purewest
             </div>
-            <div className="text-[0.42rem] tracking-[4px] uppercase text-text-muted font-garamond">
+            <div className="text-[0.42rem] tracking-[4px] uppercase  font-garamond">
               Admin Panel
             </div>
           </Link>
@@ -75,7 +75,7 @@ export default function AdminLayout({ children, title, action }) {
 
         {/* Nav items */}
         <nav className="flex-1 py-6 px-4 flex flex-col gap-1">
-          <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 text-text-muted">
+          <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 ">
             Content
           </p>
           {navItems.map((item) => {
@@ -84,9 +84,8 @@ export default function AdminLayout({ children, title, action }) {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200 rounded-none font-baskerville text-[0.7rem] tracking-[1px] uppercase border-l-2 hover:text-gold-pale ${
-                  active ? "bg-[rgba(168,144,96,0.12)] text-gold border-gold" : "bg-transparent text-text-muted border-transparent"
-                }`}
+                className={`flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200 rounded-none font-baskerville text-[0.7rem] tracking-[1px] uppercase border-l-2 hover:text-gold-pale ${active ? "bg-[rgba(168,144,96,0.12)] text-gold border-gold" : "bg-transparent  border-transparent"
+                  }`}
               >
                 <span className={active ? "opacity-100" : "opacity-50"}>{item.icon}</span>
                 {item.label}
@@ -95,12 +94,12 @@ export default function AdminLayout({ children, title, action }) {
           })}
 
           <div className="mt-4 pt-4 border-t border-rule">
-            <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 text-text-muted">
+            <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 ">
               Store
             </p>
             <Link
               to="/"
-              className="flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200 text-text-muted font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-gold-pale"
+              className="flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200  font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-gold-pale"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -115,7 +114,7 @@ export default function AdminLayout({ children, title, action }) {
         <div className="px-4 py-6 border-t border-rule">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-[10px] w-full cursor-pointer transition-colors duration-200 bg-transparent border-none text-text-muted font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-[#ff6b6b]"
+            className="flex items-center gap-3 px-3 py-[10px] w-full cursor-pointer transition-colors duration-200 bg-transparent border-none  font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-[#ff6b6b]"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -141,12 +140,12 @@ export default function AdminLayout({ children, title, action }) {
               <div className="text-lg tracking-[5px] uppercase font-semibold leading-none mb-1 font-garamond text-gold">
                 Purewest
               </div>
-              <div className="text-[0.42rem] tracking-[4px] uppercase text-text-muted font-garamond">
+              <div className="text-[0.42rem] tracking-[4px] uppercase  font-garamond">
                 Admin Panel
               </div>
             </div>
             <nav className="flex-1 py-6 px-4 flex flex-col gap-1">
-              <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 text-text-muted">Content</p>
+              <p className="text-[0.45rem] tracking-[3px] uppercase px-3 mb-3 ">Content</p>
               {navItems.map((item) => {
                 const active = location.pathname === item.href;
                 return (
@@ -154,9 +153,8 @@ export default function AdminLayout({ children, title, action }) {
                     key={item.href}
                     to={item.href}
                     onClick={() => setSidebarOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200 font-baskerville text-[0.7rem] tracking-[1px] uppercase border-l-2 hover:text-gold-pale ${
-                      active ? "bg-[rgba(168,144,96,0.12)] text-gold border-gold" : "bg-transparent text-text-muted border-transparent"
-                    }`}
+                    className={`flex items-center gap-3 px-3 py-[10px] no-underline transition-all duration-200 font-baskerville text-[0.7rem] tracking-[1px] uppercase border-l-2 hover:text-gold-pale ${active ? "bg-[rgba(168,144,96,0.12)] text-gold border-gold" : "bg-transparent  border-transparent"
+                      }`}
                   >
                     <span className={active ? "opacity-100" : "opacity-50"}>{item.icon}</span>
                     {item.label}
@@ -167,7 +165,7 @@ export default function AdminLayout({ children, title, action }) {
             <div className="px-4 py-6 border-t border-rule">
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 px-3 py-[10px] w-full cursor-pointer transition-colors duration-200 bg-transparent border-none text-text-muted font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-[#ff6b6b]"
+                className="flex items-center gap-3 px-3 py-[10px] w-full cursor-pointer transition-colors duration-200 bg-transparent border-none  font-baskerville text-[0.7rem] tracking-[1px] uppercase hover:text-[#ff6b6b]"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

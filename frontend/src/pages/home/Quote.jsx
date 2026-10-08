@@ -6,11 +6,10 @@ export default function Quote() {
       <p
         className="font-garamond mx-auto font-light italic leading-[1.7] mb-6 text-text text-[clamp(1.2rem,2.5vw,1.8rem)] max-w-[780px]"
       >
-        &ldquo;Not merely a honey. A singular expression of one of the Earth&apos;s last natural
-        places — rare, powerful, and entirely without equal.&rdquo;
+        &ldquo;Rare in origin, powerful in character, exquisite in taste. Signature honeys of Western Australia.&rdquo;
       </p>
       <p className="text-[0.6rem] tracking-[3px] uppercase text-gold">
-        PureWest Australia · South-West Western Australia
+        PureWest Australia
       </p>
 
       <div className="flex flex-col lg:flex-row gap-5 justify-center items-center mt-0 lg:mt-12">

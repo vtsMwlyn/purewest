@@ -24,7 +24,7 @@ export default function Cart() {
 
       const data = await res.json();
       console.log("[Data Fetch] Checkout response status:", res.status, "data:", data);
-      
+
       if (!res.ok) throw new Error("Checkout failed");
 
       setCheckoutStatus("success");
@@ -62,7 +62,7 @@ export default function Cart() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12">
             <div>
-              <div className="hidden md:grid grid-cols-[3fr_1fr_1fr_auto] gap-4 pb-4 mb-6 text-[0.6rem] tracking-[3px] uppercase text-text-muted border-b border-rule">
+              <div className="hidden md:grid grid-cols-[3fr_1fr_1fr_auto] gap-4 pb-4 mb-6 text-[0.6rem] tracking-[3px] uppercase  border-b border-rule">
                 <div>Product</div>
                 <div className="text-center">Quantity</div>
                 <div className="text-right">Total</div>
@@ -81,7 +81,7 @@ export default function Cart() {
                         <p className="text-[0.6rem] tracking-[2px] uppercase mb-2 text-gold-pale">
                           {item.size.s}
                         </p>
-                        <p className="text-[0.8rem] text-text-muted">
+                        <p className="text-[0.8rem] ">
                           {item.size.p}
                         </p>
                       </div>
@@ -114,7 +114,7 @@ export default function Cart() {
                       className="ml-4 w-8 h-8 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity cursor-pointer border-none bg-transparent"
                       aria-label="Remove item"
                     >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-text-muted" strokeWidth="1.5" strokeLinecap="round">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="" strokeWidth="1.5" strokeLinecap="round">
                         <path d="M18 6L6 18M6 6l12 12" />
                       </svg>
                     </button>
@@ -127,12 +127,12 @@ export default function Cart() {
               <h3 className="text-[1.2rem] font-light mb-6 pb-4 font-garamond text-white border-b border-rule">
                 Order Summary
               </h3>
-              
-              <div className="flex justify-between items-center mb-4 text-[0.85rem] text-text-muted">
+
+              <div className="flex justify-between items-center mb-4 text-[0.85rem] ">
                 <span>Subtotal</span>
                 <span>${cartTotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between items-center mb-6 text-[0.85rem] text-text-muted">
+              <div className="flex justify-between items-center mb-6 text-[0.85rem] ">
                 <span>Shipping</span>
                 <span>Calculated at checkout</span>
               </div>

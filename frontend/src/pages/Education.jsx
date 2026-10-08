@@ -15,10 +15,10 @@ function SectionRule() {
 function ArticleCard({ article }) {
   const formattedDate = article.date
     ? new Date(article.date).toLocaleDateString("en-AU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    })
     : "";
 
   return (
@@ -55,7 +55,7 @@ function ArticleCard({ article }) {
             {article.title}
           </h3>
           {article.subtitle && (
-            <p className="font-baskerville text-[0.8rem] leading-relaxed mb-5 text-text-muted">
+            <p className="font-baskerville text-[0.8rem] leading-relaxed mb-5 ">
               {article.subtitle.length > 100
                 ? article.subtitle.slice(0, 100) + "…"
                 : article.subtitle}
@@ -76,8 +76,8 @@ function ArticleCard({ article }) {
 }
 
 function HoneyComparison() {
-  const pClass = "leading-[2.1] text-[0.82rem] mb-[22px] text-text-muted";
-  
+  const pClass = "leading-[2.1] text-[0.82rem] mb-[22px] ";
+
   return (
     <div className="w-full pt-6 pb-12 flex flex-col items-center px-6 md:px-18">
       {/* Manuka Honey vs Jarrah Honey */}
@@ -85,7 +85,7 @@ function HoneyComparison() {
         {/* Text */}
         <div className="order-2 md:order-1">
           <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
-            Manuka Honey vs <em className="text-gold italic">Jarrah Honey</em>
+            Manuka honey vs <em className="text-gold italic">Jarrah honey</em>
           </h2>
           <p className={pClass}>Manuka and Jarrah honeys, both renowned for their therapeutic properties, offer distinct qualities that set them apart.</p>
           <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong>, sourced from New Zealand, is revered for its potent antibacterial powers, particularly effective in wound care and immune support. Its robust, earthy flavor carries subtle medicinal nuances, adding to its distinctive character.</p>
@@ -119,7 +119,7 @@ function HoneyComparison() {
         {/* Text */}
         <div>
           <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
-            <em className="text-gold italic">Medicinal</em> Qualities
+            <em className="text-gold italic">Medicinal</em> qualities
           </h2>
           <p className={pClass}>Both Jarrah and Manuka honeys offer significant health benefits, particularly their antibacterial properties.</p>
           <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong> is renowned for its high methylglyoxal (MGO) content, making it highly effective for wound healing, soothing inflammation, and combating bacterial infections.</p>
@@ -133,7 +133,7 @@ function HoneyComparison() {
         {/* Text */}
         <div className="order-2 md:order-1">
           <h2 className="font-garamond font-light mb-5 leading-[1.1] text-white text-[clamp(2.2rem,4.5vw,3.8rem)] tracking-[-0.5px]">
-            <em className="text-gold italic">The Science Behind their</em> Unique Healing Properties
+            <em className="text-gold italic">The science behind their</em> unique healing properties
           </h2>
           <p className={pClass}><strong className="text-gold-pale">Manuka honey</strong>’s antibacterial power comes from methylglyoxal (MGO), which gives it unique healing properties. Since it lacks hydrogen peroxide, it is classified as a "non-peroxide" honey, relying on MGO for its antimicrobial effects.</p>
           <p className={pClass}><strong className="text-gold-pale">Jarrah honey</strong> gains its antimicrobial qualities from glucose oxidase, an enzyme introduced by bees. When the honey’s glucose and water interact, the enzyme produces hydrogen peroxide. This reaction gives Jarrah honey its antibacterial, antimicrobial, and antifungal properties. With three times more antioxidants than Manuka, it also offers enhanced immune support.</p>
@@ -179,7 +179,7 @@ export default function Education() {
       {/* Hero */}
       <div className="relative flex flex-col items-center justify-center text-center h-screen w-full bg-[linear-gradient(to_bottom,#120d07,#0e0a05)]">
         <img src="/images/bee-flower.webp" className="absolute inset-0 w-full h-full object-cover z-0" />
-        
+
         <div className="relative z-8 bg-linear-to-t from-[rgba(14,10,5,1)] from-10% to-[rgba(26,18,10,0)] h-full w-full flex flex-col items-center justify-end px-6">
           {/* Decorative diamond */}
           <div className="w-[6px] h-[6px] rotate-45 mx-auto mb-6 bg-gold" />
@@ -191,9 +191,9 @@ export default function Education() {
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
           <h1 className="font-garamond font-light leading-[1.05] mb-6 text-white tracking-[-0.5px] text-[clamp(2.8rem,6vw,5rem)]">
-            The <em className="text-gold italic">Education</em> Journal
+            The <em className="text-gold italic">education</em> journal
           </h1>
-          <p className="max-w-xl text-[0.9rem] leading-relaxed text-text-muted">
+          <p className="max-w-xl text-[0.9rem] leading-relaxed ">
             Explore the science, tradition, and stories behind Australia's most
             extraordinary honeys — written by the people who live it.
           </p>
@@ -227,7 +227,7 @@ export default function Education() {
             <p className="font-baskerville text-[0.6rem] tracking-[4px] uppercase mb-3 text-gold">
               Coming Soon
             </p>
-            <p className="font-baskerville text-[0.9rem] text-text-muted">
+            <p className="font-baskerville text-[0.9rem] ">
               Our first articles are being crafted. Check back soon.
             </p>
           </div>
@@ -273,7 +273,7 @@ export default function Education() {
                         {articles[0].title}
                       </h2>
                       {articles[0].subtitle && (
-                        <p className="font-baskerville text-[0.85rem] leading-relaxed mb-6 text-text-muted">
+                        <p className="font-baskerville text-[0.85rem] leading-relaxed mb-6 ">
                           {articles[0].subtitle}
                         </p>
                       )}
