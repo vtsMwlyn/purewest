@@ -186,7 +186,7 @@ export default function Education() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
             <p className="font-baskerville text-[0.55rem] tracking-[6px] uppercase text-white">
-              Knowledge · Wellness · Nature
+              Knowledge · Wellness · Natural
             </p>
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>

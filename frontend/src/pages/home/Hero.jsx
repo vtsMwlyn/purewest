@@ -5,7 +5,7 @@ const HERO_SLIDES = [
   { id: "heroSlide4", img: "/images/pancake.webp", label: "Harvest" },
   { id: "heroSlide0", img: "/images/panelimg.webp", label: "Products" },
   { id: "heroSlide1", img: "/images/beehive-closer.webp", label: "Beehive" },
-  { id: "heroSlide2", img: "/images/mom-and-kid.webp", label: "Mom and Kids" },
+  { id: "heroSlide2", img: "/images/bunga-mari.webp", label: "Mom and Kids" },
   { id: "heroSlide3", img: "/images/green-energy.webp", label: "Green Energy" },
 ];
 
@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12.5 h-px bg-linear-to-r from-transparent to-gold" />
             <span className="text-[0.5rem] tracking-[4px] uppercase whitespace-nowrap text-white">
-              Pure · Nature · Western Australia
+              Pure · Natural · Western Australia
             </span>
             <div className="w-12.5 h-px bg-linear-to-l from-transparent to-gold" />
           </div>
@@ -86,7 +86,7 @@ export default function Hero() {
           <p
             className="font-garamond font-light italic mb-4.5 tracking-[1px] text-center text-gold-pale text-[clamp(1rem,2vw,1.5rem)]"
           >
-            From the World&apos;s Last Nature Places
+            From the World&apos;s Last Natural Places
           </p>
 
           <div className="flex gap-3 justify-center flex-wrap">

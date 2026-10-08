@@ -1,7 +1,7 @@
 export default function About() {
   const stats = [
     { num: "35+", label: "Total Activity" },
-    { num: "100%", label: "Nature-Sourced" },
+    { num: "100%", label: "Natural-Sourced" },
     { num: "2yr", label: "Bloom Cycle" },
     { num: "WA", label: "Origin Only" },
   ];
@@ -43,7 +43,7 @@ export default function About() {
           >
             A Honey Unlike <em className="text-gold italic">Any Other</em>
           </h2>
-          <p className="leading-[2.1] text-[0.82rem] mb-[22px] text-text-muted"><strong className="text-gold-pale">PureWest Australia</strong> exists for one purpose: to bring this honey to you exactly as nature intended. No blending. No heat treatment. No shortcuts. Only raw, cold-extracted honey from old-growth forests, independently tested, and delivered straight to your door.</p>
+          <p className="leading-[2.1] text-[0.82rem] mb-[22px] text-text-muted"><strong className="text-gold-pale">PureWest Australia</strong> exists for one purpose: to bring this honey to you exactly as natural intended. No blending. No heat treatment. No shortcuts. Only raw, cold-extracted honey from old-growth forests, independently tested, and delivered straight to your door.</p>
         </div>
 
         {/* Image */}

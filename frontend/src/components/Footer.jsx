@@ -16,7 +16,7 @@ export default function Footer() {
             Australia
           </div>
           <p className="font-garamond italic text-[0.85rem] mb-4 text-text-muted">
-            From the world&apos;s last nature places.
+            From the world&apos;s last natural places.
           </p>
           <p className="text-[0.72rem] leading-[1.95] max-w-[270px] text-text-muted">
             Premium raw honey from the ancient Jarrah and Marri forests of south-west Western Australia. Independently certified. Uncompromisingly pure.
